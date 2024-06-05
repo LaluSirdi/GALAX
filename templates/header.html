@@ -4,10 +4,10 @@
     <title>FJKT48 Lombok</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="../static/assets/img/logo_3.png" rel="shortcut icon" type="image/x-icon" />
+	  <link href="../static/assets/img/logo_3.png" rel="shortcut icon" type="image/x-icon" />
     
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <link rel="stylesheet" href="../static/assets/css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="../static/assets/css/animate.css">
@@ -23,109 +23,50 @@
     <link rel="stylesheet" href="../static/assets/css/flaticon.css">
     <link rel="stylesheet" href="../static/assets/css/icomoon.css">
     <link rel="stylesheet" href="../static/assets/css/style.css">
-    <style>
-      .ftco_navbar {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 1000;
-      }
-
-      body {
-        padding-top: 40px; 
-      }
-
-      #logout-popup {
-        display: none;
-        position: fixed;
-        top: 60px;
-        right: 20px;
-        background: #fff;
-        border: 1px solid #ccc;
-        padding: 15px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        width: 250px;
-        border-radius: 8px;
-      }
-
-      #logout-popup p {
-        margin: 0;
-        font-weight: 500;
-        font-size: 16px;
-      }
-
-      #logout-popup button {
-        margin-top: 10px;
-        margin-right: 5px;
-        padding: 8px 15px;
-        font-size: 14px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-
-      #logout-btn {
-        background-color: #dc3545;
-        color: #fff;
-      }
-
-      #cancel-btn {
-        background-color: #003366;
-        color: #fff;
-      }
-
-      #user-account {
-        margin-left: 20px; /* Add some space from the contact link */
-      }
-    </style>
   </head>
   <body>
+	  
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-primary ftco-navbar-primary" id="ftco-navbar">
-      <div class="container">
-        <a class="navbar-brand" href="/"><span>FJKT48</span></a>
-        <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="oi oi-menu"></span> Menu
-        </button>
+	    <div class="container">
+	      <div class="logo-circle navbar-brand">
+          <img src="../static/assets/img/logo_3.png" alt="Logo">
+        </div>
+	      <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
 
-        <div class="collapse navbar-collapse" id="ftco-nav">
-          <ul class="navbar-nav nav ml-auto">
-            <li class="nav-item"><a href="/dashboard" class="nav-link" data-nav-section="home"><span>Home</span></a></li>
-            <li class="nav-item"><a href="/gallery" class="nav-link" data-nav-section="gallery"><span>Gallery</span></a></li>
-            <li class="nav-item"><a href="/about" class="nav-link" data-nav-section="about"><span>About Us</span></a></li>
-            <li class="nav-item"><a href="/merchandise" class="nav-link" data-nav-section="merchandise"><span>Merchandise</span></a></li>
-            <li class="nav-item"><a href="/contact" class="nav-link" data-nav-section="contact"><span>Contact</span></a></li>
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav nav ml-auto">
+	          <li class="nav-item"><a href="/dashboard" class="nav-link" data-nav-section="home"><span>Home</span></a></li>
+	          <li class="nav-item"><a href="/gallery" class="nav-link" data-nav-section="gallery"><span>Gallery</span></a></li>
+	          <li class="nav-item"><a href="/about" class="nav-link" data-nav-section="about"><span>About Us</span></a></li>
+	          <li class="nav-item"><a href="/merchandise" class="nav-link" data-nav-section="merchandise"><span>Merchandise</span></a></li>
+	          <li class="nav-item"><a href="/contact" class="nav-link" data-nav-section="contact"><span>Contact</span></a></li>
             <li class="nav-item ml-auto">
               <a href="#" class="nav-link" id="user-account"><span><i class="fas fa-user"></i></span></a>
             </li>
           </ul>
-        </div>
-      </div>
-
+	      </div>
+	    </div>
       <div id="logout-popup">
         <p>Anda yakin ingin logout?</p>
         <button id="logout-btn">Logout</button>
         <button id="cancel-btn">Cancel</button>
       </div>
-    </nav>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Menampilkan popup logout saat logo user akun diklik
-        document.getElementById("user-account").addEventListener("click", function () {
-          document.getElementById("logout-popup").style.display = "block";
-        });
-
-        // Menyembunyikan popup logout saat tombol cancel diklik
-        document.getElementById("cancel-btn").addEventListener("click", function () {
-          document.getElementById("logout-popup").style.display = "none";
-        });
-
-        // Logika untuk logout saat tombol logout diklik (sesuaikan dengan logika logout pada aplikasi Anda)
-        document.getElementById("logout-btn").addEventListener("click", function () {
-          // Lakukan proses logout di sini (contoh: redirect ke halaman logout)
-          window.location.href = "/logout"; // Ganti "/logout" dengan URL logout yang sesuai
-        });
+	</nav>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("user-account").addEventListener("click", function () {
+        document.getElementById("logout-popup").style.display = "block";
       });
-    </script>
-  </body>
-</html>
+
+      document.getElementById("cancel-btn").addEventListener("click", function () {
+        document.getElementById("logout-popup").style.display = "none";
+      });
+
+      document.getElementById("logout-btn").addEventListener("click", function () {
+        window.location.href = "/logout";
+      });
+    });
+  </script>

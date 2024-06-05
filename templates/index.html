@@ -26,9 +26,11 @@
   </head>
   <body>
 	  
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-primary ftco-navbar-primary" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="/"><span>FJKT48</span></a>
+			<div class="logo-circle navbar-brand">
+				<img src="../static/assets/img/logo_3.png" alt="Logo">
+			</div>
 	      <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -38,7 +40,7 @@
 	          <li class="nav-item"><a href="#" class="nav-link" data-nav-section="home"><span>Home</span></a></li>
 	          <li class="nav-item"><a href="#" class="nav-link" data-nav-section="about"><span>About Us</span></a></li>
 	          <li class="nav-item"><a href="#" class="nav-link" data-nav-section="contact"><span>Contact</span></a></li>
-	          <li class="nav-item cta"><a href="#" class="nav-link" style="padding: 7px 20px; border-radius: 5px;">Login</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link" id="user-account"><span><i class="fas fa-user"></i></span></a></li>
 	        </ul>
 	      </div>
 	    </div>
@@ -49,12 +51,14 @@
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
           <div class="col-md-9 ftco-animate mt-5" data-scrollax=" properties: { translateY: '70%' }">
-          	<p class="d-flex align-items-center" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
-							<a href="https://www.youtube.com/watch?v=mrv2AOJLxJ4" class="icon-video popup-vimeo d-flex justify-content-center align-items-center mr-3">
-    						<span class="ion-ios-play play mr-2"></span>
-    						<span class="watch">Watch Video</span>
-    					</a>
-						</p>
+          	<!--
+			<p class="d-flex align-items-center" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
+				<a href="https://www.youtube.com/watch?v=mrv2AOJLxJ4" class="icon-video popup-vimeo d-flex justify-content-center align-items-center mr-3">
+					<span class="ion-ios-play play mr-2"></span>
+					<span class="watch">Watch Video</span>
+				</a>
+			</p>
+			-->
             <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Selamat Datang di FJKT48 Lombok</h1>
             <p class="mb-4" style="text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Temukan semangat dan kebersamaan dalam komunitas penggemar JKT48 di Pulau Lombok.</p>
           </div>
@@ -133,8 +137,8 @@
 		            </div>
 		          </div>
 		        </div>
-	        </div>
-        </div>
+	        	</div>
+        	</div>
     	</div>
     </section>
 
@@ -484,30 +488,6 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="../static/assets/js/google-map.js"></script>
   <script src="../static/assets/js/main.js"></script>
-  <script>
-    document.querySelectorAll('.nav-link').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        const targetSection = this.getAttribute('data-nav-section');
-        const targetHref = this.getAttribute('href');
-  
-        // Handle internal links (sections within the same page)
-        if (targetSection && targetHref.startsWith('#')) {
-          e.preventDefault();
-          const target = document.querySelector(targetHref);
-          if (target) {
-            target.scrollIntoView({
-              behavior: 'smooth'
-            });
-          }
-        }
-  
-        // Handle external links or page navigation
-        if (!targetHref.startsWith('#')) {
-          window.location.href = targetHref;
-        }
-      });
-    });
-  </script>
   
   </body>
 </html>
