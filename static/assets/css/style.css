@@ -9539,3 +9539,52 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+
+    * {
+      font-family: "Noto Serif Display", serif;
+    }
+    
+    body {
+      background-color: #fff; /* Ubah latar belakang menjadi putih */
+      min-height: 100vh;
+    }
+    
+    .section {
+      padding: 1rem 1.5rem;
+      max-width: 750px;
+      margin: 50px auto;
+    }
+    
+    .title {
+      font-weight: 800;
+      font-size: 5rem;
+    }
+    
+    .subtitle {
+      font-size: 2rem;
+    }
+    
+    .is-sparta {
+      color: #e8344e !important;
+    }
+    
+    .button.is-sparta {
+      background-color: #007bff; /* Ubah warna latar belakang tombol menjadi biru */
+      border-color: transparent;
+      color: #fff !important;
+    }
+    
+    .button.is-sparta.is-outlined {
+      background-color: transparent;
+      border-color: #007bff; /* Ubah warna border tombol menjadi biru */
+      color: #007bff !important; /* Ubah warna teks tombol menjadi biru */
+    }
+    
+    .help {
+      color: gray;
+    }
+    
+/* Custom CSS to change the header color to blue */
+ .ftco_navbar {
+  background-color: #007bff !important;
+}
