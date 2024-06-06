@@ -1,129 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FJKT48 Lombok</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link href="../static/assets/img/logo_3.png" rel="shortcut icon" type="image/x-icon" />
-    
-    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-    <link rel="stylesheet" href="../static/assets/css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="../static/assets/css/animate.css">
-    
-    <link rel="stylesheet" href="../static/assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../static/assets/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="../static/assets/css/magnific-popup.css">
-
-    <link rel="stylesheet" href="../static/assets/css/aos.css">
-
-    <link rel="stylesheet" href="../static/assets/css/ionicons.min.css">
-    
-    <link rel="stylesheet" href="../static/assets/css/flaticon.css">
-    <link rel="stylesheet" href="../static/assets/css/icomoon.css">
-    <link rel="stylesheet" href="../static/assets/css/style.css">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- Bulma CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css" />
-  <!-- Font Awesome CSS -->
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	    <div class="container">
-	      <a class="navbar-brand" href="/"><span>FJKT48</span></a>
-	      <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="oi oi-menu"></span> Menu
-	      </button>
-
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav nav ml-auto">
-	          <li class="nav-item"><a href="#" class="nav-link" data-nav-section="home"><span>Home</span></a></li>
-	          <li class="nav-item"><a href="#" class="nav-link" data-nav-section="about"><span>About Us</span></a></li>
-	          <li class="nav-item"><a href="#" class="nav-link" data-nav-section="contact"><span>Contact</span></a></li>
-              <li class="nav-item ml-auto">
-                <a href="#" class="nav-link" id="user-account"><span><i class="fas fa-user"></i></span></a>
-              </li>
-	        </ul>
-	      </div>
-	    </div>
-	</nav>
-    <section class="section">
-        <div class="container">
-            <div class="box" style="max-width: 470px; margin: auto">
-                <article class="media">
-                    <div class="media-content">
-                        <div class="content">
-                            <div class="field has-addons">
-                                <div class="control has-icons-left" style="width: 100%">
-                                    <input id="input-username" class="input" type="text" placeholder="Username"/> <!-- Ubah placeholder menjadi "Username" -->
-                                    <span class="icon is-small is-left">
-                                        <i class="fa fa-user"></i>
-                                    </span>
-                                </div>
-                                <div id="btn-check-dup" class="control is-hidden">
-                                    <button class="button is-sparta" onclick="check_dup()">
-                                        Check your username <!-- Sesuaikan teks tombol -->
-                                    </button>
-                                </div>
-                            </div>
-                            <p id="help-id" class="help is-hidden">
-                                For your username, please enter 2-10 English characters, numbers, <br> or the following special characters (._-) <!-- Sesuaikan teks bantuan -->
-                            </p>
-                            <p id="help-id-login" class="help is-danger"></p>
-    
-                            <div class="field">
-                                <div class="control has-icons-left">
-                                    <input id="input-password" class="input" type="password" placeholder="Password"/> <!-- Tidak ada perubahan di sini -->
-                                    <span class="icon is-small is-left">
-                                        <i class="fa fa-lock"></i>
-                                    </span>
-                                </div>
-                                <p id="help-password" class="help is-hidden">
-                                    For your password, please enter 8-20 English characters, numbers, <br> or the following special characters (!@#$%^&*)
-                                </p>
-                            </div>
-                        </div>
-                        <div id="div-sign-in-or-up" class="has-text-centered">
-                            <nav class="level is-mobile">
-                                <button class="level-item button is-sparta" onclick="sign_in()">Sign In</button>
-                                <button class="level-item button is-sparta" onclick="clearInputs()">Clear</button>
-                            </nav>
-                            <hr />
-                            <h4 class="mb-3">Jika Anda belum mendaftar</h4>
-                            <nav class="level is-mobile">
-                                <button class="level-item button is-sparta is-outlined" onclick="toggle_sign_up()">Sign Up</button>
-                            </nav>
-                        </div>
-    
-                        <div id="sign-up-box" class="is-hidden">
-                            <div class="mb-5">
-                                <div class="field">
-                                    <div class="control has-icons-left" style="width: 100%">
-                                        <input id="input-password2" class="input" type="password" placeholder="Confirm your password"/>
-                                        <span class="icon is-small is-left">
-                                            <i class="fa fa-lock"></i>
-                                        </span>
-                                    </div>
-                                    <p id="help-password2" class="help is-hidden">Please enter in your password again</p>
-                                </div>
-                            </div>
-                            <nav class="level is-mobile">
-                                <button class="level-item button is-sparta" onclick="sign_up()">Sign Up</button>
-                                <button class="level-item button is-sparta is-outlined" onclick="toggle_sign_up()">Cancel</button>
-                                <button class="level-item button is-sparta" onclick="clearInputs()">Clear</button>
-                            </nav>
-                        </div>
-                    </div>
-                </article>
-            </div>
+<div id="SignIn" class="tabcontent">
+    <h3 style="text-align: center;">Sign In</h3>
+    <form id="signInForm" action="/login" method="post">
+        <label for="username"><i class="fas fa-user"></i> Username</i></label>
+        <input type="text" id="username" name="username" required>
+        <label for="password"><i class="fas fa-lock"></i> Password</label>
+        <input type="password" id="password" name="password" required>
+        <div class="button-container" style="justify-content: center;">
+            <button type="submit">Login</button>
         </div>
-    </section>
-    
-    {% include 'footer.html' %}
-</body>
-</html>
+    </form>
+    <p style="text-align: center; margin-top: 15px;">Belum punya akun?
+        <a href="#" id="registerLink">Daftar di sini</a></p>
+</div>

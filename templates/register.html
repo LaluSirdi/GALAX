@@ -1,0 +1,19 @@
+<!-- Sign Up Tab -->
+<div id="SignUp" class="tabcontent">
+    <h3 style="text-align: center;">Sign Up</h3>
+    <form id="signUpForm" action="/register" method="post">
+        <label for="new-username"><i class="fas fa-user"></i> Username</label>
+        <input type="text" id="new-username" name="username" required>
+        <label for="email"><i class="fas fa-envelope"></i> Email</label>
+        <input type="email" id="email" name="email" required>
+        <label for="new-password"><i class="fas fa-lock"></i> Password</label>
+        <input type="password" id="new-password" name="password" required>
+        <label for="new-password"><i class="fas fa-key"></i> Confirm Password *</label>
+        <input type="password" id="confirm-password" name="confirm-password" required>
+        <div class="button-container">
+            <button type="submit">Register</button>
+            <button type="button" onclick="clearForm('signUpForm')">Clear</button>
+        </div>
+    </form>
+    <p style="text-align: center;">Sudah punya akun? <a href="#" id="loginLink">Masuk di sini</a></p>
+</div>

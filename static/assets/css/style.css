@@ -9617,3 +9617,152 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+
+    /* bagian login */
+/* User icon styles */
+.user-icon {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+.user-icon img {
+  width: 40px;
+  height: 40px;
+}
+
+/* Dropdown content styles */
+.dropdown-content {
+  display: none;
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 150px;
+  border-radius: 8px;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+/* Modal container */
+.modal-sign {
+  display: none; /* Hide the modal by default */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+  padding-top: 50px;
+}
+
+/* Modal content box */
+.modal-content-sign {
+  background-color:#f7f7f7;
+  margin: 20px auto;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  max-width: 500px; /* Maximum width */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 10px;
+  padding: 15px 15px;
+}
+
+/* Close button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Tab content */
+.tabcontent {
+  display: none;
+}
+
+/* Show the active tab content */
+.tabcontent.active {
+  display: block;
+}
+
+/* Form labels and inputs */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+
+/* Submit and Clear buttons */
+button[type="submit"],
+button[type="button"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px; /* Add some space between the buttons and other elements */
+  width: 48%; /* Adjust width to fit two buttons side by side */
+}
+
+button[type="submit"]:hover,
+button[type="button"]:hover {
+  background-color: #45a049;
+}
+
+button[type="button"] {
+  background-color: #f44336; /* Different color for clear button */
+}
+
+button[type="button"]:hover {
+  background-color: #d32f2f;
+}
+
+/* Container for buttons to align them horizontally */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.modal-content h3 {
+  text-align: center;
+}

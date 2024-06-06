@@ -3,6 +3,60 @@
  	easing: 'slide'
  });
 
+ function toggleDropdown() {
+    var dropdown = document.getElementById("dropdownMenu");
+    if (dropdown.style.display === "block") {
+        dropdown.style.display = "none";
+    } else {
+        dropdown.style.display = "block";
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Event listener for switching to register form
+    document.getElementById('registerLink').addEventListener('click', function(event) {
+        event.preventDefault();
+        openModal('SignUp');
+    });
+
+    // Event listener for switching to login form
+    document.getElementById('loginLink').addEventListener('click', function(event) {
+        event.preventDefault();
+        openModal('SignIn');
+    });
+});
+
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+    var tabcontent = document.getElementsByClassName("tabcontent");
+    for (var i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+}
+
+function openModal(tabName) {
+    document.getElementById("dropdownMenu").style.display = "none";
+    document.getElementById("modal").style.display = "block";
+    var tabcontent = document.getElementsByClassName("tabcontent");
+    for (var i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    document.getElementById(tabName).style.display = "block";
+}
+
+// Close the modal when the user clicks anywhere outside of it
+window.onclick = function(event) {
+    var modal = document.getElementById("modal");
+    if (event.target == modal) {
+        closeModal();
+    }
+}
+
+// Clear form inputs
+function clearForm(formId) {
+    document.getElementById(formId).reset();
+}
+
 (function($) {
 
 	"use strict";
@@ -381,6 +435,6 @@
 
 
 
-
+  
 })(jQuery);
 

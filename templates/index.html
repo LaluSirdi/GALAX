@@ -1,57 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>FJKT48 Lombok</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<head>
+	<title>FJKT48 Lombok</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link href="../static/assets/img/logo_3.png" rel="shortcut icon" type="image/x-icon" />
-    
-    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900" rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-    <link rel="stylesheet" href="../static/assets/css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="../static/assets/css/animate.css">
-    
-    <link rel="stylesheet" href="../static/assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../static/assets/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="../static/assets/css/magnific-popup.css">
+	<link rel="stylesheet" href="../static/assets/css/open-iconic-bootstrap.min.css">
+	<link rel="stylesheet" href="../static/assets/css/animate.css">
 
-    <link rel="stylesheet" href="../static/assets/css/aos.css">
+	<link rel="stylesheet" href="../static/assets/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="../static/assets/css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="../static/assets/css/magnific-popup.css">
 
-    <link rel="stylesheet" href="../static/assets/css/ionicons.min.css">
-    
-    <link rel="stylesheet" href="../static/assets/css/flaticon.css">
-    <link rel="stylesheet" href="../static/assets/css/icomoon.css">
-    <link rel="stylesheet" href="../static/assets/css/style.css">
-  </head>
-  <body>
-	  
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-primary ftco-navbar-primary" id="ftco-navbar">
-	    <div class="container">
+	<link rel="stylesheet" href="../static/assets/css/aos.css">
+
+	<link rel="stylesheet" href="../static/assets/css/ionicons.min.css">
+
+	<link rel="stylesheet" href="../static/assets/css/flaticon.css">
+	<link rel="stylesheet" href="../static/assets/css/icomoon.css">
+	<link rel="stylesheet" href="../static/assets/css/style.css">
+</head>
+
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-primary ftco-navbar-primary" id="ftco-navbar">
+		<div class="container">
 			<div class="logo-circle navbar-brand">
 				<img src="../static/assets/img/logo_3.png" alt="Logo">
 			</div>
-	      <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="oi oi-menu"></span> Menu
-	      </button>
+			<button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse"
+				data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="oi oi-menu"></span> Menu
+			</button>
 
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav nav ml-auto">
-	          <li class="nav-item"><a href="#" class="nav-link" data-nav-section="home"><span>Home</span></a></li>
-	          <li class="nav-item"><a href="#" class="nav-link" data-nav-section="about"><span>About Us</span></a></li>
-	          <li class="nav-item"><a href="#" class="nav-link" data-nav-section="contact"><span>Contact</span></a></li>
-	          <li class="nav-item"><a href="#" class="nav-link" id="user-account"><span><i class="fas fa-user"></i></span></a></li>
-	        </ul>
-	      </div>
-	    </div>
+			<div class="collapse navbar-collapse" id="ftco-nav">
+				<ul class="navbar-nav nav ml-auto">
+					<li class="nav-item"><a href="#" class="nav-link" data-nav-section="home"><span>Home</span></a></li>
+					<li class="nav-item"><a href="#" class="nav-link" data-nav-section="about"><span>About Us</span></a>
+					</li>
+					<li class="nav-item"><a href="#" class="nav-link"
+							data-nav-section="contact"><span>Contact</span></a></li>
+					<li class="nav-item ml-auto">
+						<a href="#" class="nav-link" id="user-account" onclick="toggleDropdown()"><span><i
+									class="fas fa-user"></i></span></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="dropdownMenu" class="dropdown-content">
+			<a href="#" onclick="openModal('SignIn')"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+			<a href="#" onclick="openModal('SignUp')"><i class="fas fa-user-plus"></i> Sign Up</a>
+		</div>
 	</nav>
-    
-    <section class="hero-wrap js-fullheight" style="background-image: url('../static/assets/img/bg_4.png');" data-section="home">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
-          <div class="col-md-9 ftco-animate mt-5" data-scrollax=" properties: { translateY: '70%' }">
-          	<!--
+
+	<section>
+		<!-- Sign In/Sign Up Modal -->
+		<div id="modal" class="modal-sign">
+			<div class="modal-content-sign">
+				<span class="close" onclick="closeModal()">&times;</span>
+				<!-- Sign In Tab -->
+				<div id="SignIn" class="tabcontent">
+					<h3 style="text-align: center;">Sign In</h3>
+					<form id="signInForm" action="/login" method="post">
+						<label for="username"><i class="fas fa-user"></i> Username</i></label>
+						<input type="text" id="username" name="username" required>
+						<label for="password"><i class="fas fa-lock"></i> Password</label>
+						<input type="password" id="password" name="password" required>
+						<div class="button-container" style="justify-content: center;">
+							<button type="submit">Login</button>
+						</div>
+					</form>
+					<p style="text-align: center; margin-top: 15px;">Belum punya akun?
+						<a href="#" id="registerLink">Daftar di sini</a></p>
+				</div>
+
+				<!-- Sign Up Tab -->
+				<div id="SignUp" class="tabcontent">
+					<h3 style="text-align: center;">Sign Up</h3>
+					<form id="signUpForm" action="/register" method="post">
+						<label for="new-username"><i class="fas fa-user"></i> Username</label>
+						<input type="text" id="new-username" name="username" required>
+						<label for="email"><i class="fas fa-envelope"></i> Email</label>
+						<input type="email" id="email" name="email" required>
+						<label for="new-password"><i class="fas fa-lock"></i> Password</label>
+						<input type="password" id="new-password" name="password" required>
+						<label for="new-password"><i class="fas fa-key"></i> Confirm Password *</label>
+						<input type="password" id="confirm-password" name="confirm-password" required>
+						<div class="button-container">
+							<button type="submit">Register</button>
+							<button type="button" onclick="clearForm('signUpForm')">Clear</button>
+						</div>
+					</form>
+					<p style="text-align: center;">Sudah punya akun? <a href="#" id="loginLink">Masuk di sini</a></p>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+	<section class="hero-wrap js-fullheight" style="background-image: url('../static/assets/img/bg_4.png');"
+		data-section="home">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start"
+				data-scrollax-parent="true">
+				<div class="col-md-9 ftco-animate mt-5" data-scrollax=" properties: { translateY: '70%' }">
+					<!--
 			<p class="d-flex align-items-center" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
 				<a href="https://www.youtube.com/watch?v=mrv2AOJLxJ4" class="icon-video popup-vimeo d-flex justify-content-center align-items-center mr-3">
 					<span class="ion-ios-play play mr-2"></span>
@@ -59,435 +118,493 @@
 				</a>
 			</p>
 			-->
-            <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Selamat Datang di FJKT48 Lombok</h1>
-            <p class="mb-4" style="text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Temukan semangat dan kebersamaan dalam komunitas penggemar JKT48 di Pulau Lombok.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-		
-	<section class="ftco-section ftco-services ftco-no-pt">
-      <div class="container">
-        <div class="row services-section justify-content-center">
-          <div class="col-md-8 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services text-center d-block">
-				<div class="icon">
-					<img src="../static/assets/img/logo_3.png" style="width: 100px; height: 100px;">
+					<h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Selamat Datang di
+						FJKT48 Lombok</h1>
+					<p class="mb-4" style="text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);"
+						data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Temukan semangat dan kebersamaan
+						dalam komunitas penggemar JKT48 di Pulau Lombok.</p>
 				</div>
-              <div class="media-body">
-                <h3 class="heading mb-3">FJKT48 Lombok</h3>
-                <p>Tujuan utama dari pembentukan fanbase ini adalah untuk menyatukan para penggemar JKT48 di Pulau Lombok, berbagi pengalaman, dan menyalurkan dukungan kepada idol ibu kota yaitu JKT48.</p>
-                <p><a href="#section-counter" class="btn btn-primary" data-nav-section="about">Read more</a></p>
-              </div>
-            </div>      
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="ftco-counter img ftco-section ftco-no-pt ftco-no-pb" id="section-counter" data-section="about">
-    	<div class="container">
-    		<div class="row d-flex">
-    			<div class="col-md-6 col-lg-4 d-flex">
-    				<div class="img d-flex align-self-stretch align-items-center" style="background-image:url(../static/assets/img/about-2.png);">
-    					
-    				</div>
-    			</div>
-    			<div class="col-md-6 col-lg-8 pl-lg-5 py-5">
-    				<div class="row justify-content-start pb-3">
-		          <div class="col-md-12 heading-section ftco-animate">
-		          	<span class="subheading">Welcome</span>
-		            <h2 class="mb-4">FJKT berdiri sejak 2023</h2>
-		            <p>Sejarah pembentukan fanbase FJKT48 Lombok dimulai ketika para penggemar JKT48 di Pulau Lombok bertemu melalui komentar di FYP TikTok. Interaksi ini kemudian beralih ke pesan WhatsApp pada tanggal 12 Mei 2023. </p>
-		            <p>Selanjutnya, para penggemar ini memutuskan untuk bertemu secara langsung pada tanggal 15 Mei 2023 di sebuah angkringan bernama Angkringan Bejo (Angjo).</p>
-		            <p>Dalam pertemuan tersebut, ditetapkan pembentukan komunitas fans JKT48 Pulau Lombok beserta para pengurusnya.</p>
-		          </div>
-		        </div>
-		    		<div class="row">
-		          <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate d-flex">
-		            <div class="block-18 text-center p-4 mb-4 align-self-stretch d-flex">
-		              <div class="text">
-		                <strong class="number" data-number="1">0</strong>
-		                <span style="color: #a5a7a2;">Years of service</span>
-		              </div>
-		            </div>
-		          </div>
-		          <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate d-flex">
-		            <div class="block-18 text-center py-4 px-3 mb-4 align-self-stretch d-flex">
-		              <div class="text">
-		                <strong class="number" data-number="100">0</strong>
-		                <span style="color: #a5a7a2;">Active Members</span>
-		              </div>
-		            </div>
-		          </div>
-		          <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate d-flex">
-		            <div class="block-18 text-center py-4 px-3 mb-4 align-self-stretch d-flex">
-		              <div class="text">
-		                <strong class="number" data-number="35">0</strong>
-		                <span style="color: #a5a7a2;">Fan Meets Hosted</span>
-		              </div>
-		            </div>
-		          </div>
-		          <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate d-flex">
-		            <div class="block-18 text-center py-4 px-3 mb-4 align-self-stretch d-flex">
-		              <div class="text">
-		                <strong class="number" data-number="1000">0</strong>
-		                <span style="color: #a5a7a2;">Social Media Followers</span>
-		              </div>
-		            </div>
-		          </div>
-		        </div>
-	        	</div>
-        	</div>
-    	</div>
-    </section>
-
-    <section class="ftco-section" data-section="team" id="team">
-    	<div class="container-fluid p-0">
-    		<div class="row no-gutters justify-content-center pb-5">
-          <div class="col-md-12 heading-section text-center ftco-animate">
-          	<span class="subheading">Members</span>
-            <h2 class="mb-4">Meet Our Team</h2>
-            <p>Perkenalkan individu berbakat yang berkontribusi pada komunitas kami. Pelajari lebih lanjut tentang wajah-wajah di balik layar.</p>
-          </div>
-        </div>
-        <div class="row no-gutters">
-					<div class="col-md-6 col-lg-3 ftco-animate">
-						<div class="staff">
-							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(../static/assets/img/team-1.jpg);"></div>
-							</div>
-							<div class="text d-flex align-items-center pt-3 text-center">
-								<div>
-									<span class="position mb-2">Member</span>
-									<h3 class="mb-4">Lloyd Wilson</h3>
-									<div class="faded">
-										<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-										<ul class="ftco-social text-center">
-											<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-											<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-											<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-lg-3 ftco-animate">
-						<div class="staff">
-							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(../static/assets/img/team-2.jpg);"></div>
-							</div>
-							<div class="text d-flex align-items-center pt-3 text-center">
-								<div>
-									<span class="position mb-2">Member</span>
-									<h3 class="mb-4">Rachel Parker</h3>
-									<div class="faded">
-										<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-										<ul class="ftco-social text-center">
-											<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-											<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-											<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-lg-3 ftco-animate">
-						<div class="staff">
-							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(../static/assets/img/team-3.jpg);"></div>
-							</div>
-							<div class="text d-flex align-items-center pt-3 text-center">
-								<div>
-									<span class="position mb-2">Member</span>
-									<h3 class="mb-4">Ian Smith</h3>
-									<div class="faded">
-										<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-										<ul class="ftco-social text-center">
-											<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-											<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-											<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-lg-3 ftco-animate">
-						<div class="staff">
-							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(../static/assets/img/team-4.jpg);"></div>
-							</div>
-							<div class="text d-flex align-items-center pt-3 text-center">
-								<div>
-									<span class="position mb-2">Member</span>
-									<h3 class="mb-4">Alicia Henderson</h3>
-									<div class="faded">
-										<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-										<ul class="ftco-social text-center">
-											<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-											<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-											<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-6 col-lg-3 ftco-animate">
-						<div class="staff">
-							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(../static/assets/img/staff-1.jpg);"></div>
-							</div>
-							<div class="text d-flex align-items-center pt-3 text-center">
-								<div>
-									<span class="position mb-2">Member</span>
-									<h3 class="mb-4">Lloyd Wilson</h3>
-									<div class="faded">
-										<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-										<ul class="ftco-social text-center">
-											<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-											<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-											<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-lg-3 ftco-animate">
-						<div class="staff">
-							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(../static/assets/img/staff-2.jpg);"></div>
-							</div>
-							<div class="text d-flex align-items-center pt-3 text-center">
-								<div>
-									<span class="position mb-2">Member</span>
-									<h3 class="mb-4">Rachel Parker</h3>
-									<div class="faded">
-										<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-										<ul class="ftco-social text-center">
-											<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-											<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-											<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-lg-3 ftco-animate">
-						<div class="staff">
-							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(../static/assets/img/staff-3.jpg);"></div>
-							</div>
-							<div class="text d-flex align-items-center pt-3 text-center">
-								<div>
-									<span class="position mb-2">Member</span>
-									<h3 class="mb-4">Ian Smith</h3>
-									<div class="faded">
-										<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-										<ul class="ftco-social text-center">
-											<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-											<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-											<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-lg-3 ftco-animate">
-						<div class="staff">
-							<div class="img-wrap d-flex align-items-stretch">
-								<div class="img align-self-stretch" style="background-image: url(../static/assets/img/staff-4.jpg);"></div>
-							</div>
-							<div class="text d-flex align-items-center pt-3 text-center">
-								<div>
-									<span class="position mb-2">Member</span>
-									<h3 class="mb-4">Alicia Henderson</h3>
-									<div class="faded">
-										<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-										<ul class="ftco-social text-center">
-											<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-											<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-											<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-    	</div>
-    </section>
-
-    <section class="testimony-section" data-section="message" id="message">
-      <div class="container">
-        <div class="row ftco-animate justify-content-center">
-        	<div class="col-md-12 d-flex align-items-center">
-        		<div class="carousel-testimony owl-carousel">
-	        		<div class="item">
-	        			<div class="testimony-wrap d-flex align-items-stretch">
-		              <div class="user-img d-flex align-self-stretch" style="background-image: url(../static/assets/img/testimony-1.jpg)">
-		              </div>
-		              <div class="text d-flex align-items-center">
-		              	<div>
-			              	<div class="icon-quote">
-			              		<span class="icon-quote-left"></span>
-			              	</div>
-			                <p class="mb-4">Menyatukan para penggemar JKT48 di Pulau Lombok, berbagi pengalaman, dan menyalurkan dukungan kepada idol ibu kota yaitu JKT48.</p>
-			                <p class="name">Dimas...</p>
-			                <span class="position">Ketua, Founder</span>
-		                </div>
-		              </div>
-		            </div>
-	        		</div>
-	        		<div class="item">
-	        			<div class="testimony-wrap d-flex align-items-stretch">
-		              <div class="user-img d-flex align-self-stretch" style="background-image: url(../static/assets/img/testimony-2.jpg)">
-		              </div>
-		              <div class="text d-flex align-items-center">
-		              	<div>
-			              	<div class="icon-quote">
-			              		<span class="icon-quote-left"></span>
-			              	</div>
-			                <p class="mb-4">Menyatukan para penggemar JKT48 di Pulau Lombok, berbagi pengalaman, dan menyalurkan dukungan kepada idol ibu kota yaitu JKT48.</p>
-			                <p class="name">Rasya...</p>
-			                <span class="position">Wakil Ketua, Founder</span>
-		                </div>
-		              </div>
-		            </div>
-	        		</div>
-	        	</div>
-        	</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="ftco-section contact-section" data-section="contact" id="contact">
-      <div class="container">
-		<div class="row justify-content-center mb-5">
-			<div class="col-md-7 heading-section text-center ftco-animate">
-			  <span class="subheading">Contact</span>
-			  <h2 class="mb-4">Contact Us</h2>
-			  <p>Jangan ragu untuk menghubungi kami untuk terhubung dengan sesama penggemar JKT48 di Lombok, berbagi pengalaman, dan menyalurkan dukungan kepada grup idola ibu kota kami, JKT48.</p>
 			</div>
 		</div>
-        <div class="row d-flex justify-content-center  contact-info">
-          <div class="col-md-6 col-lg-3 d-flex">
-          	<div class="align-self-stretch box p-4 text-center">
-          		<div class="icon d-flex align-items-center justify-content-center">
-          			<span class="icon-map-signs"></span>
-          		</div>
-          		<h3 class="mb-4">Address</h3>
-	            <p>Jalan ... No. Kota Mataram, Nusa Tenggara Barat, Lombok</p>
-	          </div>
-          </div>
-          <div class="col-md-6 col-lg-3 d-flex">
-          	<div class="align-self-stretch box p-4 text-center">
-          		<div class="icon d-flex align-items-center justify-content-center">
-          			<span class="icon-phone2"></span>
-          		</div>
-          		<h3 class="mb-4">Contact Number</h3>
-	            <p><a href="tel://085....">+62 858 4554 9290</a></p>
-	          </div>
-          </div>
-          <div class="col-md-6 col-lg-3 d-flex">
-          	<div class="align-self-stretch box p-4 text-center">
-          		<div class="icon d-flex align-items-center justify-content-center">
-          			<span class="icon-paper-plane"></span>
-          		</div>
-          		<h3 class="mb-4">Email Address</h3>
-	            <p><a href="mailto:...@gmail.com">....@gmail.com</a></p>
-	          </div>
+	</section>
+
+	<section class="ftco-section ftco-services ftco-no-pt">
+		<div class="container">
+			<div class="row services-section justify-content-center">
+				<div class="col-md-8 d-flex align-self-stretch ftco-animate">
+					<div class="media block-6 services text-center d-block">
+						<div class="icon">
+							<img src="../static/assets/img/logo_3.png" style="width: 100px; height: 100px;">
+						</div>
+						<div class="media-body">
+							<h3 class="heading mb-3">FJKT48 Lombok</h3>
+							<p>Tujuan utama dari pembentukan fanbase ini adalah untuk menyatukan para penggemar JKT48 di
+								Pulau Lombok, berbagi pengalaman, dan menyalurkan dukungan kepada idol ibu kota yaitu
+								JKT48.</p>
+							<p><a href="#section-counter" class="btn btn-primary" data-nav-section="about">Read more</a>
+							</p>
+						</div>
+					</div>
+				</div>
 			</div>
-        </div>
-      </div>
-    </section>
-		
-    <footer class="ftco-footer ftco-section">
-      <div class="container">
-        <div class="row mb-5">
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">FJKT48 Lombok</h2>
-              <p>Menyatukan para penggemar JKT48 di Pulau Lombok, berbagi pengalaman, dan menyalurkan dukungan kepada idol ibu kota yaitu JKT48.</p>
-              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                <li class="ftco-animate"><a href="https://x.com/fjkt48_lombokuy"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate" style="text-align: center;"><a href="https://www.tiktok.com/@fjkt48.lombok" style="font-size: 24px; padding: 3px; align-items: center;"><i class="fab fa-tiktok"></i></a></li>
-                <li class="ftco-animate"><a href="https://www.instagram.com/fjkt48.lombok"><span class="icon-instagram"></span></a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4 ml-md-4">
-              <h2 class="ftco-heading-2">Links</h2>
-              <ul class="list-unstyled">
-                <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Home</a></li>
-                <li><a href="#section-counter"><span class="icon-long-arrow-right mr-2"></span>About</a></li>
-                <li><a href="#team"><span class="icon-long-arrow-right mr-2"></span>Team</a></li>
-                <li><a href="#message"><span class="icon-long-arrow-right mr-2"></span>Message</a></li>
-                <li><a href="#contact"><span class="icon-long-arrow-right mr-2"></span>Contact</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md">
-             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Events</h2>
-              <ul class="list-unstyled">
-                <li><a><span class="icon-long-arrow-right mr-2"></span>Gathering</a></li>
-                <li><a><span class="icon-long-arrow-right mr-2"></span>Nobar & Karaoke</a></li>
-                <li><a><span class="icon-long-arrow-right mr-2"></span>Fun Sports</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4">
-            	<h2 class="ftco-heading-2">Have a Questions?</h2>
-            	<div class="block-23 mb-3">
-	              <ul>
-	                <li><span class="icon icon-map-marker"></span><span class="text">Jalan ... No. Kota Mataram, Nusa Tenggara Barat, Lombok</span></li>
-	                <li><a href="tel://085...."><span class="icon icon-phone"></span><span class="text">+62 858 4554 9290</span></a></li>
-	                <li><a href="mailto:...@gmail.com"><span class="icon icon-envelope"></span><span class="text">....@gmail.com</span></a></li>
-	              </ul>
-	            </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <p>
-				&copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Fanbase JKT48 Lombok
-			</p>			
-          </div>
-        </div>
-      </div>
-    </footer>
-  
+		</div>
+	</section>
 
-  <!-- loader -->
-  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+	<section class="ftco-counter img ftco-section ftco-no-pt ftco-no-pb" id="section-counter" data-section="about">
+		<div class="container">
+			<div class="row d-flex">
+				<div class="col-md-6 col-lg-4 d-flex">
+					<div class="img d-flex align-self-stretch align-items-center"
+						style="background-image:url(../static/assets/img/about-2.png);">
+
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-8 pl-lg-5 py-5">
+					<div class="row justify-content-start pb-3">
+						<div class="col-md-12 heading-section ftco-animate">
+							<span class="subheading">Welcome</span>
+							<h2 class="mb-4">FJKT berdiri sejak 2023</h2>
+							<p>Sejarah pembentukan fanbase FJKT48 Lombok dimulai ketika para penggemar JKT48 di Pulau
+								Lombok bertemu melalui komentar di FYP TikTok. Interaksi ini kemudian beralih ke pesan
+								WhatsApp pada tanggal 12 Mei 2023. </p>
+							<p>Selanjutnya, para penggemar ini memutuskan untuk bertemu secara langsung pada tanggal 15
+								Mei 2023 di sebuah angkringan bernama Angkringan Bejo (Angjo).</p>
+							<p>Dalam pertemuan tersebut, ditetapkan pembentukan komunitas fans JKT48 Pulau Lombok
+								beserta para pengurusnya.</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate d-flex">
+							<div class="block-18 text-center p-4 mb-4 align-self-stretch d-flex">
+								<div class="text">
+									<strong class="number" data-number="1">0</strong>
+									<span style="color: #a5a7a2;">Years of service</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate d-flex">
+							<div class="block-18 text-center py-4 px-3 mb-4 align-self-stretch d-flex">
+								<div class="text">
+									<strong class="number" data-number="100">0</strong>
+									<span style="color: #a5a7a2;">Active Members</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate d-flex">
+							<div class="block-18 text-center py-4 px-3 mb-4 align-self-stretch d-flex">
+								<div class="text">
+									<strong class="number" data-number="35">0</strong>
+									<span style="color: #a5a7a2;">Fan Meets Hosted</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate d-flex">
+							<div class="block-18 text-center py-4 px-3 mb-4 align-self-stretch d-flex">
+								<div class="text">
+									<strong class="number" data-number="1000">0</strong>
+									<span style="color: #a5a7a2;">Social Media Followers</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="ftco-section" data-section="team" id="team">
+		<div class="container-fluid p-0">
+			<div class="row no-gutters justify-content-center pb-5">
+				<div class="col-md-12 heading-section text-center ftco-animate">
+					<span class="subheading">Members</span>
+					<h2 class="mb-4">Meet Our Team</h2>
+					<p>Perkenalkan individu berbakat yang berkontribusi pada komunitas kami. Pelajari lebih lanjut
+						tentang wajah-wajah di balik layar.</p>
+				</div>
+			</div>
+			<div class="row no-gutters">
+				<div class="col-md-6 col-lg-3 ftco-animate">
+					<div class="staff">
+						<div class="img-wrap d-flex align-items-stretch">
+							<div class="img align-self-stretch"
+								style="background-image: url(../static/assets/img/team-1.jpg);"></div>
+						</div>
+						<div class="text d-flex align-items-center pt-3 text-center">
+							<div>
+								<span class="position mb-2">Member</span>
+								<h3 class="mb-4">Lloyd Wilson</h3>
+								<div class="faded">
+									<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+									<ul class="ftco-social text-center">
+										<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+										<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a>
+										</li>
+										<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-3 ftco-animate">
+					<div class="staff">
+						<div class="img-wrap d-flex align-items-stretch">
+							<div class="img align-self-stretch"
+								style="background-image: url(../static/assets/img/team-2.jpg);"></div>
+						</div>
+						<div class="text d-flex align-items-center pt-3 text-center">
+							<div>
+								<span class="position mb-2">Member</span>
+								<h3 class="mb-4">Rachel Parker</h3>
+								<div class="faded">
+									<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+									<ul class="ftco-social text-center">
+										<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+										<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a>
+										</li>
+										<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-3 ftco-animate">
+					<div class="staff">
+						<div class="img-wrap d-flex align-items-stretch">
+							<div class="img align-self-stretch"
+								style="background-image: url(../static/assets/img/team-3.jpg);"></div>
+						</div>
+						<div class="text d-flex align-items-center pt-3 text-center">
+							<div>
+								<span class="position mb-2">Member</span>
+								<h3 class="mb-4">Ian Smith</h3>
+								<div class="faded">
+									<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+									<ul class="ftco-social text-center">
+										<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+										<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a>
+										</li>
+										<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-3 ftco-animate">
+					<div class="staff">
+						<div class="img-wrap d-flex align-items-stretch">
+							<div class="img align-self-stretch"
+								style="background-image: url(../static/assets/img/team-4.jpg);"></div>
+						</div>
+						<div class="text d-flex align-items-center pt-3 text-center">
+							<div>
+								<span class="position mb-2">Member</span>
+								<h3 class="mb-4">Alicia Henderson</h3>
+								<div class="faded">
+									<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+									<ul class="ftco-social text-center">
+										<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+										<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a>
+										</li>
+										<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-6 col-lg-3 ftco-animate">
+					<div class="staff">
+						<div class="img-wrap d-flex align-items-stretch">
+							<div class="img align-self-stretch"
+								style="background-image: url(../static/assets/img/staff-1.jpg);"></div>
+						</div>
+						<div class="text d-flex align-items-center pt-3 text-center">
+							<div>
+								<span class="position mb-2">Member</span>
+								<h3 class="mb-4">Lloyd Wilson</h3>
+								<div class="faded">
+									<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+									<ul class="ftco-social text-center">
+										<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+										<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a>
+										</li>
+										<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-3 ftco-animate">
+					<div class="staff">
+						<div class="img-wrap d-flex align-items-stretch">
+							<div class="img align-self-stretch"
+								style="background-image: url(../static/assets/img/staff-2.jpg);"></div>
+						</div>
+						<div class="text d-flex align-items-center pt-3 text-center">
+							<div>
+								<span class="position mb-2">Member</span>
+								<h3 class="mb-4">Rachel Parker</h3>
+								<div class="faded">
+									<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+									<ul class="ftco-social text-center">
+										<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+										<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a>
+										</li>
+										<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-3 ftco-animate">
+					<div class="staff">
+						<div class="img-wrap d-flex align-items-stretch">
+							<div class="img align-self-stretch"
+								style="background-image: url(../static/assets/img/staff-3.jpg);"></div>
+						</div>
+						<div class="text d-flex align-items-center pt-3 text-center">
+							<div>
+								<span class="position mb-2">Member</span>
+								<h3 class="mb-4">Ian Smith</h3>
+								<div class="faded">
+									<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+									<ul class="ftco-social text-center">
+										<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+										<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a>
+										</li>
+										<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-3 ftco-animate">
+					<div class="staff">
+						<div class="img-wrap d-flex align-items-stretch">
+							<div class="img align-self-stretch"
+								style="background-image: url(../static/assets/img/staff-4.jpg);"></div>
+						</div>
+						<div class="text d-flex align-items-center pt-3 text-center">
+							<div>
+								<span class="position mb-2">Member</span>
+								<h3 class="mb-4">Alicia Henderson</h3>
+								<div class="faded">
+									<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+									<ul class="ftco-social text-center">
+										<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+										<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a>
+										</li>
+										<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="testimony-section" data-section="message" id="message">
+		<div class="container">
+			<div class="row ftco-animate justify-content-center">
+				<div class="col-md-12 d-flex align-items-center">
+					<div class="carousel-testimony owl-carousel">
+						<div class="item">
+							<div class="testimony-wrap d-flex align-items-stretch">
+								<div class="user-img d-flex align-self-stretch"
+									style="background-image: url(../static/assets/img/testimony-1.jpg)">
+								</div>
+								<div class="text d-flex align-items-center">
+									<div>
+										<div class="icon-quote">
+											<span class="icon-quote-left"></span>
+										</div>
+										<p class="mb-4">Menyatukan para penggemar JKT48 di Pulau Lombok, berbagi
+											pengalaman, dan menyalurkan dukungan kepada idol ibu kota yaitu JKT48.</p>
+										<p class="name">Dimas...</p>
+										<span class="position">Ketua, Founder</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="item">
+							<div class="testimony-wrap d-flex align-items-stretch">
+								<div class="user-img d-flex align-self-stretch"
+									style="background-image: url(../static/assets/img/testimony-2.jpg)">
+								</div>
+								<div class="text d-flex align-items-center">
+									<div>
+										<div class="icon-quote">
+											<span class="icon-quote-left"></span>
+										</div>
+										<p class="mb-4">Menyatukan para penggemar JKT48 di Pulau Lombok, berbagi
+											pengalaman, dan menyalurkan dukungan kepada idol ibu kota yaitu JKT48.</p>
+										<p class="name">Rasya...</p>
+										<span class="position">Wakil Ketua, Founder</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="ftco-section contact-section" data-section="contact" id="contact">
+		<div class="container">
+			<div class="row justify-content-center mb-5">
+				<div class="col-md-7 heading-section text-center ftco-animate">
+					<span class="subheading">Contact</span>
+					<h2 class="mb-4">Contact Us</h2>
+					<p>Jangan ragu untuk menghubungi kami untuk terhubung dengan sesama penggemar JKT48 di Lombok,
+						berbagi pengalaman, dan menyalurkan dukungan kepada grup idola ibu kota kami, JKT48.</p>
+				</div>
+			</div>
+			<div class="row d-flex justify-content-center  contact-info">
+				<div class="col-md-6 col-lg-3 d-flex">
+					<div class="align-self-stretch box p-4 text-center">
+						<div class="icon d-flex align-items-center justify-content-center">
+							<span class="icon-map-signs"></span>
+						</div>
+						<h3 class="mb-4">Address</h3>
+						<p>Jalan ... No. Kota Mataram, Nusa Tenggara Barat, Lombok</p>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-3 d-flex">
+					<div class="align-self-stretch box p-4 text-center">
+						<div class="icon d-flex align-items-center justify-content-center">
+							<span class="icon-phone2"></span>
+						</div>
+						<h3 class="mb-4">Contact Number</h3>
+						<p><a href="tel://085....">+62 858 4554 9290</a></p>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-3 d-flex">
+					<div class="align-self-stretch box p-4 text-center">
+						<div class="icon d-flex align-items-center justify-content-center">
+							<span class="icon-paper-plane"></span>
+						</div>
+						<h3 class="mb-4">Email Address</h3>
+						<p><a href="mailto:...@gmail.com">....@gmail.com</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer class="ftco-footer ftco-section">
+		<div class="container">
+			<div class="row mb-5">
+				<div class="col-md">
+					<div class="ftco-footer-widget mb-4">
+						<h2 class="ftco-heading-2">FJKT48 Lombok</h2>
+						<p>Menyatukan para penggemar JKT48 di Pulau Lombok, berbagi pengalaman, dan menyalurkan dukungan
+							kepada idol ibu kota yaitu JKT48.</p>
+						<ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+							<li class="ftco-animate"><a href="https://x.com/fjkt48_lombokuy"><span
+										class="icon-twitter"></span></a></li>
+							<li class="ftco-animate" style="text-align: center;"><a
+									href="https://www.tiktok.com/@fjkt48.lombok"
+									style="font-size: 24px; padding: 3px; align-items: center;"><i
+										class="fab fa-tiktok"></i></a></li>
+							<li class="ftco-animate"><a href="https://www.instagram.com/fjkt48.lombok"><span
+										class="icon-instagram"></span></a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md">
+					<div class="ftco-footer-widget mb-4 ml-md-4">
+						<h2 class="ftco-heading-2">Links</h2>
+						<ul class="list-unstyled">
+							<li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Home</a></li>
+							<li><a href="#section-counter"><span class="icon-long-arrow-right mr-2"></span>About</a>
+							</li>
+							<li><a href="#team"><span class="icon-long-arrow-right mr-2"></span>Team</a></li>
+							<li><a href="#message"><span class="icon-long-arrow-right mr-2"></span>Message</a></li>
+							<li><a href="#contact"><span class="icon-long-arrow-right mr-2"></span>Contact</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md">
+					<div class="ftco-footer-widget mb-4">
+						<h2 class="ftco-heading-2">Events</h2>
+						<ul class="list-unstyled">
+							<li><a><span class="icon-long-arrow-right mr-2"></span>Gathering</a></li>
+							<li><a><span class="icon-long-arrow-right mr-2"></span>Nobar & Karaoke</a></li>
+							<li><a><span class="icon-long-arrow-right mr-2"></span>Fun Sports</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md">
+					<div class="ftco-footer-widget mb-4">
+						<h2 class="ftco-heading-2">Have a Questions?</h2>
+						<div class="block-23 mb-3">
+							<ul>
+								<li><span class="icon icon-map-marker"></span><span class="text">Jalan ... No. Kota
+										Mataram, Nusa Tenggara Barat, Lombok</span></li>
+								<li><a href="tel://085...."><span class="icon icon-phone"></span><span class="text">+62
+											858 4554 9290</span></a></li>
+								<li><a href="mailto:...@gmail.com"><span class="icon icon-envelope"></span><span
+											class="text">....@gmail.com</span></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<p>
+						&copy;<script>
+							document.write(new Date().getFullYear());
+						</script> All rights reserved | Fanbase JKT48 Lombok
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
 
 
-  <script src="../static/assets/js/jquery.min.js"></script>
-  <script src="../static/assets/js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="../static/assets/js/popper.min.js"></script>
-  <script src="../static/assets/js/bootstrap.min.js"></script>
-  <script src="../static/assets/js/jquery.easing.1.3.js"></script>
-  <script src="../static/assets/js/jquery.waypoints.min.js"></script>
-  <script src="../static/assets/js/jquery.stellar.min.js"></script>
-  <script src="../static/assets/js/owl.carousel.min.js"></script>
-  <script src="../static/assets/js/jquery.magnific-popup.min.js"></script>
-  <script src="../static/assets/js/aos.js"></script>
-  <script src="../static/assets/js/jquery.animateNumber.min.js"></script>
-  <script src="../static/assets/js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="../static/assets/js/google-map.js"></script>
-  <script src="../static/assets/js/main.js"></script>
-  
-  </body>
+	<!-- loader -->
+	<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+				stroke="#F96D00" /></svg></div>
+
+
+	<script src="../static/assets/js/jquery.min.js"></script>
+	<script src="../static/assets/js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="../static/assets/js/popper.min.js"></script>
+	<script src="../static/assets/js/bootstrap.min.js"></script>
+	<script src="../static/assets/js/jquery.easing.1.3.js"></script>
+	<script src="../static/assets/js/jquery.waypoints.min.js"></script>
+	<script src="../static/assets/js/jquery.stellar.min.js"></script>
+	<script src="../static/assets/js/owl.carousel.min.js"></script>
+	<script src="../static/assets/js/jquery.magnific-popup.min.js"></script>
+	<script src="../static/assets/js/aos.js"></script>
+	<script src="../static/assets/js/jquery.animateNumber.min.js"></script>
+	<script src="../static/assets/js/scrollax.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false">
+	</script>
+	<script src="../static/assets/js/google-map.js"></script>
+	<script src="../static/assets/js/main.js"></script>
+
+</body>
+
 </html>
