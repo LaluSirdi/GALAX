@@ -9733,7 +9733,7 @@ input[type="email"] {
 /* Submit and Clear buttons */
 button[type="submit"],
 button[type="button"] {
-  background-color: #4CAF50;
+  background-color: #007bff;
   color: white;
   padding: 10px 15px;
   border: none;
@@ -9745,7 +9745,7 @@ button[type="button"] {
 
 button[type="submit"]:hover,
 button[type="button"]:hover {
-  background-color: #45a049;
+  background-color: #007bff;
 }
 
 button[type="button"] {
