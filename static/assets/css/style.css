@@ -9766,3 +9766,111 @@ button[type="button"]:hover {
 .modal-content h3 {
   text-align: center;
 }
+body {
+  font-family: Arial, sans-serif;
+  background-color: white;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: row;
+  justify-content: flex-end;
+  gap: auto;
+}
+
+.gallery img {
+  width: auto;
+  height: 100px; /* Tinggi akan menyesuaikan secara otomatis */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: transform 0.2s;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+}
+
+.caption {
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+}
+
+
+
+.image-container {
+  display: flex;
+  position: relative;
+}
+
+.image-container img {
+  width: 325px; /* Fixed width */
+  height: 250px; /* Fixed height */
+  object-fit: cover; /* Ensure the image covers its container */
+  margin-left: -20px; /* Adjust the overlap as needed */
+  opacity: 0.8; /* Adjust the opacity as needed */
+  transition: opacity 0.3s ease;
+}
+
+.image-container img:first-child {
+  margin-left: 0;
+}
+
+.image-container img:hover {
+  opacity: 1; /* Increase opacity on hover */
+}
+.button-container {
+  display: flex;
+  justify-content: center; /* Membuat tombol berada di tengah horizontal */
+  margin-top: 20px;
+  
+}
+.button-container button {
+  margin: 0 150px; /* Menambahkan jarak horizontal antara tombol */
+}
+.button-container button {
+  padding: 10px 150px; /* Menambahkan padding untuk membuat tombol lebih panjang */
+  border: none;
+  border-radius: 5px;
+  background-color: #D0D3D4 ;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}on-container button:hover {
+  background-color: grey;
+}
+
+#filterable-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px; 
+}
+.cards {
+  flex: 1 1 calc(20% - 16px); 
+  box-sizing: border-box;
+}
+
+.cards img {
+  width: 100%;
+  height: auto;
+}
+
+.cards-body {
+  padding: 8px;
+  text-align: center;
+}
+
+.centered-bold {
+  text-align: center;
+  font-weight: bold;
+}
+
+.cards-title{
+  color: #000;
+  font-weight: bold;
+}
+.cards-text{
+  color: #000;
+}

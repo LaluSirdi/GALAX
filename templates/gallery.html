@@ -1,0 +1,121 @@
+{% include 'header.html' %}
+
+<section class="ftco-section bg-light" data-section="gallery">
+  <div class="image-container">
+    <img src="../static/assets/img/person_1.jpg" alt="Image 1">
+    <img src="../static/assets/img/person_2.jpg" alt="Image 2">
+    <img src="../static/assets/img/person_3.jpg" alt="Image 3">
+    <img src="../static/assets/img/person_4.jpg" alt="Image 4">
+    <img src="../static/assets/img/person_1.jpg" alt="Image 5">
+  </div>
+  <div class="button-container">
+    <button id="fjkt-button">
+      <a href="#target-section">FJKT</a>
+    </button>
+    <button id="fan-art-button">
+      <a href="#fan-section">FAN ART</a>
+    </button>
+  </div>
+  <div>
+    <h3 class="centered-bold" id="target-section">FJKT</h3>
+  </div>
+  <div class="row px-2 mt-4 gap-3" id="filterable-cards">
+    <div class="cards p-0" data-name="nature">
+      <img src="../static/assets/img/1.jpg" alt="img">
+      <div class="cards-body">
+        <h6 class="cards-title">Mountains</h6>
+        <p class="cards-text">Lorem ipsum dolor..</p>
+      </div>
+    </div>
+    <div class="cards p-0" data-name="nature">
+      <img src="../static/assets/img/2.jpg" alt="img">
+      <div class="cards-body">
+        <h6 class="cards-title">Lights</h6>
+        <p class="cards-text">Lorem ipsum dolor..</p>
+      </div>
+    </div>
+    <div class="cards p-0" data-name="nature">
+      <img src="../static/assets/img/3.jpg" alt="img">
+      <div class="cards-body">
+        <h6 class="cards-title">Nature</h6>
+        <p class="cards-text">Lorem ipsum dolor..</p>
+      </div>
+    </div>
+    <div class="cards p-0" data-name="cars">
+      <img src="../static/assets/img/4.jpg" alt="img">
+      <div class="cards-body">
+        <h6 class="cards-title">Retro</h6>
+        <p class="cards-text">Lorem ipsum dolor..</p>
+      </div>
+    </div>
+    <div class="cards p-0" data-name="nature">
+      <img src="../static/assets/img/1.jpg" alt="img">
+      <div class="cards-body">
+        <h6 class="cards-title">Mountains</h6>
+        <p class="cards-text">Lorem ipsum dolor..</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="centered-bold" id="fan-section">FAN ART</h3>
+  <div class="row px-2 mt-4 gap-3" id="filterable-cards">
+    <div class="cards p-0" data-name="nature">
+      <img src="../static/assets/img/1.jpg" alt="img">
+      <div class="cards-body">
+        <h6 class="cards-title">Mountains</h6>
+        <p class="cards-text">Lorem ipsum dolor..</p>
+      </div>
+    </div>
+    <div class="cards p-0" data-name="nature">
+      <img src="../static/assets/img/2.jpg" alt="img">
+      <div class="cards-body">
+        <h6 class="cards-title">Lights</h6>
+        <p class="cards-text">Lorem ipsum dolor..</p>
+      </div>
+    </div>
+    <div class="cards p-0" data-name="nature">
+      <img src="../static/assets/img/3.jpg" alt="img">
+      <div class="cards-body">
+        <h6 class="cards-title">Nature</h6>
+        <p class="cards-text">Lorem ipsum dolor..</p>
+      </div>
+    </div>
+    <div class="cards p-0" data-name="cars">
+      <img src="../static/assets/img/4.jpg" alt="img">
+      <div class="cards-body">
+        <h6 class="cards-title">Retro</h6>
+        <p class="cards-text">Lorem ipsum dolor..</p>
+      </div>
+    </div>
+    <div class="cards p-0" data-name="nature">
+      <img src="../static/assets/img/1.jpg" alt="img">
+      <div class="cards-body">
+        <h6 class="cards-title">Mountains</h6>
+        <p class="cards-text">Lorem ipsum dolor..</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const fjktButton = document.getElementById('fjkt-button');
+  const fanArtButton = document.getElementById('fan-art-button');
+  const targetSection = document.getElementById('target-section');
+  const fanSection = document.getElementById('fan-section');
+
+  fjktButton.addEventListener('click', () => {
+    targetSection.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  });
+
+  fanArtButton.addEventListener('click', () => {
+    fanSection.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  });
+</script>
+
+{% include 'footer.html' %}
