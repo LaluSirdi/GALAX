@@ -11,6 +11,27 @@ db = client.dbfjkt
 def index():
     return render_template('index.html')
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        users = db.users
+        login_user = users.find_one({'username': request.form['username']})
+
+        if login_user:
+            if bcrypt.checkpw(request.form['password'].encode('utf-8'), login_user['password']):
+                session['username'] = request.form['username']
+                if request.form['username'] == 'admin' and request.form['password'] == 'admin123':  
+                    return redirect(url_for('upmerchandise'))  
+                else:
+                    return redirect(url_for('dashboard'))
+            else:
+                flash('Invalid username/password combination')
+        else:
+            flash('Invalid username/password combination')
+
+    return render_template('login.html')
+
+
 @app.route('/beranda')
 def beranda():
     return render_template('beranda.html')
