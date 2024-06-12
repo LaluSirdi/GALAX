@@ -1,10 +1,10 @@
-from flask import Flask, redirect, url_for, render_template, request, jsonify
-from pymongo import MongoClient
-from bson import ObjectId
+from flask import Flask, redirect, url_for, render_template, request, jsonify # type: ignore
+from pymongo import MongoClient # type: ignore
+from bson import ObjectId # type: ignore
 import os
 
 app = Flask(__name__)
-client = MongoClient('mongodb+srv://nawangandrian:xfDGGaRjSPR5TPoJ@cluster0.eqhmd7k.mongodb.net/')
+client = MongoClient('mongodb://galax:123@ac-ze3lobj-shard-00-00.q2oca08.mongodb.net:27017,ac-ze3lobj-shard-00-01.q2oca08.mongodb.net:27017,ac-ze3lobj-shard-00-02.q2oca08.mongodb.net:27017/?ssl=true&replicaSet=atlas-vu1i2x-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster')
 db = client.dbfjkt
 
 @app.route('/')
@@ -100,6 +100,10 @@ def deleteMerchandise(_id):
    id = ObjectId(_id)
    db.merchandise.delete_one({"_id": ObjectId(_id)})
    return redirect(url_for("upmerchandise"))
+
+@app.route('/upgallery')
+def home():
+    return render_template('up-gallery.html')
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
