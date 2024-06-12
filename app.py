@@ -4,6 +4,7 @@ from pymongo import MongoClient
 from bson import ObjectId 
 from flask_bcrypt import Bcrypt
 from flask_session import Session
+from flask_bcrypt import generate_password_hash
 from flask import flash, session
 import os
 
@@ -12,10 +13,13 @@ app.secret_key = 'galax'
 
 client = MongoClient('mongodb+srv://nawangandrian:xfDGGaRjSPR5TPoJ@cluster0.eqhmd7k.mongodb.net/')
 db = client.dbfjkt
+users_collection = db['users']  # Ganti 'users' dengan nama koleksi untuk pengguna
 
 @app.route('/')
 def index():
     return render_template('index.html')
+
+bcrypt = Bcrypt()
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -24,9 +28,10 @@ def login():
         login_user = users.find_one({'username': request.form['username']})
 
         if login_user:
-            if bcrypt.checkpw(request.form['password'].encode('utf-8'), login_user['password']):
+            hashed_password = login_user['password']
+            if bcrypt.check_password_hash(hashed_password, request.form['password']):
                 session['username'] = request.form['username']
-                if request.form['username'] == 'admin' and request.form['password'] == 'admin123':
+                if request.form['username'] == 'admin1' and request.form['password'] == 'admin1234':
                     return redirect(url_for('upmerchandise'))
                 else:
                     return redirect(url_for('beranda'))
@@ -36,6 +41,7 @@ def login():
             flash('Kombinasi username/password tidak valid')
 
     return render_template('index.html')
+
 
 @app.route('/beranda')
 def beranda():
