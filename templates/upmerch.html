@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>FJKT48 Lombok</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  <link href="../static/assets/img/logo_3.png" rel="shortcut icon" type="image/x-icon" />
+    
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900" rel="stylesheet">
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="stylesheet" href="../static/assets/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="../static/assets/css/animate.css">
+    
+    <link rel="stylesheet" href="../static/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../static/assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../static/assets/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="../static/assets/css/aos.css">
+
+    <link rel="stylesheet" href="../static/assets/css/ionicons.min.css">
+    
+    <link rel="stylesheet" href="../static/assets/css/flaticon.css">
+    <link rel="stylesheet" href="../static/assets/css/icomoon.css">
+    <link rel="stylesheet" href="../static/assets/css/style.css">
+    <style>
+  
+        /* Modal styling */
+        .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          padding-top: 60px;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          overflow: auto;
+          background-color: rgb(0,0,0);
+          background-color: rgba(0,0,0,0.4);
+        }
+        
+        .modal-content {
+          background-color: #fefefe;
+          margin: 5% auto;
+          padding: 20px;
+          border: 1px solid #888;
+          width: 80%;
+        }
+        
+        .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+        }
+        
+        .close:hover,
+        .close:focus {
+          color: black;
+          text-decoration: none;
+          cursor: pointer;
+        }
+        
+        </style>
+  </head>
+  <body>
+	  
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-primary ftco-navbar-primary" id="ftco-navbar">
+	    <div class="container">
+	      <div class="logo-circle navbar-brand">
+          <img src="../static/assets/img/logo_3.png" alt="Logo">
+        </div>
+	      <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav nav ml-auto">
+	          <li class="nav-item"><a href="/dashboard" class="nav-link" data-nav-section="home"><span>Home</span></a></li>
+	          <li class="nav-item"><a href="/gallery" class="nav-link" data-nav-section="gallery"><span>Gallery</span></a></li>
+	          <li class="nav-item"><a href="/about" class="nav-link" data-nav-section="about"><span>About Us</span></a></li>
+	          <li class="nav-item"><a href="/merchandise" class="nav-link" data-nav-section="merchandise"><span>Merchandise</span></a></li>
+	          <li class="nav-item"><a href="/contact" class="nav-link" data-nav-section="contact"><span>Contact</span></a></li>
+            <li class="nav-item ml-auto">
+              <a href="#" class="nav-link" id="user-account"><span><i class="fas fa-user"></i></span></a>
+            </li>
+          </ul>
+	      </div>
+	    </div>
+      <div id="logout-popup">
+        <p>Anda yakin ingin logout?</p>
+        <button id="logout-btn">Logout</button>
+        <button id="cancel-btn">Cancel</button>
+      </div>
+	</nav>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("user-account").addEventListener("click", function () {
+        document.getElementById("logout-popup").style.display = "block";
+      });
+
+      document.getElementById("cancel-btn").addEventListener("click", function () {
+        document.getElementById("logout-popup").style.display = "none";
+      });
+
+      document.getElementById("logout-btn").addEventListener("click", function () {
+        window.location.href = "/logout";
+      });
+    });
+
+    function openModal(modalId) {
+        document.getElementById(modalId).style.display = "block";
+    }
+    
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = "none";
+    }
+    
+    function openEditModal(id, description, price) {
+        document.getElementById('editForm').action = '/edit/' + id;
+        document.getElementById('edit_description').value = description;
+        document.getElementById('edit_price').value = price;
+        openModal('editModal');
+    }
+
+    // Menutup semua modal saat halaman dimuat
+  document.addEventListener("DOMContentLoaded", function() {
+    var modals = document.getElementsByClassName("modal");
+    for (var i = 0; i < modals.length; i++) {
+      modals[i].style.display = "none";
+    }
+  });
+    
+  </script>
+
+  <section class="ftco-section bg-light" data-section="merchandise">
+      <div class="container">
+          <div class="row justify-content-center mb-5 pb-5">
+              <div class="col-md-7 heading-section text-center ftco-animate">
+                  <span class="subheading">Merchandise</span>
+                  <h2 class="mb-4">See Our Products</h2>
+                  <p>Yuk, lengkapi koleksimu dengan berbagai merchandise kece dari Fanbase JKT48 Lombok!</p>
+                  <button class="btn btn-primary" onclick="openModal('addModal')">Add Merchandise</button>
+              </div>
+          </div>
+          <div class="row d-flex">
+              {% for merchandise in merchandises %}
+              <div class="col-md-4 d-flex ftco-animate">
+                  <div class="blog-entry justify-content-end">
+                      <div class="img">
+                          <a href="{{ url_for('static', filename='uploads/' ~ merchandise.image) }}" class="icon image-popup d-flex justify-content-center align-items-center">
+                              <img src="{{ url_for('static', filename='uploads/' ~ merchandise.image) }}" class="block-20" alt="Merchandise Image">
+                          </a>
+                      </div> 
+                      <div class="text mt-3 float-right d-block">
+                          <div class="d-flex align-items-center pt-2 mb-4 topp">
+                              <div class="one mr-3">
+                                  <span class="day">10</span>
+                              </div>
+                              <div class="two">
+                                  <span class="yr">2024</span>
+                                  <span class="mos">May</span>
+                              </div>
+                          </div>
+                          <h3 class="heading">{{ merchandise.description }}</h3>
+                          <p>Rp. {{ '%.2f' | format(merchandise.price) }}</p>
+                          <div class="d-flex align-items-center mt-4 meta">
+                              <button class="btn btn-secondary" onclick="openEditModal('{{ merchandise._id }}', '{{ merchandise.description }}', {{ merchandise.price }})">Edit</button>
+                              <a href="{{ url_for('delete_merchandise', id=merchandise._id) }}" class="btn btn-danger ml-2">Delete</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              {% endfor %}
+          </div>
+      </div>
+  </section>
+  
+  <!-- Add Modal -->
+  <div id="addModal" class="modal">
+      <div class="modal-content">
+          <span class="close" onclick="closeModal('addModal')">&times;</span>
+          <h2>Add Merchandise</h2>
+          <form action="{{ url_for('add_merchandise') }}" method="post" enctype="multipart/form-data">
+              <div>
+                  <label for="image">Pilih Gambar</label>
+                  <input type="file" id="image" name="image" accept="image/*" required>
+              </div>
+              <div>
+                  <label for="description">Deskripsi</label>
+                  <input type="text" id="description" name="description" required>
+              </div>
+              <div>
+                  <label for="price">Harga</label>
+                  <input type="text" id="price" name="price" required>
+              </div>
+              <button type="submit">Unggah</button>
+          </form>
+      </div>
+  </div>
+  
+  <!-- Edit Modal -->
+  <div id="editModal" class="modal">
+      <div class="modal-content">
+          <span class="close" onclick="closeModal('editModal')">&times;</span>
+          <h2>Edit Merchandise</h2>
+          <form id="editForm" action="#" method="post" enctype="multipart/form-data">
+              <div>
+                  <label for="edit_image">Pilih Gambar Baru (opsional)</label>
+                  <input type="file" id="edit_image" name="image" accept="image/*">
+              </div>
+              <div>
+                  <label for="edit_description">Deskripsi</label>
+                  <input type="text" id="edit_description" name="description" required>
+              </div>
+              <div>
+                  <label for="edit_price">Harga</label>
+                  <input type="text" id="edit_price" name="price" required>
+              </div>
+              <button type="submit">Simpan Perubahan</button>
+          </form>
+      </div>
+  </div>
+  
+  {% include 'footer.html' %}
+  
