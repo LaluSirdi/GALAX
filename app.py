@@ -27,7 +27,6 @@ def beli():
     whatsapp = '6285865317821'
     return redirect(f'https://wa.me/{whatsapp}?text=Saya tertarik dengan {nama} seharga {harga}. Tolong informasi lebih lanjut.')
 
-
 @app.route('/gallery')
 def gallery():
     return render_template('gallery.html')
