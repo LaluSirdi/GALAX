@@ -5,7 +5,7 @@
 	<title>FJKT48 Lombok</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link href="../static/assets/img/logo_3.png" rel="shortcut icon" type="image/x-icon" />
+	<link href="../static/assets/img/logo_4.png" rel="shortcut icon" type="image/x-icon" />
 
 	<link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -24,6 +24,7 @@
 	<link rel="stylesheet" href="../static/assets/css/flaticon.css">
 	<link rel="stylesheet" href="../static/assets/css/icomoon.css">
 	<link rel="stylesheet" href="../static/assets/css/style.css">
+	<link rel="stylesheet" href="../static/assets/css/style-login.css">
 </head>
 
 <body>
@@ -41,14 +42,9 @@
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav nav ml-auto">
 					<li class="nav-item"><a href="#" class="nav-link" data-nav-section="home"><span>Home</span></a></li>
-					<li class="nav-item"><a href="#" class="nav-link" data-nav-section="about"><span>About Us</span></a>
-					</li>
-					<li class="nav-item"><a href="#" class="nav-link"
-							data-nav-section="contact"><span>Contact</span></a></li>
-					<li class="nav-item ml-auto">
-						<a href="#" class="nav-link" id="user-account" onclick="toggleDropdown()"><span><i
-									class="fas fa-user"></i></span></a>
-					</li>
+					<li class="nav-item"><a href="#" class="nav-link" data-nav-section="about"><span>About Us</span></a></li>
+					<li class="nav-item"><a href="#" class="nav-link" data-nav-section="contact"><span>Contact</span></a></li>
+					<li class="nav-item"><a href="#" class="nav-link" id="user-account" onclick="toggleDropdown()"><span><i class="fas fa-user"></i> <span class="login-text">Login</span></span></a></li>
 				</ul>
 			</div>
 		</div>
@@ -72,7 +68,7 @@
 						<label for="password"><i class="fas fa-lock"></i> Password</label>
 						<input type="password" id="password" name="password" required>
 						<div class="button-container" style="justify-content: center;">
-							<button type="submit">Login</button>
+							<button type="submit" id="login-b">Login</button>
 						</div>
 					</form>
 					<p style="text-align: center; margin-top: 15px;">Belum punya akun?
@@ -92,8 +88,8 @@
 						<label for="new-password"><i class="fas fa-key"></i> Confirm Password *</label>
 						<input type="password" id="confirm-password" name="confirm-password" required>
 						<div class="button-container">
-							<button type="submit">Register</button>
-							<button type="button" onclick="clearForm('signUpForm')">Clear</button>
+							<button type="submit" id="registrasi">Register</button>
+							<button type="button" id="clear" onclick="clearForm('signUpForm')">Clear</button>
 						</div>
 					</form>
 					<p style="text-align: center;">Sudah punya akun? <a href="#" id="loginLink">Masuk di sini</a></p>
@@ -141,7 +137,7 @@
 							<p>Tujuan utama dari pembentukan fanbase ini adalah untuk menyatukan para penggemar JKT48 di
 								Pulau Lombok, berbagi pengalaman, dan menyalurkan dukungan kepada idol ibu kota yaitu
 								JKT48.</p>
-							<p><a href="#section-counter" class="btn btn-primary" data-nav-section="about">Read more</a>
+							<p><a href="#section-counter" class="btn btn-primary" id="klikabout">Read more</a>
 							</p>
 						</div>
 					</div>
@@ -203,261 +199,6 @@
 								<div class="text">
 									<strong class="number" data-number="1000">0</strong>
 									<span style="color: #a5a7a2;">Social Media Followers</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section class="ftco-section" data-section="team" id="team">
-		<div class="container-fluid p-0">
-			<div class="row no-gutters justify-content-center pb-5">
-				<div class="col-md-12 heading-section text-center ftco-animate">
-					<span class="subheading">Members</span>
-					<h2 class="mb-4">Meet Our Team</h2>
-					<p>Perkenalkan individu berbakat yang berkontribusi pada komunitas kami. Pelajari lebih lanjut
-						tentang wajah-wajah di balik layar.</p>
-				</div>
-			</div>
-			<div class="row no-gutters">
-				<div class="col-md-6 col-lg-3 ftco-animate">
-					<div class="staff">
-						<div class="img-wrap d-flex align-items-stretch">
-							<div class="img align-self-stretch"
-								style="background-image: url(../static/assets/img/team-1.jpg);"></div>
-						</div>
-						<div class="text d-flex align-items-center pt-3 text-center">
-							<div>
-								<span class="position mb-2">Member</span>
-								<h3 class="mb-4">Lloyd Wilson</h3>
-								<div class="faded">
-									<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-									<ul class="ftco-social text-center">
-										<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-										<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a>
-										</li>
-										<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3 ftco-animate">
-					<div class="staff">
-						<div class="img-wrap d-flex align-items-stretch">
-							<div class="img align-self-stretch"
-								style="background-image: url(../static/assets/img/team-2.jpg);"></div>
-						</div>
-						<div class="text d-flex align-items-center pt-3 text-center">
-							<div>
-								<span class="position mb-2">Member</span>
-								<h3 class="mb-4">Rachel Parker</h3>
-								<div class="faded">
-									<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-									<ul class="ftco-social text-center">
-										<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-										<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a>
-										</li>
-										<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3 ftco-animate">
-					<div class="staff">
-						<div class="img-wrap d-flex align-items-stretch">
-							<div class="img align-self-stretch"
-								style="background-image: url(../static/assets/img/team-3.jpg);"></div>
-						</div>
-						<div class="text d-flex align-items-center pt-3 text-center">
-							<div>
-								<span class="position mb-2">Member</span>
-								<h3 class="mb-4">Ian Smith</h3>
-								<div class="faded">
-									<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-									<ul class="ftco-social text-center">
-										<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-										<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a>
-										</li>
-										<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3 ftco-animate">
-					<div class="staff">
-						<div class="img-wrap d-flex align-items-stretch">
-							<div class="img align-self-stretch"
-								style="background-image: url(../static/assets/img/team-4.jpg);"></div>
-						</div>
-						<div class="text d-flex align-items-center pt-3 text-center">
-							<div>
-								<span class="position mb-2">Member</span>
-								<h3 class="mb-4">Alicia Henderson</h3>
-								<div class="faded">
-									<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-									<ul class="ftco-social text-center">
-										<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-										<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a>
-										</li>
-										<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-6 col-lg-3 ftco-animate">
-					<div class="staff">
-						<div class="img-wrap d-flex align-items-stretch">
-							<div class="img align-self-stretch"
-								style="background-image: url(../static/assets/img/staff-1.jpg);"></div>
-						</div>
-						<div class="text d-flex align-items-center pt-3 text-center">
-							<div>
-								<span class="position mb-2">Member</span>
-								<h3 class="mb-4">Lloyd Wilson</h3>
-								<div class="faded">
-									<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-									<ul class="ftco-social text-center">
-										<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-										<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a>
-										</li>
-										<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3 ftco-animate">
-					<div class="staff">
-						<div class="img-wrap d-flex align-items-stretch">
-							<div class="img align-self-stretch"
-								style="background-image: url(../static/assets/img/staff-2.jpg);"></div>
-						</div>
-						<div class="text d-flex align-items-center pt-3 text-center">
-							<div>
-								<span class="position mb-2">Member</span>
-								<h3 class="mb-4">Rachel Parker</h3>
-								<div class="faded">
-									<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-									<ul class="ftco-social text-center">
-										<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-										<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a>
-										</li>
-										<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3 ftco-animate">
-					<div class="staff">
-						<div class="img-wrap d-flex align-items-stretch">
-							<div class="img align-self-stretch"
-								style="background-image: url(../static/assets/img/staff-3.jpg);"></div>
-						</div>
-						<div class="text d-flex align-items-center pt-3 text-center">
-							<div>
-								<span class="position mb-2">Member</span>
-								<h3 class="mb-4">Ian Smith</h3>
-								<div class="faded">
-									<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-									<ul class="ftco-social text-center">
-										<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-										<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a>
-										</li>
-										<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3 ftco-animate">
-					<div class="staff">
-						<div class="img-wrap d-flex align-items-stretch">
-							<div class="img align-self-stretch"
-								style="background-image: url(../static/assets/img/staff-4.jpg);"></div>
-						</div>
-						<div class="text d-flex align-items-center pt-3 text-center">
-							<div>
-								<span class="position mb-2">Member</span>
-								<h3 class="mb-4">Alicia Henderson</h3>
-								<div class="faded">
-									<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-									<ul class="ftco-social text-center">
-										<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-										<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a>
-										</li>
-										<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section class="testimony-section" data-section="message" id="message">
-		<div class="container">
-			<div class="row ftco-animate justify-content-center">
-				<div class="col-md-12 d-flex align-items-center">
-					<div class="carousel-testimony owl-carousel">
-						<div class="item">
-							<div class="testimony-wrap d-flex align-items-stretch">
-								<div class="user-img d-flex align-self-stretch"
-									style="background-image: url(../static/assets/img/testimony-1.jpg)">
-								</div>
-								<div class="text d-flex align-items-center">
-									<div>
-										<div class="icon-quote">
-											<span class="icon-quote-left"></span>
-										</div>
-										<p class="mb-4">Menyatukan para penggemar JKT48 di Pulau Lombok, berbagi
-											pengalaman, dan menyalurkan dukungan kepada idol ibu kota yaitu JKT48.</p>
-										<p class="name">Dimas...</p>
-										<span class="position">Ketua, Founder</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="testimony-wrap d-flex align-items-stretch">
-								<div class="user-img d-flex align-self-stretch"
-									style="background-image: url(../static/assets/img/testimony-2.jpg)">
-								</div>
-								<div class="text d-flex align-items-center">
-									<div>
-										<div class="icon-quote">
-											<span class="icon-quote-left"></span>
-										</div>
-										<p class="mb-4">Menyatukan para penggemar JKT48 di Pulau Lombok, berbagi
-											pengalaman, dan menyalurkan dukungan kepada idol ibu kota yaitu JKT48.</p>
-										<p class="name">Rasya...</p>
-										<span class="position">Wakil Ketua, Founder</span>
-									</div>
 								</div>
 							</div>
 						</div>
@@ -604,6 +345,17 @@
 	</script>
 	<script src="../static/assets/js/google-map.js"></script>
 	<script src="../static/assets/js/main.js"></script>
+	<script>
+		const klikabout = document.getElementById('klikabout');
+		const targetSection = document.getElementById('section-counter');
+	  
+		klikabout.addEventListener('click', () => {
+		  targetSection.scrollIntoView({
+			behavior: 'smooth',
+			block: 'start'
+		  });
+		});
+	</script>
 
 </body>
 
