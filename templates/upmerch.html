@@ -167,7 +167,7 @@
                           <h3 class="heading">{{ merchandise.description }}</h3>
                           <p>Rp. {{ '%.2f' | format(merchandise.price) }}</p>
                           <div class="d-flex align-items-center mt-4 meta">
-                              <button class="btn btn-secondary" onclick="openEditModal('{{ merchandise._id }}', '{{ merchandise.description }}', {{ merchandise.price }})">Edit</button>
+                              <button class="btn btn-secondary" onclick="openEditModal('{{ merchandise._id }}', '{{ merchandise.description }}', '{{ merchandise.price }}')">Edit</button>
                               <a href="{{ url_for('delete_merchandise', id=merchandise._id) }}" class="btn btn-danger ml-2">Delete</a>
                           </div>
                       </div>
