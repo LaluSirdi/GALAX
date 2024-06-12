@@ -1,10 +1,16 @@
-from flask import Flask, redirect, url_for, render_template, request, jsonify # type: ignore
-from pymongo import MongoClient # type: ignore
-from bson import ObjectId # type: ignore
+import bcrypt
+from flask import Flask, redirect, url_for, render_template, request, jsonify 
+from pymongo import MongoClient 
+from bson import ObjectId 
+from flask_bcrypt import Bcrypt
+from flask_session import Session
+from flask import flash, session
 import os
 
 app = Flask(__name__)
-client = MongoClient('mongodb://galax:123@ac-ze3lobj-shard-00-00.q2oca08.mongodb.net:27017,ac-ze3lobj-shard-00-01.q2oca08.mongodb.net:27017,ac-ze3lobj-shard-00-02.q2oca08.mongodb.net:27017/?ssl=true&replicaSet=atlas-vu1i2x-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster')
+app.secret_key = 'galax'
+
+client = MongoClient('mongodb+srv://nawangandrian:xfDGGaRjSPR5TPoJ@cluster0.eqhmd7k.mongodb.net/')
 db = client.dbfjkt
 
 @app.route('/')
@@ -20,17 +26,16 @@ def login():
         if login_user:
             if bcrypt.checkpw(request.form['password'].encode('utf-8'), login_user['password']):
                 session['username'] = request.form['username']
-                if request.form['username'] == 'admin' and request.form['password'] == 'admin123':  
-                    return redirect(url_for('upmerchandise'))  
+                if request.form['username'] == 'admin' and request.form['password'] == 'admin123':
+                    return redirect(url_for('upmerchandise'))
                 else:
-                    return redirect(url_for('dashboard'))
+                    return redirect(url_for('beranda'))
             else:
-                flash('Invalid username/password combination')
+                flash('Kombinasi username/password tidak valid')
         else:
-            flash('Invalid username/password combination')
+            flash('Kombinasi username/password tidak valid')
 
-    return render_template('login.html')
-
+    return render_template('index.html')
 
 @app.route('/beranda')
 def beranda():
