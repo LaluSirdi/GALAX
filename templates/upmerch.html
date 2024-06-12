@@ -1,228 +1,169 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>FJKT48 Lombok</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	  <link href="../static/assets/img/logo_3.png" rel="shortcut icon" type="image/x-icon" />
-    
-    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900" rel="stylesheet">
-	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+{% include 'header.html' %}
 
-    <link rel="stylesheet" href="../static/assets/css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="../static/assets/css/animate.css">
-    
-    <link rel="stylesheet" href="../static/assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../static/assets/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="../static/assets/css/magnific-popup.css">
+<link rel="stylesheet" href="../static/assets/css/style-landing.css">
 
-    <link rel="stylesheet" href="../static/assets/css/aos.css">
-
-    <link rel="stylesheet" href="../static/assets/css/ionicons.min.css">
-    
-    <link rel="stylesheet" href="../static/assets/css/flaticon.css">
-    <link rel="stylesheet" href="../static/assets/css/icomoon.css">
-    <link rel="stylesheet" href="../static/assets/css/style.css">
-    <style>
-  
-        /* Modal styling */
-        .modal {
-          display: none;
-          position: fixed;
-          z-index: 1;
-          padding-top: 60px;
-          left: 0;
-          top: 0;
-          width: 100%;
-          height: 100%;
-          overflow: auto;
-          background-color: rgb(0,0,0);
-          background-color: rgba(0,0,0,0.4);
-        }
-        
-        .modal-content {
-          background-color: #fefefe;
-          margin: 5% auto;
-          padding: 20px;
-          border: 1px solid #888;
-          width: 80%;
-        }
-        
-        .close {
-          color: #aaa;
-          float: right;
-          font-size: 28px;
-          font-weight: bold;
-        }
-        
-        .close:hover,
-        .close:focus {
-          color: black;
-          text-decoration: none;
-          cursor: pointer;
-        }
-        
-        </style>
-  </head>
-  <body>
-	  
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-primary ftco-navbar-primary" id="ftco-navbar">
-	    <div class="container">
-	      <div class="logo-circle navbar-brand">
-          <img src="../static/assets/img/logo_3.png" alt="Logo">
+<section class="ftco-section bg-light" data-section="merchandise">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-5">
+            <div class="col-md-7 heading-section text-center ftco-animate">
+                <span class="subheading">Merchandise</span>
+                <h2 class="mb-4">See Our Products</h2>
+                <p>Yuk, lengkapi koleksimu dengan berbagai merchandise kece dari Fanbase JKT48 Lombok!</p>
+            </div>
+            <div class="trending">
+                <div class="trending_content">
+                    <p class="trending_p">Product</p>
+                    <h2 class="trending_title">Exclusive JKT48 Merchandise!</h2>
+                    <a href="#shop" class="trending_btn">Shop Now!</a>
+                </div>
+                <div class="img_conta">
+                    <img src="../static/assets/img/product/banner-2.png" alt="header" class="img_large" />
+                    <img src="../static/assets/img/product/banner-1.png" alt="header" class="img_small" />
+                </div>
+            </div>
         </div>
-	      <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="oi oi-menu"></span> Menu
-	      </button>
+        <div class="row justify-content-center pb-5" style="margin-top: -9rem; margin-bottom: -12rem;">
+            <section class="room__container" id="room">
+                <div class="room__grid">
+                    {% for item in merchandise %}
+                    <div class="room__card">
+                        <div class="img">
+                            <a href="../static/assets/img/product/{{item.gambar}}" class="icon image-popup d-flex justify-content-center align-items-center" >
+                                <img src="../static/assets/img/product/{{item.gambar}}" class="block-20" alt="Colorlib Template" style="height: 450px;">
+                            </a>
+                        </div>
+                        <div class="room__card__details">
+                            <div>
+                                <h4>{{item.nama}}</h4>
+                                <p>{{item.deskripsi}}</p>
+                                <div class="d-flex align-items-center mt-4 meta">
+                                    <p class="mb-0"><a href="/beli?nama={{item.nama}}&harga={{item.harga}}" class="btn btn-primary btn-small">Contact <span class="ion-logo-whatsapp"></span></a></p>
+                                    <h3 class="ml-auto mb-0">Rp. {{item.harga}}</h3>
+                                </div>
+                                <div class="d-flex flex-column align-items-center mt-2">
+                                  <div class="w-100">
+                                    <a href="#" class="btn btn-warning btn-small w-100" onclick="editMerchandise('{{ item._id }}')" data-toggle="modal" data-target="#editMerchandiseModal" data-id="{{ item._id }}">Edit <span class="ion-ios-create"></span></a>
+                                  </div>
+                                  <div class="w-100" style="margin-top: -0.7rem;">
+                                      <a href="/deleteMerchandise/{{item._id}}" class="btn btn-secondary btn-small w-100">Delete <span class="ion-ios-trash"></span></a>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+        <div id="input-merchandise" style="margin-top: 2rem; display: flex; justify-content: center;">
+          <!-- Button to trigger modal -->
+          <p class="mb-0"><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#merchandiseModal">Add Merchandise <span class="ion-md-add"></span></a></p>
+        </div>
+    </div>
+</section>
 
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav nav ml-auto">
-	          <li class="nav-item"><a href="/dashboard" class="nav-link" data-nav-section="home"><span>Home</span></a></li>
-	          <li class="nav-item"><a href="/gallery" class="nav-link" data-nav-section="gallery"><span>Gallery</span></a></li>
-	          <li class="nav-item"><a href="/about" class="nav-link" data-nav-section="about"><span>About Us</span></a></li>
-	          <li class="nav-item"><a href="/merchandise" class="nav-link" data-nav-section="merchandise"><span>Merchandise</span></a></li>
-	          <li class="nav-item"><a href="/contact" class="nav-link" data-nav-section="contact"><span>Contact</span></a></li>
-            <li class="nav-item ml-auto">
-              <a href="#" class="nav-link" id="user-account"><span><i class="fas fa-user"></i></span></a>
-            </li>
-          </ul>
-	      </div>
-	    </div>
-      <div id="logout-popup">
-        <p>Anda yakin ingin logout?</p>
-        <button id="logout-btn">Logout</button>
-        <button id="cancel-btn">Cancel</button>
-      </div>
-	</nav>
-  
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      document.getElementById("user-account").addEventListener("click", function () {
-        document.getElementById("logout-popup").style.display = "block";
-      });
+<!-- Modal -->
+<div class="modal fade" id="merchandiseModal" tabindex="-1" role="dialog" aria-labelledby="merchandiseModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="merchandiseModalLabel">Add Merchandise</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ url_for('upmerchandise') }}" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="nama">Nama Merchandise</label>
+                        <input type="text" class="form-control" id="nama" name="nama" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="harga">Harga</label>
+                        <input type="number" class="form-control" id="harga" name="harga" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="deskripsi">Deskripsi</label>
+                        <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="gambar">Gambar</label>
+                        <input type="file" class="form-control-file" id="gambar" name="gambar" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-      document.getElementById("cancel-btn").addEventListener("click", function () {
-        document.getElementById("logout-popup").style.display = "none";
-      });
-
-      document.getElementById("logout-btn").addEventListener("click", function () {
-        window.location.href = "/logout";
-      });
-    });
-
-    function openModal(modalId) {
-        document.getElementById(modalId).style.display = "block";
-    }
-    
-    function closeModal(modalId) {
-        document.getElementById(modalId).style.display = "none";
-    }
-    
-    function openEditModal(id, description, price) {
-        document.getElementById('editForm').action = '/edit/' + id;
-        document.getElementById('edit_description').value = description;
-        document.getElementById('edit_price').value = price;
-        openModal('editModal');
-    }
-
-    // Menutup semua modal saat halaman dimuat
-  document.addEventListener("DOMContentLoaded", function() {
-    var modals = document.getElementsByClassName("modal");
-    for (var i = 0; i < modals.length; i++) {
-      modals[i].style.display = "none";
-    }
-  });
-    
-  </script>
-
-  <section class="ftco-section bg-light" data-section="merchandise">
-      <div class="container">
-          <div class="row justify-content-center mb-5 pb-5">
-              <div class="col-md-7 heading-section text-center ftco-animate">
-                  <span class="subheading">Merchandise</span>
-                  <h2 class="mb-4">See Our Products</h2>
-                  <p>Yuk, lengkapi koleksimu dengan berbagai merchandise kece dari Fanbase JKT48 Lombok!</p>
-                  <button class="btn btn-primary" onclick="openModal('addModal')">Add Merchandise</button>
-              </div>
+<!-- Modal for Edit Merchandise -->
+<div class="modal fade" id="editMerchandiseModal" tabindex="-1" role="dialog" aria-labelledby="editMerchandiseModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="editMerchandiseModalLabel">Edit Merchandise</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
           </div>
-          <div class="row d-flex">
-              {% for merchandise in merchandises %}
-              <div class="col-md-4 d-flex ftco-animate">
-                  <div class="blog-entry justify-content-end">
-                      <div class="img">
-                          <a href="{{ url_for('static', filename='uploads/' ~ merchandise.image) }}" class="icon image-popup d-flex justify-content-center align-items-center">
-                              <img src="{{ url_for('static', filename='uploads/' ~ merchandise.image) }}" class="block-20" alt="Merchandise Image">
-                          </a>
-                      </div> 
-                      <div class="text mt-3 float-right d-block">
-                          <div class="d-flex align-items-center pt-2 mb-4 topp">
-                              <div class="one mr-3">
-                                  <span class="day">10</span>
-                              </div>
-                              <div class="two">
-                                  <span class="yr">2024</span>
-                                  <span class="mos">May</span>
-                              </div>
-                          </div>
-                          <h3 class="heading">{{ merchandise.description }}</h3>
-                          <p>Rp. {{ '%.2f' | format(merchandise.price) }}</p>
-                          <div class="d-flex align-items-center mt-4 meta">
-                              <button class="btn btn-secondary" onclick="openEditModal('{{ merchandise._id }}', '{{ merchandise.description }}', '{{ merchandise.price }}')">Edit</button>
-                              <a href="{{ url_for('delete_merchandise', id=merchandise._id) }}" class="btn btn-danger ml-2">Delete</a>
-                          </div>
-                      </div>
+          <div class="modal-body">
+              <form id="editMerchandiseForm" action="" method="post" enctype="multipart/form-data">
+                  <input type="hidden" id="edit_id" name="_id">
+                  <div class="form-group">
+                      <label for="edit_nama">Nama Merchandise</label>
+                      <input type="text" class="form-control" id="edit_nama" name="nama" required>
                   </div>
-              </div>
-              {% endfor %}
+                  <div class="form-group">
+                      <label for="edit_harga">Harga</label>
+                      <input type="number" class="form-control" id="edit_harga" name="harga" required>
+                  </div>
+                  <div class="form-group">
+                      <label for="edit_deskripsi">Deskripsi</label>
+                      <textarea class="form-control" id="edit_deskripsi" name="deskripsi" rows="3" required></textarea>
+                  </div>
+                  <div class="form-group">
+                      <label for="edit_gambar">Gambar</label>
+                      <img id="gambar-preview" src="" alt="" width="200">
+                      <input type="file" class="form-control" accept=".png,.jpg,.jpeg" name="gambar"
+                            style="border-radius: 13px;" placeholder="Enter the Image" onchange="previewImage(event)" />
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
           </div>
       </div>
-  </section>
-  
-  <!-- Add Modal -->
-  <div id="addModal" class="modal">
-      <div class="modal-content">
-          <span class="close" onclick="closeModal('addModal')">&times;</span>
-          <h2>Add Merchandise</h2>
-          <form action="{{ url_for('add_merchandise') }}" method="post" enctype="multipart/form-data">
-              <div>
-                  <label for="image">Pilih Gambar</label>
-                  <input type="file" id="image" name="image" accept="image/*" required>
-              </div>
-              <div>
-                  <label for="description">Deskripsi</label>
-                  <input type="text" id="description" name="description" required>
-              </div>
-              <div>
-                  <label for="price">Harga</label>
-                  <input type="text" id="price" name="price" required>
-              </div>
-              <button type="submit">Unggah</button>
-          </form>
-      </div>
   </div>
-  
-  <!-- Edit Modal -->
-  <div id="editModal" class="modal">
-      <div class="modal-content">
-          <span class="close" onclick="closeModal('editModal')">&times;</span>
-          <h2>Edit Merchandise</h2>
-          <form id="editForm" action="#" method="post" enctype="multipart/form-data">
-              <div>
-                  <label for="edit_image">Pilih Gambar Baru (opsional)</label>
-                  <input type="file" id="edit_image" name="image" accept="image/*">
-              </div>
-              <div>
-                  <label for="edit_description">Deskripsi</label>
-                  <input type="text" id="edit_description" name="description" required>
-              </div>
-              <div>
-                  <label for="edit_price">Harga</label>
-                  <input type="text" id="edit_price" name="price" required>
-              </div>
-              <button type="submit">Simpan Perubahan</button>
-          </form>
-      </div>
-  </div>
-  
-  {% include 'footer.html' %}
-  
+</div>
+
+<script>
+  function editMerchandise(itemId) {
+      $.ajax({
+          url: '/editMerchandise/' + itemId,
+          type: 'GET',
+          success: function(response) {
+              $('#edit_id').val(itemId);
+              $('#edit_nama').val(response.nama);
+              $('#edit_harga').val(response.harga);
+              $('#edit_deskripsi').val(response.deskripsi);
+              $('#editMerchandiseForm').attr('action', '/editMerchandise/' + itemId);
+              if (response.gambar) {
+                $('#gambar-preview').attr('src', '/static/assets/img/product/' + response.gambar);
+            }
+          },
+          error: function(error) {
+              console.log(error);
+          }
+      });
+  }
+
+  function previewImage(event) {
+    var reader = new FileReader();
+    reader.onload = function () {
+        var img = document.getElementById('gambar-preview');
+        img.src = reader.result;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+  }
+</script>
+
+{% include 'footer.html' %}
