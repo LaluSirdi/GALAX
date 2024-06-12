@@ -1,47 +1,42 @@
 import bcrypt
-from flask import Flask, redirect, url_for, render_template, request, jsonify 
+from flask import Flask, redirect, url_for, render_template, request, jsonify, flash, session
 from pymongo import MongoClient 
 from bson import ObjectId 
 from flask_bcrypt import Bcrypt
 from flask_session import Session
 from flask_bcrypt import generate_password_hash
-from flask import flash, session
 import os
 
 app = Flask(__name__)
-app.secret_key = 'galax'
 
 client = MongoClient('mongodb+srv://nawangandrian:xfDGGaRjSPR5TPoJ@cluster0.eqhmd7k.mongodb.net/')
 db = client.dbfjkt
-users_collection = db['users']  # Ganti 'users' dengan nama koleksi untuk pengguna
+users_collection = db['users']  
+
+app.secret_key = 'galax'
+bcrypt = Bcrypt()
+
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-bcrypt = Bcrypt()
-
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['POST'])
 def login():
     if request.method == 'POST':
         users = db.users
         login_user = users.find_one({'username': request.form['username']})
 
-        if login_user:
-            hashed_password = login_user['password']
-            if bcrypt.check_password_hash(hashed_password, request.form['password']):
-                session['username'] = request.form['username']
-                if request.form['username'] == 'admin1' and request.form['password'] == 'admin1234':
-                    return redirect(url_for('upmerchandise'))
-                else:
-                    return redirect(url_for('beranda'))
+        if login_user and bcrypt.check_password_hash(login_user['password'], request.form['password']):
+            session['username'] = request.form['username']
+            if request.form['username'] == 'admin1' and request.form['password'] == 'admin1234':
+                return redirect(url_for('upmerchandise'))
             else:
-                flash('Kombinasi username/password tidak valid')
-        else:
-            flash('Kombinasi username/password tidak valid')
+                return redirect(url_for('beranda'))
+
+        return render_template('index.html', error_message="Kombinasi username/password tidak valid")
 
     return render_template('index.html')
-
 
 @app.route('/beranda')
 def beranda():

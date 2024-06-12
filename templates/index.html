@@ -25,6 +25,13 @@
 	<link rel="stylesheet" href="../static/assets/css/icomoon.css">
 	<link rel="stylesheet" href="../static/assets/css/style.css">
 	<link rel="stylesheet" href="../static/assets/css/style-login.css">
+	<script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+	<script>
+    {% if error_message %}
+        alert("{{ error_message }}");
+    {% endif %}
+</script>
+
 </head>
 
 <body>
@@ -63,18 +70,18 @@
 				<div id="SignIn" class="tabcontent">
 					<h3 style="text-align: center;">Sign In</h3>
 					<form id="signInForm" action="/login" method="post">
-						<label for="username"><i class="fas fa-user"></i> Username</i></label>
+						<label for="username"><i class="fas fa-user"></i> Username</label>
 						<input type="text" id="username" name="username" required>
 						<label for="password"><i class="fas fa-lock"></i> Password</label>
 						<input type="password" id="password" name="password" required>
 						<div class="button-container" style="justify-content: center;">
-							<button type="submit" id="login-b">Login</button>
+							<button type="submit" id="login-b" onclick="submitLoginForm()">Login</button>
 						</div>
 					</form>
+					
 					<p style="text-align: center; margin-top: 15px;">Belum punya akun?
 						<a href="#" id="registerLink">Daftar di sini</a></p>
-				</div>
-
+						  
 				<!-- Sign Up Tab -->
 				<div id="SignUp" class="tabcontent">
 					<h3 style="text-align: center;">Sign Up</h3>
