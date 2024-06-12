@@ -1,6 +1,13 @@
-from flask import Flask, render_template, redirect, url_for
-
+import os
+from flask import Flask, render_template, request, redirect, url_for
+from werkzeug.utils import secure_filename
+from pymongo import MongoClient
+from bson.objectid import ObjectId
 app = Flask(__name__)
+
+client = MongoClient('mongodb+srv://laloesirdy:mama1000@cluster0.t2dmoad.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+db = client['coba'] 
+collection = db.coba  
 
 @app.route('/')
 def index():
