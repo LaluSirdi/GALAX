@@ -1,4 +1,100 @@
-{% include 'header.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>FJKT48 Lombok</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  <link href="../static/assets/img/logo_4.png" rel="shortcut icon" type="image/x-icon" />
+    
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900" rel="stylesheet">
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="stylesheet" href="../static/assets/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="../static/assets/css/animate.css">
+    
+    <link rel="stylesheet" href="../static/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../static/assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../static/assets/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="../static/assets/css/aos.css">
+
+    <link rel="stylesheet" href="../static/assets/css/ionicons.min.css">
+    
+    <link rel="stylesheet" href="../static/assets/css/flaticon.css">
+    <link rel="stylesheet" href="../static/assets/css/icomoon.css">
+    <link rel="stylesheet" href="../static/assets/css/style.css">
+    <style>
+      .user-icon {
+          position: fixed;
+          top: 10px;
+          right: 10px;
+          cursor: pointer;
+      }
+      .user-icon img {
+          width: 40px;
+          height: 40px;
+      }
+
+      #user-account .login-text {
+          display: none;
+      }
+
+      /* Media query to change icon to text at smaller screen sizes */
+      @media (max-width: 650px) {
+          #user-account .fas.fa-user {
+              display: none;
+          }
+
+          #user-account .login-text {
+              display: inline;
+              color: white; /* Warna teks Login */
+          }
+      }
+    </style>
+  </head>
+  <body>
+	  
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-primary ftco-navbar-primary" id="ftco-navbar">
+	    <div class="container">
+	      <div class="logo-circle navbar-brand">
+          <img src="../static/assets/img/logo_3.png" alt="Logo">
+        </div>
+	      <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav nav ml-auto">
+	          <li class="nav-item"><a href="/upgallery" class="nav-link" data-nav-section="gallery"><span>Gallery</span></a></li>
+	          <li class="nav-item"><a href="/upmerchandise" class="nav-link" data-nav-section="merchandise"><span>Merchandise</span></a></li>
+            <li class="nav-item">
+              <a href="#" class="nav-link" id="user-account"><span><i class="fas fa-user"></i> <span class="login-text">Logout</span></span></a>
+            </li>
+          </ul>
+	      </div>
+	    </div>
+      <div id="logout-popup">
+        <p>Anda yakin ingin logout?</p>
+        <button id="logout-btn">Logout</button>
+        <button id="cancel-btn">Cancel</button>
+      </div>
+	</nav>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("user-account").addEventListener("click", function () {
+        document.getElementById("logout-popup").style.display = "block";
+      });
+
+      document.getElementById("cancel-btn").addEventListener("click", function () {
+        document.getElementById("logout-popup").style.display = "none";
+      });
+
+      document.getElementById("logout-btn").addEventListener("click", function () {
+        window.location.href = "/";
+      });
+    });
+  </script>
 
 <link rel="stylesheet" href="../static/assets/css/style-landing.css">
 
