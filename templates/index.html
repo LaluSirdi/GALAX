@@ -70,7 +70,7 @@
 				<div id="SignIn" class="tabcontent">
 					<h3 style="text-align: center;">Sign In</h3>
 					<form id="signInForm" action="/login" method="post">
-						<label for="username"><i class="fas fa-user"></i> Username</label>
+						<label for="username"><i class="fas fa-user"></i> Username</i></label>
 						<input type="text" id="username" name="username" required>
 						<label for="password"><i class="fas fa-lock"></i> Password</label>
 						<input type="password" id="password" name="password" required>
@@ -78,9 +78,9 @@
 							<button type="submit" id="login-b" onclick="submitLoginForm()">Login</button>
 						</div>
 					</form>
-					
 					<p style="text-align: center; margin-top: 15px;">Belum punya akun?
 						<a href="#" id="registerLink">Daftar di sini</a></p>
+				</div>
 						  
 				<!-- Sign Up Tab -->
 				<div id="SignUp" class="tabcontent">
@@ -105,6 +105,14 @@
 			</div>
 		</div>
 	</section>
+	<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const flashes = {{ get_flashed_messages(with_categories=true) | tojson }};
+            flashes.forEach(([category, message]) => {
+                alert(message); // Menampilkan pesan flash sebagai pop-up
+            });
+        });
+    </script>
 
 	<section class="hero-wrap js-fullheight" style="background-image: url('../static/assets/img/bg_4.png');"
 		data-section="home">
@@ -232,7 +240,7 @@
 							<span class="icon-map-signs"></span>
 						</div>
 						<h3 class="mb-4">Address</h3>
-						<p>Jalan ... No. Kota Mataram, Nusa Tenggara Barat, Lombok</p>
+						<p>(Goebux's Cafe) Jl. Pesona Wisata, Pagutan - Kota Mataram, Nusa Tenggara Barat, Lombok</p>
 					</div>
 				</div>
 				<div class="col-md-6 col-lg-3 d-flex">
@@ -241,7 +249,7 @@
 							<span class="icon-phone2"></span>
 						</div>
 						<h3 class="mb-4">Contact Number</h3>
-						<p><a href="tel://085....">+62 858 4554 9290</a></p>
+						<p><a href="tel://081236233328">+62 812-3623-3328</a></p>
 					</div>
 				</div>
 				<div class="col-md-6 col-lg-3 d-flex">
@@ -250,7 +258,7 @@
 							<span class="icon-paper-plane"></span>
 						</div>
 						<h3 class="mb-4">Email Address</h3>
-						<p><a href="mailto:...@gmail.com">....@gmail.com</a></p>
+						<p><a href="mailto:dpurwantama18@gmail.com">dpurwantama18@gmail.com</a></p>
 					</div>
 				</div>
 			</div>
@@ -282,10 +290,7 @@
 						<h2 class="ftco-heading-2">Links</h2>
 						<ul class="list-unstyled">
 							<li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Home</a></li>
-							<li><a href="#section-counter"><span class="icon-long-arrow-right mr-2"></span>About</a>
-							</li>
-							<li><a href="#team"><span class="icon-long-arrow-right mr-2"></span>Team</a></li>
-							<li><a href="#message"><span class="icon-long-arrow-right mr-2"></span>Message</a></li>
+							<li><a href="#section-counter"><span class="icon-long-arrow-right mr-2"></span>About</a></li>
 							<li><a href="#contact"><span class="icon-long-arrow-right mr-2"></span>Contact</a></li>
 						</ul>
 					</div>
@@ -305,12 +310,9 @@
 						<h2 class="ftco-heading-2">Have a Questions?</h2>
 						<div class="block-23 mb-3">
 							<ul>
-								<li><span class="icon icon-map-marker"></span><span class="text">Jalan ... No. Kota
-										Mataram, Nusa Tenggara Barat, Lombok</span></li>
-								<li><a href="tel://085...."><span class="icon icon-phone"></span><span class="text">+62
-											858 4554 9290</span></a></li>
-								<li><a href="mailto:...@gmail.com"><span class="icon icon-envelope"></span><span
-											class="text">....@gmail.com</span></a></li>
+								<li><span class="icon icon-map-marker"></span><span class="text"> (Goebux's Cafe) Jl. Pesona Wisata, Pagutan - Kota Mataram, Nusa Tenggara Barat, Lombok</span></li>
+								<li><a href="tel://081236233328"><span class="icon icon-phone"></span><span class="text">+62 812-3623-3328</span></a></li>
+								<li><a href="mailto:dpurwantama18@gmail.com"><span class="icon icon-envelope"></span><span class="text">dpurwantama18@gmail.com</span></a></li>
 							</ul>
 						</div>
 					</div>
