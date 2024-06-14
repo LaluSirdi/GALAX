@@ -21,6 +21,37 @@ bcrypt = Bcrypt()
 def index():
     return render_template('index.html')
 
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+        confirm_password = request.form['confirm-password']
+
+        if password != confirm_password:
+            flash('Password dan konfirmasi password tidak cocok.', 'error')
+            return redirect(url_for('index'))
+
+        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+        
+        user_exists = users_collection.find_one({'username': username})
+        email_exists = users_collection.find_one({'email': email})
+        
+        if user_exists:
+            flash('Username sudah ada. Silakan pilih username lain.', 'error')
+            return redirect(url_for('register'))
+
+        if email_exists:
+            flash('Email sudah digunakan. Silakan gunakan email lain.', 'error')
+            return redirect(url_for('register'))
+        
+        users_collection.insert_one({'username': username, 'email': email, 'password': hashed_password})
+        flash('Registrasi berhasil! Silakan login.', 'success')
+        return redirect(url_for('index'))
+
+    return render_template('index.html')
+
 @app.route('/login', methods=['POST'])
 def login():
     if request.method == 'POST':
