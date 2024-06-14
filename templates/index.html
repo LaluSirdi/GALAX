@@ -106,6 +106,10 @@
 		</div>
 	</section>
 	<script>
+		function clearForm(formId) {
+            document.getElementById(formId).reset();
+        }
+		
         document.addEventListener('DOMContentLoaded', function() {
             const flashes = {{ get_flashed_messages(with_categories=true) | tojson }};
             flashes.forEach(([category, message]) => {
