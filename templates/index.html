@@ -70,7 +70,7 @@
 				<div id="SignIn" class="tabcontent">
 					<h3 style="text-align: center;">Sign In</h3>
 					<form id="signInForm" action="/login" method="post">
-						<label for="username"><i class="fas fa-user"></i> Username</i></label>
+						<label for="username"><i class="fas fa-user"></i> Username</label>
 						<input type="text" id="username" name="username" required>
 						<label for="password"><i class="fas fa-lock"></i> Password</label>
 						<input type="password" id="password" name="password" required>
@@ -105,6 +105,7 @@
 			</div>
 		</div>
 	</section>
+
 	<script>
 		function clearForm(formId) {
             document.getElementById(formId).reset();
@@ -113,7 +114,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const flashes = {{ get_flashed_messages(with_categories=true) | tojson }};
             flashes.forEach(([category, message]) => {
-                alert(message); // Menampilkan pesan flash sebagai pop-up
+                alert(message); 
             });
         });
     </script>
@@ -200,7 +201,7 @@
 						<div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate d-flex">
 							<div class="block-18 text-center py-4 px-3 mb-4 align-self-stretch d-flex">
 								<div class="text">
-									<strong class="number" data-number="100">0</strong>
+									<strong class="number" data-number="132">0</strong>
 									<span style="color: #a5a7a2;">Active Members</span>
 								</div>
 							</div>
@@ -208,15 +209,7 @@
 						<div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate d-flex">
 							<div class="block-18 text-center py-4 px-3 mb-4 align-self-stretch d-flex">
 								<div class="text">
-									<strong class="number" data-number="35">0</strong>
-									<span style="color: #a5a7a2;">Fan Meets Hosted</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate d-flex">
-							<div class="block-18 text-center py-4 px-3 mb-4 align-self-stretch d-flex">
-								<div class="text">
-									<strong class="number" data-number="1000">0</strong>
+									<strong class="number" data-number="987">0</strong>
 									<span style="color: #a5a7a2;">Social Media Followers</span>
 								</div>
 							</div>

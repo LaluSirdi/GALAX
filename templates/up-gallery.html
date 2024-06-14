@@ -39,7 +39,6 @@
           display: none;
       }
 
-      /* Media query to change icon to text at smaller screen sizes */
       @media (max-width: 650px) {
           #user-account .fas.fa-user {
               display: none;
@@ -47,7 +46,7 @@
 
           #user-account .login-text {
               display: inline;
-              color: white; /* Warna teks Login */
+              color: white; 
           }
       }
     </style>
@@ -65,8 +64,8 @@
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav nav ml-auto">
-	          <li class="nav-item"><a href="/upgallery" class="nav-link" data-nav-section="gallery"><span>Gallery</span></a></li>
-	          <li class="nav-item"><a href="/upmerchandise" class="nav-link" data-nav-section="merchandise"><span>Merchandise</span></a></li>
+	          <li class="nav-item"><a href="/upgallery" class="nav-link" data-nav-section="gallery"><span>Up Gallery</span></a></li>
+	          <li class="nav-item"><a href="/upmerchandise" class="nav-link" data-nav-section="merchandise"><span>Up Merchandise</span></a></li>
             <li class="nav-item">
               <a href="#" class="nav-link" id="user-account"><span><i class="fas fa-user"></i> <span class="login-text">Logout</span></span></a>
             </li>
@@ -99,14 +98,14 @@
 <style>
 .button-container {
     display: flex;
-    justify-content: center; /* Center the buttons horizontally */
+    justify-content: center; 
     margin-top: -2rem;
     margin-bottom: 16px;
-    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+    flex-wrap: wrap; 
 }
 
 .button-container button {
-    margin: 8px 16px; /* Add horizontal margin between buttons */
+    margin: 8px 16px; 
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -116,29 +115,28 @@
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    flex: 1; /* Allow buttons to grow and fill available space */
-    max-width: 300px; /* Optional: Set a max-width for buttons */
+    flex: 1; 
+    max-width: 300px; 
 }
 
 .button-container button:hover {
-    background-color: #1f4a7a; /* Darker shade on hover */
+    background-color: #1f4a7a; 
 }
 
 #fjkt-button a, #fan-art-button a {
-    color: white; /* Text color */
-    text-decoration: none; /* Remove underline from links */
+    color: white; 
+    text-decoration: none; 
 }
 
 #fjkt-button a:hover, #fan-art-button a:hover {
-    color: white; /* Text color on hover */
+    color: white; 
 }
 
-/* Media query for smaller screens */
 @media (max-width: 650px) {
     .button-container button {
-        padding: 10px; /* Adjust padding for smaller screens */
-        width: 100%; /* Make buttons take full width */
-        max-width: none; /* Remove max-width constraint */
+        padding: 10px; 
+        width: 100%; 
+        max-width: none; 
     }
 }
 .centered-bold {
@@ -152,15 +150,14 @@
   gap: 16px; 
 }
 
-/* Tambahkan class baru untuk gambar */
 .responsive-image {
-  max-width: 350px; /* Mengatur lebar maksimum gambar sesuai dengan lebar parent element */
-  height: auto; /* Mengatur ketinggian secara otomatis agar gambar tidak terdistorsi */
+  max-width: 350px; 
+  height: auto; 
 }
 
 @media (max-width: 768px) {
   body {
-    overflow-x: hidden; /* Nonaktifkan scroll horizontal */
+    overflow-x: hidden; 
   }
   .block-20 img {
       max-width: 100%;
@@ -168,13 +165,12 @@
       margin: 0 auto;
   }
   .col-md-4 {
-    margin: 0 auto; /* Menengahkan kolom */
+    margin: 0 auto; 
     padding-bottom: 5rem;
   }
 }
 
-/* modal */
-/* CSS untuk modal */
+
 .modal {
   display: none;
   position: fixed;
@@ -210,52 +206,46 @@
 }
 
 </style>
+
 <script>
-    // JavaScript untuk mengontrol modal
-var fjktModal = document.getElementById("fjkt-modal");
-var fanArtModal = document.getElementById("fan-art-modal");
+  var fjktModal = document.getElementById("fjkt-modal");
+  var fanArtModal = document.getElementById("fan-art-modal");
 
-// Dapatkan tombol yang membuka modal
-var fjktBtn = document.getElementById("fjkt-button");
-var fanArtBtn = document.getElementById("fan-art-button");
+  var fjktBtn = document.getElementById("fjkt-button");
+  var fanArtBtn = document.getElementById("fan-art-button");
 
-// Dapatkan tombol close
-var fjktClose = document.getElementsByClassName("close")[0];
-var fanArtClose = document.getElementsByClassName("close")[1];
+  var fjktClose = document.getElementsByClassName("close")[0];
+  var fanArtClose = document.getElementsByClassName("close")[1];
 
-// Ketika pengguna mengklik tombol, buka modal yang sesuai
-fjktBtn.onclick = function() {
-  fjktModal.style.display = "block";
-}
-fanArtBtn.onclick = function() {
-  fanArtModal.style.display = "block";
-}
+  fjktBtn.onclick = function() {
+    fjktModal.style.display = "block";
+  }
+  fanArtBtn.onclick = function() {
+    fanArtModal.style.display = "block";
+  }
 
-// Ketika pengguna mengklik tombol close, tutup modal yang sesuai
-fjktClose.onclick = function() {
-  fjktModal.style.display = "none";
-}
-fanArtClose.onclick = function() {
-  fanArtModal.style.display = "none";
-}
-
-// Ketika pengguna mengklik di luar modal, tutup modal
-window.onclick = function(event) {
-  if (event.target == fjktModal) {
+  fjktClose.onclick = function() {
     fjktModal.style.display = "none";
   }
-  if (event.target == fanArtModal) {
+  fanArtClose.onclick = function() {
     fanArtModal.style.display = "none";
   }
-}
 
+  window.onclick = function(event) {
+    if (event.target == fjktModal) {
+      fjktModal.style.display = "none";
+    }
+    if (event.target == fanArtModal) {
+      fanArtModal.style.display = "none";
+    }
+  }
 </script>
 
 <section class="ftco-section bg-light" data-section="gallery">
   <div class="container">
     <div class="row justify-content-center pb-5">
       <div class="col-md-7 heading-section text-center ftco-animate">
-        <span class="subheading">Gallery</span>
+        <span class="subheading">Up Gallery</span>
         <h2 class="mb-4">Our Gallery</h2>
         <p>Jelajahi galeri kami untuk melihat foto dan media menawan dari acara komunitas kami. 
           Ruang ini juga memamerkan karya seni yang dibuat oleh penggemar dan peminat JKT48.</p>
@@ -267,84 +257,84 @@ window.onclick = function(event) {
           <div class="item">
             <div class="project">
               <div class="img">
-                <img src="../static/assets/img/person_1.jpg" class="img-fluid" alt="Colorlib Template">
-                <a href="../static/assets/img/person_1.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+                <img src="../static/assets/img/gallery/banner-1.jpg" class="img-fluid" alt="Image">
+                <a href="../static/assets/img/gallery/banner-1.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
                   <span class="icon-expand"></span>
                 </a>
               </div>
               <div class="text px-4">
-                <h3><a href="#">Office Interior Design</a></h3>
-                <span>Interior Design</span>
+                <h3><a href="#">Gathering</a></h3>
+                <span>FJKT</span>
               </div>
             </div>
           </div>
           <div class="item">
             <div class="project">
               <div class="img">
-                <img src="../static/assets/img/person_2.jpg" class="img-fluid" alt="Colorlib Template">
-                <a href="../static/assets/img/person_2.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+                <img src="../static/assets/img/gallery/banner-2.png" class="img-fluid fanartku" alt="Image">
+                <a href="../static/assets/img/gallery/banner-2.png" class="icon image-popup d-flex justify-content-center align-items-center">
                   <span class="icon-expand"></span>
                 </a>
               </div>
               <div class="text px-4">
-                <h3><a href="#">Office Interior Design</a></h3>
-                <span>Interior Design</span>
+                <h3><a href="#">Freya</a></h3>
+                <span>Fan Art</span>
               </div>
             </div>
           </div>
           <div class="item">
             <div class="project">
               <div class="img">
-                <img src="../static/assets/img/person_3.jpg" class="img-fluid" alt="Colorlib Template">
-                <a href="../static/assets/img/person_3.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+                <img src="../static/assets/img/gallery/banner-3.jpg" class="img-fluid" alt="Image">
+                <a href="../static/assets/img/gallery/banner-3.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
                   <span class="icon-expand"></span>
                 </a>
               </div>
               <div class="text px-4">
-                <h3><a href="#">Office Interior Design</a></h3>
-                <span>Interior Design</span>
+                <h3><a href="#">Gathering</a></h3>
+                <span>FJKT</span>
               </div>
             </div>
           </div>
           <div class="item">
             <div class="project">
               <div class="img">
-                <img src="../static/assets/img/person_4.jpg" class="img-fluid" alt="Colorlib Template">
-                <a href="../static/assets/img/person_4.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+                <img src="../static/assets/img/gallery/banner-4.png" class="img-fluid fanartku" alt="Image">
+                <a href="../static/assets/img/gallery/banner-4.png" class="icon image-popup d-flex justify-content-center align-items-center">
                   <span class="icon-expand"></span>
                 </a>
               </div>
               <div class="text px-4">
-                <h3><a href="#">Office Interior Design</a></h3>
-                <span>Interior Design</span>
+                <h3><a href="#">Adel</a></h3>
+                <span>Fan Art</span>
               </div>
             </div>
           </div>
           <div class="item">
             <div class="project">
               <div class="img">
-                <img src="../static/assets/img/person_1.jpg" class="img-fluid" alt="Colorlib Template">
-                <a href="../static/assets/img/person_1.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+                <img src="../static/assets/img/gallery/banner-5.jpg" class="img-fluid" alt="Image">
+                <a href="../static/assets/img/gallery/banner-5.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
                   <span class="icon-expand"></span>
                 </a>
               </div>
               <div class="text px-4">
-                <h3><a href="#">Office Interior Design</a></h3>
-                <span>Interior Design</span>
+                <h3><a href="#">Gathering</a></h3>
+                <span>FJKT</span>
               </div>
             </div>
           </div>
           <div class="item">
             <div class="project">
               <div class="img">
-                <img src="../static/assets/img/person_2.jpg" class="img-fluid" alt="Colorlib Template">
-                <a href="../static/assets/img/person_2.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+                <img src="../static/assets/img/gallery/banner-6.png" class="img-fluid fanartku" alt="Image">
+                <a href="../static/assets/img/gallery/banner-6.png" class="icon image-popup d-flex justify-content-center align-items-center">
                   <span class="icon-expand"></span>
                 </a>
               </div>
               <div class="text px-4">
-                <h3><a href="#">Office Interior Design</a></h3>
-                <span>Interior Design</span>
+                <h3><a href="#">Zee</a></h3>
+                <span>Fan Art</span>
               </div>
             </div>
           </div>
@@ -355,13 +345,13 @@ window.onclick = function(event) {
       <div class="col-md-7 heading-section text-center ftco-animate">
         <div class="button-container mb-4">
             <button id="fjkt-button">
-                <a href="#fjkt-modal">
+                <a href="#" data-toggle="modal" data-target="#fjkt-modal">
                   <span style="margin-right: 5px;">FJKT</span>
                   <i class="fas fa-plus-circle"></i>
                 </a>
               </button>
               <button id="fan-art-button">
-                <a href="#fan-art-modal">
+                <a href="#" data-toggle="modal" data-target="#fan-art-modal">
                   <span style="margin-right: 5px;">FAN ART</span>
                   <i class="fas fa-plus-circle"></i>
                 </a>
@@ -369,40 +359,6 @@ window.onclick = function(event) {
         </div>
       </div>
     </div>
-
-    <!-- Modal untuk Form FJKT -->
-<div id="fjkt-modal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <form id="fjkt-form" enctype="multipart/form-data" method="post">
-        <h2>Form FJKT</h2>
-        <label for="fjkt-name">Nama:</label>
-        <input type="text" id="fjkt-name" name="fjkt-name" required><br>
-        <label for="fjkt-description">Deskripsi:</label><br>
-        <textarea id="fjkt-description" name="fjkt-description" rows="4" cols="50" required></textarea><br>
-        <label for="fjkt-photo">Foto:</label><br>
-        <input type="file" id="fjkt-photo" name="fjkt-photo" accept="image/*" required><br>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-  </div>
-  
-  <!-- Modal untuk Form Fan Art -->
-  <div id="fan-art-modal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <form id="fan-art-form" enctype="multipart/form-data" method="post">
-        <h2>Form Fan Art</h2>
-        <label for="fan-art-name">Nama:</label>
-        <input type="text" id="fan-art-name" name="fan-art-name" required><br>
-        <label for="fan-art-description">Deskripsi:</label><br>
-        <textarea id="fan-art-description" name="fan-art-description" rows="4" cols="50" required></textarea><br>
-        <label for="fan-art-photo">Foto:</label><br>
-        <input type="file" id="fan-art-photo" name="fan-art-photo" accept="image/*" required><br>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-  </div>  
     
     <div>
       <h3 class="centered-bold" id="target-section" style="margin-bottom: 4rem;">FJKT</h3>
@@ -615,26 +571,119 @@ window.onclick = function(event) {
   </div>
 </div>
 
-<script>
-  const fjktButton = document.getElementById('fjkt-button');
-  const fanArtButton = document.getElementById('fan-art-button');
-  const targetSection = document.getElementById('target-section');
-  const fanSection = document.getElementById('fan-section');
+<!-- Modal untuk Form FJKT -->
+<div id="fjkt-modal" class="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="galleryModalLabel">Form Add FJKT</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form action="" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                  <label for="fjkt-name">Nama</label>
+                  <input type="text" id="fjkt-name" name="fjkt-name" required>
+                </div>
+                <div class="form-group">
+                  <label for="fjkt-description">Deskripsi</label><br>
+                  <textarea id="fjkt-description" name="fjkt-description" rows="4" cols="50" required></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="fjkt-photo">Foto</label><br>
+                  <input type="file" id="fjkt-photo" name="fjkt-photo" accept="image/*" required><br>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+  </div>
+</div>
 
-  fjktButton.addEventListener('click', () => {
-    targetSection.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
-    });
-  });
+<!-- Modal untuk Form Fan Art -->
+<div id="fan-art-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <form id="fan-art-form" enctype="multipart/form-data" method="post">
+      <h2>Form Fan Art</h2>
+      <label for="fan-art-name">Nama:</label>
+      <input type="text" id="fan-art-name" name="fan-art-name" required><br>
+      <label for="fan-art-description">Deskripsi:</label><br>
+      <textarea id="fan-art-description" name="fan-art-description" rows="4" cols="50" required></textarea><br>
+      <label for="fan-art-photo">Foto:</label><br>
+      <input type="file" id="fan-art-photo" name="fan-art-photo" accept="image/*" required><br>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>  
 
-  fanArtButton.addEventListener('click', () => {
-    fanSection.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
-    });
-  });
-</script>
+  <footer class="ftco-footer ftco-section">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">FJKT48 Lombok</h2>
+            <p>Menyatukan para penggemar JKT48 di Pulau Lombok, berbagi pengalaman, dan menyalurkan dukungan kepada idol ibu kota yaitu JKT48.</p>
+            <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+              <li class="ftco-animate"><a href="https://x.com/fjkt48_lombokuy"><span class="icon-twitter"></span></a></li>
+              <li class="ftco-animate" style="text-align: center;"><a href="https://www.tiktok.com/@fjkt48.lombok" style="font-size: 24px; padding: 3px; align-items: center;"><i class="fab fa-tiktok"></i></a></li>
+              <li class="ftco-animate"><a href="https://www.instagram.com/fjkt48.lombok"><span class="icon-instagram"></span></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="ftco-footer-widget mb-4 ml-md-4">
+            <h2 class="ftco-heading-2">Links</h2>
+            <ul class="list-unstyled">
+              <li><a href="/upcontact"><span class="icon-long-arrow-right mr-2"></span>Up Gallery</a></li>
+              <li><a href="/upmerchandise"><span class="icon-long-arrow-right mr-2"></span>Up Merchandise</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Have a Questions?</h2>
+              <div class="block-23 mb-3">
+                <ul>
+                  <li><span class="icon icon-map-marker"></span><span class="text"> (Goebux's Cafe) Jl. Pesona Wisata, Pagutan - Kota Mataram, Nusa Tenggara Barat, Lombok</span></li>
+                  <li><a href="tel://081236233328"><span class="icon icon-phone"></span><span class="text">+62 812-3623-3328</span></a></li>
+                  <li><a href="mailto:dpurwantama18@gmail.com"><span class="icon icon-envelope"></span><span class="text">dpurwantama18@gmail.com</span></a></li>
+                </ul>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <p>
+              &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Fanbase JKT48 Lombok
+          </p>			
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 
-{% include 'footer.html' %}
+  <script src="../static/assets/js/jquery.min.js"></script>
+  <script src="../static/assets/js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="../static/assets/js/popper.min.js"></script>
+  <script src="../static/assets/js/bootstrap.min.js"></script>
+  <script src="../static/assets/js/jquery.easing.1.3.js"></script>
+  <script src="../static/assets/js/jquery.waypoints.min.js"></script>
+  <script src="../static/assets/js/jquery.stellar.min.js"></script>
+  <script src="../static/assets/js/owl.carousel.min.js"></script>
+  <script src="../static/assets/js/jquery.magnific-popup.min.js"></script>
+  <script src="../static/assets/js/aos.js"></script>
+  <script src="../static/assets/js/jquery.animateNumber.min.js"></script>
+  <script src="../static/assets/js/scrollax.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="../static/assets/js/google-map.js"></script>
+  <script src="../static/assets/js/main.js"></script>
+
+  </body>
+</html>
