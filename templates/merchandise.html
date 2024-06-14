@@ -14,7 +14,7 @@
               <div class="trending_content">
                 <p class="trending_p">Product</p>
                 <h2 class="trending_title">Exclusive JKT48 Merchandise!</h2>
-                <a href="#" class="trending_btn">Shop Now!</a>
+                <a href="#shop" class="trending_btn">Shop Now!</a>
               </div>
               <div class="img_conta">
                 <img src="../static/assets/img/product/banner-2.png" alt="header" class="img_large" />
@@ -26,24 +26,24 @@
             <section class="room__container" id="room">
               <div class="room__grid">
                 {% for item in merchandise %}
-                    <div class="room__card">
-                        <div class="img">
-                            <a href="../static/assets/img/product/{{item.gambar}}" class="icon image-popup d-flex justify-content-center align-items-center" >
-                                <img src="../static/assets/img/product/{{item.gambar}}" class="block-20" alt="Colorlib Template" style="height: 450px;">
-                            </a>
-                        </div>
-                        <div class="room__card__details">
-                            <div>
-                                <h4>{{item.nama}}</h4>
-                                <p>{{item.deskripsi}}</p>
-                                <div class="d-flex align-items-center mt-4 meta">
-                                    <p class="mb-0"><a href="/beli?nama={{item.nama}}&harga={{item.harga}}" class="btn btn-primary btn-small">Contact <span class="ion-logo-whatsapp"></span></a></p>
-                                    <h3 class="ml-auto mb-0">Rp. {{item.harga}}</h3>
-                                </div>
+                <div class="room__card">
+                    <div class="img">
+                        <a href="../static/assets/img/product/{{item.gambar}}" class="icon image-popup d-flex justify-content-center align-items-center">
+                            <img src="../static/assets/img/product/{{item.gambar}}" class="block-20" alt="Colorlib Template" style="height: 450px;">
+                        </a>
+                    </div>
+                    <div class="room__card__details">
+                        <div>
+                            <h4>{{item.nama}}</h4>
+                            <p>{{item.deskripsi}}</p>
+                            <div class="d-flex align-items-center mt-4 meta">
+                                <p class="mb-0"><a href="/beli?nama={{item.nama}}&harga={{item.harga}}" class="btn btn-primary btn-small">Contact <span class="ion-logo-whatsapp"></span></a></p>
+                                <h3 class="ml-auto mb-0 harga-item">Rp. {{item.harga}}</h3>
                             </div>
                         </div>
                     </div>
-                    {% endfor %}
+                </div>
+                {% endfor %}
               </div>
             </section>
           </div>

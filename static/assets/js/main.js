@@ -26,6 +26,35 @@ document.addEventListener('DOMContentLoaded', function() {
    });
 });
 
+  document.addEventListener('DOMContentLoaded', function() {
+    // Fungsi untuk memformat angka menjadi Rupiah
+    function formatRupiah(angka, prefix) {
+      var number_string = angka.toString(),
+          split = number_string.split(','),
+          sisa = split[0].length % 3,
+          rupiah = split[0].substr(0, sisa),
+          ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+      // Menambahkan titik jika ada ribuan
+      if (ribuan) {
+        separator = sisa ? '.' : '';
+        rupiah += separator + ribuan.join('.');
+      }
+
+      rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+      return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+    }
+
+    // Mengambil semua elemen dengan class "harga-item"
+    var hargaItems = document.querySelectorAll('.harga-item');
+
+    // Loop melalui setiap elemen dan format harganya
+    hargaItems.forEach(function(hargaItem) {
+      var harga = parseInt(hargaItem.textContent.replace('Rp. ', '').replace(/[^0-9]/g, ''));
+      hargaItem.textContent = formatRupiah(harga, 'Rp. ');
+    });
+  });
+
 function closeModal() {
    document.getElementById("modal").style.display = "none";
    var tabcontent = document.getElementsByClassName("tabcontent");

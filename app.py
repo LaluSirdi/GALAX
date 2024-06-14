@@ -1,24 +1,55 @@
-import bcrypt
 from flask import Flask, redirect, url_for, render_template, request, jsonify, flash, session
-from pymongo import MongoClient 
-from bson import ObjectId 
+from pymongo import MongoClient
+from bson import ObjectId
 from flask_bcrypt import Bcrypt
 from flask_session import Session
 from flask_bcrypt import generate_password_hash
 import os
+from functools import wraps
 
 app = Flask(__name__)
 
 client = MongoClient('mongodb+srv://nawangandrian:xfDGGaRjSPR5TPoJ@cluster0.eqhmd7k.mongodb.net/')
 db = client.dbfjkt
-users_collection = db['users']  
+users_collection = db['users']
 
 app.secret_key = 'galax'
-bcrypt = Bcrypt()
+SECRET_KEY = "GALAX"
+bcrypt = Bcrypt(app)
 
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'username' not in session or session['username'] == '':
+            flash('Harap login terlebih dahulu.', 'error')
+            return redirect(url_for('index'))
+        if 'status' not in session or session['status'] != 'login':
+            flash('Anda harus login terlebih dahulu untuk mengakses halaman ini.', 'error')
+            return redirect(url_for('index'))
+        if session['username'] != 'admin1':
+            flash('Akses ditolak. Hanya admin yang dapat mengakses halaman ini.', 'error')
+            return redirect(url_for('beranda'))
+        return f(*args, **kwargs)
+    return decorated_function
+
+def user_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'username' not in session or session['username'] == '':
+            flash('Harap login terlebih dahulu.', 'error')
+            return redirect(url_for('index'))
+        if 'status' not in session or session['status'] != 'login':
+            flash('Anda harus login terlebih dahulu untuk mengakses halaman ini.', 'error')
+            return redirect(url_for('index'))
+        if session['username'] == 'admin1':
+            flash('Akses ditolak, harus login sebagai user.', 'error')
+            return redirect(url_for('upmerchandise'))
+        return f(*args, **kwargs)
+    return decorated_function
 
 @app.route('/')
 def index():
+    session.clear()
     return render_template('index.html')
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -34,10 +65,10 @@ def register():
             return redirect(url_for('index'))
 
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
-        
+
         user_exists = users_collection.find_one({'username': username})
         email_exists = users_collection.find_one({'email': email})
-        
+
         if user_exists:
             flash('Username sudah ada. Silakan pilih username lain.', 'error')
             return redirect(url_for('register'))
@@ -45,7 +76,7 @@ def register():
         if email_exists:
             flash('Email sudah digunakan. Silakan gunakan email lain.', 'error')
             return redirect(url_for('register'))
-        
+
         users_collection.insert_one({'username': username, 'email': email, 'password': hashed_password})
         flash('Registrasi berhasil! Silakan login.', 'success')
         return redirect(url_for('index'))
@@ -55,30 +86,35 @@ def register():
 @app.route('/login', methods=['POST'])
 def login():
     if request.method == 'POST':
-        users = db.users
-        login_user = users.find_one({'username': request.form['username']})
+        login_user = users_collection.find_one({'username': request.form['username']})
 
         if login_user and bcrypt.check_password_hash(login_user['password'], request.form['password']):
             session['username'] = request.form['username']
-            if request.form['username'] == 'admin1' and request.form['password'] == 'admin1234':
+            session['_id'] = str(login_user['_id'])
+            session['status'] = 'login'
+            if request.form['username'] == 'admin1':
                 return redirect(url_for('upmerchandise'))
             else:
                 return redirect(url_for('beranda'))
 
-        return render_template('index.html', error_message="Kombinasi username/password tidak valid")
+        flash('Kombinasi username/password tidak valid', 'error')
+        return redirect(url_for('index'))
 
     return render_template('index.html')
 
 @app.route('/beranda')
+@user_required
 def beranda():
     return render_template('beranda.html')
 
 @app.route('/merchandise')
+@user_required
 def merchandise():
     merchandise = list(db.merchandise.find({}))
     return render_template('merchandise.html', merchandise=merchandise)
 
 @app.route('/beli')
+@user_required
 def beli():
     nama = request.args.get('nama')
     harga = request.args.get('harga')
@@ -86,18 +122,34 @@ def beli():
     return redirect(f'https://wa.me/{whatsapp}?text=Saya tertarik dengan {nama} seharga {harga}. Tolong informasi lebih lanjut.')
 
 @app.route('/gallery')
+@user_required
 def gallery():
     return render_template('gallery.html')
 
 @app.route('/contact')
+@user_required
 def contact():
     return render_template('contact.html')
 
 @app.route('/about')
+@user_required
 def about():
     return render_template('about.html')
 
+@app.route('/user')
+@admin_required
+def user():
+    user = list(users_collection.find({}))
+    return render_template('user.html', user=user)
+
+@app.route('/deleteUser/<_id>', methods=['GET', 'POST'])
+@admin_required
+def deleteUser(_id):
+    users_collection.delete_one({"_id": ObjectId(_id)})
+    return redirect(url_for("user"))
+
 @app.route('/upmerchandise', methods=['GET', 'POST'])
+@admin_required
 def upmerchandise():
     if request.method == 'POST':
         nama = request.form['nama']
@@ -126,6 +178,7 @@ def upmerchandise():
     return render_template('up-merchandise.html', merchandise=merchandise)
 
 @app.route('/editMerchandise/<_id>', methods=['GET', 'POST'])
+@admin_required
 def editMerchandise(_id):
     if request.method == 'POST':
         id = request.form['_id']
@@ -153,13 +206,15 @@ def editMerchandise(_id):
     merchandise = db.merchandise.find_one({"_id": id})
     return jsonify({'nama': merchandise['nama'], 'harga': merchandise['harga'], 'deskripsi': merchandise['deskripsi'], 'gambar': merchandise['gambar']})
 
-@app.route('/deleteMerchandise/<_id>',methods=['GET','POST'])
+@app.route('/deleteMerchandise/<_id>', methods=['GET', 'POST'])
+@admin_required
 def deleteMerchandise(_id):
-   id = ObjectId(_id)
-   db.merchandise.delete_one({"_id": ObjectId(_id)})
-   return redirect(url_for("upmerchandise"))
+    id = ObjectId(_id)
+    db.merchandise.delete_one({"_id": id})
+    return redirect(url_for("upmerchandise"))
 
 @app.route('/upgallery')
+@admin_required
 def home():
     return render_template('up-gallery.html')
 

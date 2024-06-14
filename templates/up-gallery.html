@@ -23,33 +23,7 @@
     <link rel="stylesheet" href="../static/assets/css/flaticon.css">
     <link rel="stylesheet" href="../static/assets/css/icomoon.css">
     <link rel="stylesheet" href="../static/assets/css/style.css">
-    <style>
-      .user-icon {
-          position: fixed;
-          top: 10px;
-          right: 10px;
-          cursor: pointer;
-      }
-      .user-icon img {
-          width: 40px;
-          height: 40px;
-      }
-
-      #user-account .login-text {
-          display: none;
-      }
-
-      @media (max-width: 650px) {
-          #user-account .fas.fa-user {
-              display: none;
-          }
-
-          #user-account .login-text {
-              display: inline;
-              color: white; 
-          }
-      }
-    </style>
+    <link rel="stylesheet" href="../static/assets/css/style-gallery.css">
   </head>
   <body>
 	  
@@ -64,6 +38,7 @@
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav nav ml-auto">
+	          <li class="nav-item"><a href="/user" class="nav-link" data-nav-section="users"><span>Users</span></a></li>
 	          <li class="nav-item"><a href="/upgallery" class="nav-link" data-nav-section="gallery"><span>Up Gallery</span></a></li>
 	          <li class="nav-item"><a href="/upmerchandise" class="nav-link" data-nav-section="merchandise"><span>Up Merchandise</span></a></li>
             <li class="nav-item">
@@ -637,6 +612,7 @@
           <div class="ftco-footer-widget mb-4 ml-md-4">
             <h2 class="ftco-heading-2">Links</h2>
             <ul class="list-unstyled">
+              <li><a href="/user"><span class="icon-long-arrow-right mr-2"></span>Users</a></li>
               <li><a href="/upcontact"><span class="icon-long-arrow-right mr-2"></span>Up Gallery</a></li>
               <li><a href="/upmerchandise"><span class="icon-long-arrow-right mr-2"></span>Up Merchandise</a></li>
             </ul>
