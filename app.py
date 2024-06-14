@@ -82,7 +82,7 @@ def merchandise():
 def beli():
     nama = request.args.get('nama')
     harga = request.args.get('harga')
-    whatsapp = '6285865317821'
+    whatsapp = '6289617338298'
     return redirect(f'https://wa.me/{whatsapp}?text=Saya tertarik dengan {nama} seharga {harga}. Tolong informasi lebih lanjut.')
 
 @app.route('/gallery')
