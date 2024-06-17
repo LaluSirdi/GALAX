@@ -104,6 +104,11 @@ def login():
 
     return render_template('index.html')
 
+@app.route('/users')
+def show_users():
+    users = list(db.users.find({}))
+    return render_template('user.html', users=users)
+
 @app.route('/beranda')
 @user_required
 def beranda():

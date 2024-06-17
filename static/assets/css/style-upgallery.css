@@ -186,6 +186,21 @@
     /* Menebalkan teks label */
   }
 
+  .form-group select {
+    width: 50%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+}
+
+.form-group select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
   /* Gaya untuk input form */
   .form-group input[type="text"],
   .form-group input[type="file"] {
@@ -203,7 +218,8 @@
 
   /* Gaya untuk tombol Clear */
   #fjkt-clear,
-  #fan-art-clear {
+  #fan-art-clear,
+  #edit-clear {
     display: block;
     /* Menjadikan tombol sebagai blok */
     padding: 8px 16px;
@@ -224,7 +240,8 @@
 
   /* Gaya untuk tombol Clear saat dihover */
   #fjkt-clear:hover,
-  #fan-art:hover {
+  #fan-art:hover,
+  #edit-clear:hover {
     background-color: #d32f2f;
     /* Warna latar merah yang lebih gelap saat dihover */
   }
@@ -267,7 +284,8 @@
   }
 
   #fjkt-save,
-  #fan-art-save {
+  #fan-art-save,
+  #edit-save {
     padding: 8px 16px;
     /* Padding vertikal dan horizontal */
     margin-top: 10px;
@@ -284,7 +302,7 @@
     /* Kursor menunjukkan tombol dapat diklik */
   }
 
-  #fjkt-save:hover #fan-art-save:hover {
+  #fjkt-save:hover #fan-art-save:hover #edit-save:hover{
     background-color: #45a049;
     /* Warna latar hijau yang lebih gelap saat dihover */
   }
