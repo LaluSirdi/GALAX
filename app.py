@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import Flask, redirect, url_for, render_template, request, jsonify, flash, session
 from pymongo import MongoClient
 from bson import ObjectId
@@ -6,10 +7,11 @@ from flask_session import Session
 from flask_bcrypt import generate_password_hash
 import os
 from functools import wraps
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
-client = MongoClient('mongodb+srv://nawangandrian:xfDGGaRjSPR5TPoJ@cluster0.eqhmd7k.mongodb.net/')
+client = MongoClient('mongodb://sparta:123@ac-noo9u4e-shard-00-00.uurp56w.mongodb.net:27017,ac-noo9u4e-shard-00-01.uurp56w.mongodb.net:27017,ac-noo9u4e-shard-00-02.uurp56w.mongodb.net:27017/?ssl=true&replicaSet=atlas-g38sd1-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0&connectTimeoutMS=30000')
 db = client.dbfjkt
 users_collection = db['users']
 
@@ -121,11 +123,6 @@ def beli():
     whatsapp = '6289617338298'
     return redirect(f'https://wa.me/{whatsapp}?text=Saya tertarik dengan {nama} seharga {harga}. Tolong informasi lebih lanjut.')
 
-@app.route('/gallery')
-@user_required
-def gallery():
-    return render_template('gallery.html')
-
 @app.route('/contact')
 @user_required
 def contact():
@@ -213,10 +210,130 @@ def deleteMerchandise(_id):
     db.merchandise.delete_one({"_id": id})
     return redirect(url_for("upmerchandise"))
 
+@app.route('/gallery')
+def gallery():
+    fjkt_items = list(db.fjkt.find({"archived": {"$ne": True}}))
+    fan_art_items = list(db.fan_art.find({"archived": {"$ne": True}}))
+    return render_template('gallery.html', fjkt_items=fjkt_items, fan_art_items=fan_art_items)
+
 @app.route('/upgallery')
-@admin_required
-def home():
-    return render_template('up-gallery.html')
+def upgallery():
+    fjkt_items = list(db.fjkt.find())
+    fan_art_items = list(db.fan_art.find())
+    return render_template('up-gallery.html', fjkt_items=fjkt_items, fan_art_items=fan_art_items)
+
+@app.route('/submitgallery', methods=['POST'])
+def submitgallery():
+    category = request.form['category']
+    title = request.form.get('fjkt-name') or request.form.get('fan-art-title')
+    description = request.form.get('fjkt-description') or request.form.get('fan-art-description')
+    image = request.files.get('fjkt-image') or request.files.get('fan-art-image')
+
+    if image:
+        image_filename = secure_filename(image.filename)
+        
+        if category == 'FJKT':
+            image_path = f'static/assets/img/gallery/fjkt/{image_filename}'
+        elif category == 'FAN ART':
+            image_path = f'static/assets/img/gallery/fan_art/{image_filename}'
+        else:
+            # Handle jika kategori tidak dikenali
+            return "Kategori tidak valid"
+
+        image.save(image_path)
+    else:
+        image_path = None
+
+    current_date = datetime.now()
+    day = current_date.day
+    month = current_date.strftime('%B')
+    year = current_date.year
+
+    data = {
+        'title': title,
+        'category': category,
+        'description': description,
+        'image': image_path,
+        'day': day,
+        'month': month,
+        'year': year,
+        'archived': False  
+    }
+
+    if category == 'FJKT':
+        db.fjkt.insert_one(data)
+    elif category == 'FAN ART':
+        db.fan_art.insert_one(data)
+
+    return redirect(url_for('upgallery'))
+
+@app.route('/deletegallery/<item_id>', methods=['POST'])
+def delete_gallery(item_id):
+    # Temukan item berdasarkan kategori
+    fjkt_item = db.fjkt.find_one({"_id": ObjectId(item_id)})
+    fan_art_item = db.fan_art.find_one({"_id": ObjectId(item_id)})
+    
+    # Hapus item dari koleksi yang sesuai
+    if fjkt_item:
+        db.fjkt.delete_one({"_id": ObjectId(item_id)})
+    elif fan_art_item:
+        db.fan_art.delete_one({"_id": ObjectId(item_id)})
+    else:
+        return jsonify({"status": "error", "message": "Item tidak ditemukan"}), 404
+    
+    return jsonify({"status": "success", "message": "Item berhasil dihapus"})
+
+@app.route('/editgallery', methods=['POST'])
+def edit_gallery():
+    item_id = request.form['item_id']
+    category = request.form['edit-category']
+    title = request.form['edit-name']
+    description = request.form['edit-description']
+    image = request.files.get('edit-image')
+    current_image_path = request.form['current_image_path']
+
+    if image:
+        image_filename = secure_filename(image.filename)
+        if category == 'FJKT':
+            image_path = f'static/assets/img/gallery/fjkt/{image_filename}'
+        elif category == 'Fan Art':
+            image_path = f'static/assets/img/gallery/fan_art/{image_filename}'
+        else:
+            return "Kategori tidak valid", 400
+        image.save(image_path)
+    else:
+        image_path = current_image_path
+
+    db_collection = db.fjkt if category == 'FJKT' else db.fan_art
+    
+    result = db_collection.update_one(
+        {"_id": ObjectId(item_id)},
+        {"$set": {
+            "title": title,
+            "description": description,
+            "image": image_path,
+            "archived": False  # Tambahkan atribut archived di sini
+        }}
+    )
+    
+    if result.modified_count == 1:
+        return redirect(url_for('upgallery'))
+    else:
+        return "Gagal memperbarui data", 500
+
+@app.route('/archive_item/<item_id>', methods=['POST'])
+def archive_item(item_id):
+    data = request.json
+    category = data.get('category')
+    
+    db_collection = db.fjkt if category == 'FJKT' else db.fan_art
+    item = db_collection.find_one({"_id": ObjectId(item_id)})
+
+    if item:
+        new_status = not item.get('archived', False)
+        db_collection.update_one({"_id": ObjectId(item_id)}, {"$set": {"archived": new_status}})
+        return jsonify(success=True, archived=new_status)
+    return jsonify(success=False), 404
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

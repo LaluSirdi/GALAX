@@ -1,0 +1,359 @@
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    /* Membuat tombol berada di sisi kiri dan kanan */
+    align-items: center;
+    /* Memusatkan secara vertikal */
+    flex-wrap: wrap;
+    gap: 20px;
+    /* Menambahkan jarak antar tombol */
+    padding: 10px;
+    /* Menambahkan padding pada container */
+  }
+
+  .buttons-container button {
+    background-color: #2A629A;
+    /* Warna latar belakang tombol */
+    border: none;
+    padding: 10px 20px;
+    /* Padding dalam tombol */
+    margin: 5px;
+    /* Margin antar tombol */
+    border-radius: 5px;
+    /* Membuat sudut tombol melengkung */
+    cursor: pointer;
+    font-size: 16px;
+    /* Ukuran font tombol */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    /* Transisi untuk hover effect */
+    flex: 1;
+    /* Membuat tombol fleksibel dan mengambil ruang yang tersedia */
+    min-width: 10px;
+    /* Lebar minimum tombol */
+    min-height: 50px;
+    /* Tinggi minimum tombol */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .buttons-container button a {
+    text-decoration: none;
+    color: white;
+    /* Atur warna teks */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Memusatkan teks dalam tombol */
+    width: 100%;
+    /* Memastikan link mengisi seluruh tombol */
+    height: 100%;
+    /* Memastikan link mengisi seluruh tombol */
+  }
+
+  .buttons-container button:hover {
+    background-color: #1f4a7a;
+    /* Warna latar belakang saat hover */
+    transform: scale(1.05);
+    /* Efek zoom saat hover */
+  }
+
+  .buttons-container button:active {
+    background-color: #003f7f;
+    /* Warna latar belakang saat ditekan */
+    transform: scale(0.95);
+    /* Efek zoom saat ditekan */
+  }
+
+  /* Gaya untuk #gallery-options */
+  #gallery-options {
+    position: fixed;
+    top: 50%;
+    left: 51.3%;
+    transform: translate(-50%, -50%);
+    display: none;
+    width: 50%;
+    justify-content: center;
+  }
+
+  /* Gaya untuk .button-container */
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: -2rem;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .button-container button {
+    margin: 8px 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #2A629A;
+    color: #f3f2f2;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    flex: 1;
+    max-width: 300px;
+  }
+
+  .button-container button:hover {
+    background-color: #1f4a7a;
+  }
+
+  .button-container button a {
+    color: white;
+  }
+
+  .button-container button a:hover {
+    color: white;
+  }
+
+  /* Modal styles */
+  .modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 50;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    /* Could be more or less, depending on screen size */
+  }
+
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  /* Gaya untuk container form */
+  .form-container {
+    width: 50%;
+    /* Lebar kontainer form */
+    float: left;
+    /* Mengapit elemen sebelah kanan */
+    margin-right: 30px;
+    /* Jarak kanan antara kontainer form */
+    margin-bottom: 20px;
+    /* Jarak bawah antara kontainer form */
+  }
+
+  /* Gaya untuk grup form */
+  .form-group {
+    margin-bottom: 15px;
+    /* Jarak bawah antara setiap grup form */
+  }
+
+  /* Gaya untuk label form */
+  .form-group label {
+    display: block;
+    /* Menjadikan label sebagai blok untuk memisahkan baris */
+    margin-bottom: 8px;
+    /* Jarak bawah antara label dan input */
+    font-weight: bold;
+    /* Menebalkan teks label */
+  }
+
+  /* Gaya untuk input form */
+  .form-group input[type="text"],
+  .form-group input[type="file"] {
+    width: calc(100% - 20px);
+    /* Lebar input mengurangi padding */
+    padding: 8px;
+    /* Padding di sekitar teks dalam input */
+    border: 1px solid #ccc;
+    /* Garis tepi input */
+    border-radius: 4px;
+    /* Sudut lengkung tepi input */
+    box-sizing: border-box;
+    /* Menghitung padding dan border dalam lebar total */
+  }
+
+  /* Gaya untuk tombol Clear */
+  #fjkt-clear,
+  #fan-art-clear {
+    display: block;
+    /* Menjadikan tombol sebagai blok */
+    padding: 8px 16px;
+    /* Padding vertikal dan horizontal */
+    margin-top: 10px;
+    /* Jarak atas dari tombol Clear */
+    border: none;
+    /* Hilangkan border */
+    background-color: #f44336;
+    /* Warna latar merah */
+    color: white;
+    /* Warna teks putih */
+    border-radius: 4px;
+    /* Sudut lengkung tepi tombol */
+    cursor: pointer;
+    /* Kursor menunjukkan tombol dapat diklik */
+  }
+
+  /* Gaya untuk tombol Clear saat dihover */
+  #fjkt-clear:hover,
+  #fan-art:hover {
+    background-color: #d32f2f;
+    /* Warna latar merah yang lebih gelap saat dihover */
+  }
+
+  .detail-container {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    /* Menyesuaikan posisi konten ke kiri */
+    margin-bottom: 20px;
+    width: 50%;
+    /* Lebar kontainer */
+    float: right;
+    /* Mengapit elemen sebelah kiri */
+    clear: both;
+    /* Membersihkan float */
+  }
+
+  .detail-container h2 {
+    margin-bottom: 10px;
+    /* Jarak bawah antara judul dan konten */
+    font-size: 1.5em;
+    /* Ukuran font judul */
+  }
+
+  .detail-container p {
+    margin-bottom: 8px;
+    /* Jarak bawah antara paragraf */
+  }
+
+  .detail-container img {
+    max-width: 100%;
+    /* Gambar tidak akan melebihi lebar kontainer */
+    max-height: 200px;
+    /* Atur tinggi maksimal yang diinginkan */
+    object-fit: contain;
+    /* Memastikan gambar mempertahankan rasio aspek tanpa merubah ukuran */
+    margin-top: 10px;
+    /* Spasi atas gambar */
+  }
+
+  #fjkt-save,
+  #fan-art-save {
+    padding: 8px 16px;
+    /* Padding vertikal dan horizontal */
+    margin-top: 10px;
+    /* Jarak atas dari tombol Simpan */
+    border: none;
+    /* Hilangkan border */
+    background-color: #4CAF50;
+    /* Warna latar hijau */
+    color: white;
+    /* Warna teks putih */
+    border-radius: 4px;
+    /* Sudut lengkung tepi tombol */
+    cursor: pointer;
+    /* Kursor menunjukkan tombol dapat diklik */
+  }
+
+  #fjkt-save:hover #fan-art-save:hover {
+    background-color: #45a049;
+    /* Warna latar hijau yang lebih gelap saat dihover */
+  }
+
+
+  .modal-inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  /* Media query for smaller screens */
+  @media (max-width: 650px) {
+    .button-container button {
+      padding: 10px;
+      /* Adjust padding for smaller screens */
+      width: 100%;
+      /* Make buttons take full width */
+      max-width: none;
+      /* Remove max-width constraint */
+    }
+  }
+
+  .centered-bold {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  #filterable-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  /* Tambahkan class baru untuk gambar */
+  .responsive-image {
+    max-width: 350px;
+    /* Mengatur lebar maksimum gambar sesuai dengan lebar parent element */
+    height: auto;
+    /* Mengatur ketinggian secara otomatis agar gambar tidak terdistorsi */
+  }
+
+  @media (max-width: 768px) {
+    body {
+      overflow-x: hidden;
+      /* Nonaktifkan scroll horizontal */
+    }
+
+    .block-20 img {
+      max-width: 100%;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .col-md-4 {
+      margin: 0 auto;
+      /* Menengahkan kolom */
+      padding-bottom: 5rem;
+    }
+  }
+
+  .one {
+    display: inline-block;
+  }
+
+  .two {
+    display: inline-block;
+  }
+
+  .mr-3 {
+    margin-right: 3px;
+  }

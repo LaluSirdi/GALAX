@@ -460,9 +460,5 @@ function clearForm(formId) {
 
    fixedContentPos: false
  });
-
-
-
-
  
 })(jQuery);
