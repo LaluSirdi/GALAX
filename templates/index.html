@@ -26,6 +26,8 @@
 	<link rel="stylesheet" href="../static/assets/css/style.css">
 	<link rel="stylesheet" href="../static/assets/css/style-login.css">
 	<script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
 	<script>
     {% if error_message %}
         alert("{{ error_message }}");
@@ -85,19 +87,19 @@
 				<!-- Sign Up Tab -->
 				<div id="SignUp" class="tabcontent">
 					<h3 style="text-align: center;">Sign Up</h3>
-					<form id="signUpForm" action="/register" method="post">
-						<label for="new-username"><i class="fas fa-user"></i> Username</label>
-						<input type="text" id="new-username" name="username" required>
-						<label for="email"><i class="fas fa-envelope"></i> Email</label>
-						<input type="email" id="email" name="email" required>
-						<label for="new-password"><i class="fas fa-lock"></i> Password</label>
-						<input type="password" id="new-password" name="password" required>
-						<label for="new-password"><i class="fas fa-key"></i> Confirm Password *</label>
-						<input type="password" id="confirm-password" name="confirm-password" required>
-						<div class="button-container">
-							<button type="submit" id="registrasi">Register</button>
-							<button type="button" id="clear" onclick="clearForm('signUpForm')">Clear</button>
-						</div>
+					<form id="signUpForm" method="post">
+					<label for="new-username"><i class="fas fa-user"></i> Username</label>
+					<input type="text" id="new-username" name="username" required>
+					<label for="email"><i class="fas fa-envelope"></i> Email</label>
+					<input type="email" id="email" name="email" required>
+					<label for="new-password"><i class="fas fa-lock"></i> Password</label>
+					<input type="password" id="new-password" name="password" required>
+					<label for="confirm-password"><i class="fas fa-key"></i> Confirm Password *</label>
+					<input type="password" id="confirm-password" name="confirm-password" required>
+					<div class="button-container">
+						<button type="submit" id="registrasi">Register</button>
+						<button type="button" id="clear" onclick="clearForm('signUpForm')">Clear</button>
+					</div>
 					</form>
 					<p style="text-align: center;">Sudah punya akun? <a href="#" id="loginLink">Masuk di sini</a></p>
 				</div>
@@ -111,12 +113,48 @@
             document.getElementById(formId).reset();
         }
 		
-        document.addEventListener('DOMContentLoaded', function() {
-            const flashes = {{ get_flashed_messages(with_categories=true) | tojson }};
-            flashes.forEach(([category, message]) => {
-                alert(message); 
-            });
-        });
+        document.addEventListener("DOMContentLoaded", function () {
+			document.getElementById('signUpForm').addEventListener('submit', function(event) {
+			  event.preventDefault(); 
+		  
+			  Swal.fire({
+				title: 'Apakah Anda yakin?',
+				text: 'Pastikan data yang Anda masukkan sudah benar.',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonText: 'Ya, daftar!',
+				cancelButtonText: 'Batal'
+			  }).then((result) => {
+				if (result.isConfirmed) {
+				  const formData = new FormData(document.getElementById('signUpForm'));
+		  
+				  $.ajax({
+					url: '/register',
+					type: 'POST',
+					data: formData,
+					processData: false,
+					contentType: false,
+					success: function(response) {
+					  Swal.fire(
+						'Berhasil!',
+						'Pendaftaran Anda telah berhasil.',
+						'success'
+					  ).then(() => {
+						window.location.href = '/'; 
+					  });
+					},
+					error: function(xhr, status, error) {
+					  Swal.fire(
+						'Gagal!',
+						'Pendaftaran Anda tidak dapat diproses.',
+						'error'
+					  );
+					}
+				  });
+				}
+			  });
+			});
+		  });
     </script>
 
 	<section class="hero-wrap js-fullheight" style="background-image: url('../static/assets/img/bg_4.png');"
@@ -351,6 +389,8 @@
 	</script>
 	<script src="../static/assets/js/google-map.js"></script>
 	<script src="../static/assets/js/main.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 	<script>
 		const klikabout = document.getElementById('klikabout');
 		const targetSection = document.getElementById('section-counter');

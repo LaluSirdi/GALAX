@@ -1,626 +1,985 @@
-{% include 'header.html' %}
-<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style-upgallery.css') }}">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>FJKT48 Lombok</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  <link href="../static/assets/img/logo_4.png" rel="shortcut icon" type="image/x-icon" />
+    
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900" rel="stylesheet">
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-<section class="ftco-section bg-light" data-section="gallery">
-  <div class="container">
-    <div class="row justify-content-center pb-5">
-      <div class="col-md-7 heading-section text-center ftco-animate">
-        <span class="subheading">Gallery</span>
-        <h2 class="mb-4">Our Gallery</h2>
-        <p>Jelajahi galeri kami untuk melihat foto dan media menawan dari acara komunitas kami.
-          Ruang ini juga memamerkan karya seni yang dibuat oleh penggemar dan peminat JKT48.</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12 testimonial">
-        <div class="carousel-project owl-carousel">
-          {% for item in fan_art_items %}
-          <div class="item">
-            <div class="project">
-              <div class="img">
-                <img src="{{ item.image }}" class="img-fluid" alt="Colorlib Template">
-                <a href="{{ item.image }}"
-                  class="icon image-popup d-flex justify-content-center align-items-center">
-                  <span class="icon-expand"></span>
-                </a>
-              </div>
-              <div class="text px-4">
-                <h3><a href="#">{{ item.title }}</a></h3>
-                <span>{{ item.category }}</span>
-              </div>
-            </div>
-          </div>
-          {% endfor %}
-          {% for item in fjkt_items %}
-          <div class="item">
-            <div class="project">
-              <div class="img">
-                <img src="{{ item.image }}" class="img-fluid" alt="Colorlib Template">
-                <a href="{{ item.image }}"
-                  class="icon image-popup d-flex justify-content-center align-items-center">
-                  <span class="icon-expand"></span>
-                </a>
-              </div>
-              <div class="text px-4">
-                <h3><a href="#">{{ item.title }}</a></h3>
-                <span>{{ item.category }}</span>
-              </div>
-            </div>
-          </div>
-          {% endfor %}
-          {% for item in fan_art_items %}
-          <div class="item">
-            <div class="project">
-              <div class="img">
-                <img src="{{ item.image }}" class="img-fluid" alt="Colorlib Template">
-                <a href="{{ item.image }}"
-                  class="icon image-popup d-flex justify-content-center align-items-center">
-                  <span class="icon-expand"></span>
-                </a>
-              </div>
-              <div class="text px-4">
-                <h3><a href="#">{{ item.title }}</a></h3>
-                <span>{{ item.category }}</span>
-              </div>
-            </div>
-          </div>
-          {% endfor %}
-          {% for item in fjkt_items %}
-          <div class="item">
-            <div class="project">
-              <div class="img">
-                <img src="{{ item.image }}" class="img-fluid" alt="Colorlib Template">
-                <a href="{{ item.image }}"
-                  class="icon image-popup d-flex justify-content-center align-items-center">
-                  <span class="icon-expand"></span>
-                </a>
-              </div>
-              <div class="text px-4">
-                <h3><a href="#">{{ item.title }}</a></h3>
-                <span>{{ item.category }}</span>
-              </div>
-            </div>
-          </div>
-          {% endfor %}
-          {% for item in fan_art_items %}
-          <div class="item">
-            <div class="project">
-              <div class="img">
-                <img src="{{ item.image }}" class="img-fluid" alt="Colorlib Template">
-                <a href="{{ item.image }}"
-                  class="icon image-popup d-flex justify-content-center align-items-center">
-                  <span class="icon-expand"></span>
-                </a>
-              </div>
-              <div class="text px-4">
-                <h3><a href="#">{{ item.title }}</a></h3>
-                <span>{{ item.category }}</span>
-              </div>
-            </div>
-          </div>
-          {% endfor %}
-          {% for item in fjkt_items %}
-          <div class="item">
-            <div class="project">
-              <div class="img">
-                <img src="{{ item.image }}" class="img-fluid" alt="Colorlib Template">
-                <a href="{{ item.image }}"
-                  class="icon image-popup d-flex justify-content-center align-items-center">
-                  <span class="icon-expand"></span>
-                </a>
-              </div>
-              <div class="text px-4">
-                <h3><a href="#">{{ item.title }}</a></h3>
-                <span>{{ item.category }}</span>
-              </div>
-            </div>
-          </div>
-          {% endfor %}
+    <link rel="stylesheet" href="../static/assets/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="../static/assets/css/animate.css">
+    
+    <link rel="stylesheet" href="../static/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../static/assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../static/assets/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="../static/assets/css/aos.css">
+
+    <link rel="stylesheet" href="../static/assets/css/ionicons.min.css">
+    
+    <link rel="stylesheet" href="../static/assets/css/flaticon.css">
+    <link rel="stylesheet" href="../static/assets/css/icomoon.css">
+    <link rel="stylesheet" href="../static/assets/css/style.css">
+    <link rel="stylesheet" href="../static/assets/css/style-gallery.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style-upgallery.css') }}">
+
+    <style>
+      .user-icon {
+          position: fixed;
+          top: 10px;
+          right: 10px;
+          cursor: pointer;
+      }
+      .user-icon img {
+          width: 40px;
+          height: 40px;
+      }
+
+      #user-account .login-text {
+          display: none;
+      }
+      @media (max-width: 650px) {
+          #user-account .fas.fa-user {
+              display: none;
+          }
+
+          #user-account .login-text {
+              display: inline;
+              color: white; 
+          }
+      }
+    </style>
+  </head>
+  <body>
+	  
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-primary ftco-navbar-primary" id="ftco-navbar">
+	    <div class="container">
+	      <div class="logo-circle navbar-brand">
+          <img src="../static/assets/img/logo_3.png" alt="Logo">
+        </div>
+	      <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav nav ml-auto">
+	          <li class="nav-item"><a href="/user" class="nav-link" data-nav-section="users"><span>Users</span></a></li>
+	          <li class="nav-item"><a href="/upgallery" class="nav-link" data-nav-section="gallery"><span>Up Gallery</span></a></li>
+	          <li class="nav-item"><a href="/upmerchandise" class="nav-link" data-nav-section="merchandise"><span>Up Merchandise</span></a></li>
+            <li class="nav-item">
+              <a href="#" class="nav-link" id="user-account"><span><i class="fas fa-user"></i> <span class="login-text">Logout</span></span></a>
+            </li>
+          </ul>
+	      </div>
+	    </div>
+      <div id="logout-popup">
+        <button id="edit-profile-btn" class="btn btn-primary btn-small w-100" data-toggle="modal" data-target="#edit-profile-modal">Setting Profil</button>
+        <div class="row justify-content-center">
+          <p>Anda yakin ingin logout?</p>
+          <button id="logout-btn">Logout</button>
+          <button id="cancel-btn">Cancel</button>
         </div>
       </div>
-    </div>
-    <div class="row justify-content-center mb-5">
-      <div class="col-md-7 heading-section text-center ftco-animate">
-        <div class="button-container">
-          <button id="gallery-button">
-            <span style="margin-right: 5px;">GALLERY</span>
-            <i class="fas fa-plus-circle"></i>
+	</nav>
+
+  <!-- Modal for Edit Profile -->
+  <div class="modal fade" id="edit-profile-modal" tabindex="-1" role="dialog" aria-labelledby="eedit-profile-modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="edit-profile-modalLabel">Edit Profile</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
           </button>
         </div>
-      </div>
-    </div>
-
-    <div class="row justify-content-center align-items-center vh-100 mb-5" id="gallery-options" style="display: none;">
-      <div class="col-md-7 heading-section text-center ftco-animate">
-        <div class="buttons-container">
-          <button id="fjkt-button" onclick="selectCategory('FJKT')">
-            <span style="margin-right: 5px;">FJKT</span>
-            <i class="fas fa-plus-circle"></i>
-          </button>
-          <button id="fan-art-button" onclick="selectCategory('FAN ART')">
-            <span style="margin-right: 5px;">FAN ART</span>
-            <i class="fas fa-plus-circle"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div>
-      <h3 class="centered-bold" id="target-section" style="margin-bottom: 4rem;">FJKT</h3>
-    </div>
-    <div class="row px-2 mt-4 gap-3" id="filterable-cards" style="margin-bottom: 3rem;">
-      {% for item in fjkt_items %}
-      <div class="col-md-4 ftco-animate">
-        <div class="blog-entry justify-content-end">
-          <a href="#" data-toggle="modal" data-target="#myModal" class="block-20">
-            <img src="{{ item.image }}" style="max-width: 350px;" alt="Image">
-          </a>
-          <div class="text mt-3 float-right d-block">
-            <div class="d-flex align-items-center pt-2 mb-4 topp">
-              <div class="one mr-3">
-                <span class="day">{{ item.day }}</span>
+        <div class="modal-body">
+          <form id="editProfileForm" method="post" enctype="multipart/form-data">
+            <input type="hidden" id="id" name="_id" value="{{ session['_id'] }}">
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" class="form-control" id="username" name="username" value="{{ session['username'] }}" required readonly>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" name="email" value="{{ session['email'] }}" required>
+            </div>
+            <div class="form-group">
+              <label for="profile_pic">Foto Profil (Hanya image .png, .jpeg dan .jpg)</label>
+              <img id="gambar-preview" src="../static/assets/img/profile_pics/{{ session['profile_pic_real'] }}" alt="" width="200">
+              <input type="file" class="form-control" accept=".png,.jpg,.jpeg" name="profile_pic" id="profile_pic"
+                    style="border-radius: 13px;" placeholder="Enter the Image" onchange="previewImage(event)" />
+            </div>
+            <hr>
+            <button type="button" class="btn btn-secondary" id="edit-password-btn">Edit Password</button>
+            <div id="password-fields" style="display: none;">
+              <div class="form-group">
+                <input type="password" class="form-control" id="current_password" name="current_password" value="{{ session['password'] }}" hidden>
               </div>
-              <div class="two">
-                <span class="yr">{{ item.year }}</span>
-                <span class="mos">{{ item.month }}</span>
+              <div class="form-group">
+                <label for="new_password">Password Baru</label>
+                <input type="password" class="form-control" id="new_password" name="new_password">
+              </div>
+              <div class="form-group">
+                <label for="confirm_password">Konfirmasi Password Baru</label>
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password">
               </div>
             </div>
-            <h3 class="heading"><a href="#" data-toggle="modal" data-target="#myModal">{{ item.title }}</a></h3>
-            <p>{{ item.description }}</p>
-            <div class="d-flex align-items-center mt-4 meta">
-              <p class="mb-0">
-                <a href="#" class="btn btn-secondary" onclick="confirmDelete('{{ item._id }}')">
-                  <span class="ion-ios-trash"></span> Hapus
-                </a>
-              </p>
-              <p class="ml-auto mb-0">
-                <a href="#" class="mr-2"
-                  onclick="openEditModal('{{ item._id }}', '{{ item.title }}', '{{ item.description }}', '{{ item.category }}', '{{ item.image }}')">
-                  <span class="ion-ios-create"></span> Edit
-                </a>
-                <a href="#" class="mr-2" onclick="toggleArchive('{{ item._id }}', '{{ item.category }}')">
-                  <span class="{{ 'ion-ios-archive' if not item.archived else 'ion-ios-unarchive' }}"></span>
-                  {{ 'Arsipkan' if not item.archived else 'Un-Arsipkan' }}
-                </a>
-              </p>
-            </div>
-          </div>
+            <button type="button" class="btn btn-primary" onclick="confirmEditP()">Submit</button>
+          </form>
         </div>
-      </div>
-      {% endfor %}
-    </div>
-
-    <div>
-      <h3 class="centered-bold" id="fan-section" style="margin-bottom: 4rem;">FAN ART</h3>
-    </div>
-    <div class="row px-2 mt-4 gap-3" id="filterable-cards">
-      {% for item in fan_art_items %}
-      <div class="col-md-4 ftco-animate">
-        <div class="blog-entry justify-content-end">
-          <a href="#" data-toggle="modal" data-target="#myModal" class="block-20">
-            <img src="{{ item.image }}" style="max-width: 350px;" alt="Image">
-          </a>
-          <div class="text mt-3 float-right d-block">
-            <div class="d-flex align-items-center pt-2 mb-4 topp">
-              <div class="one mr-3">
-                <span class="day" style="color: steelblue;">{{ item.day }}</span>
-              </div>
-              <div class="two">
-                <span class="yr" style="color: steelblue;">{{ item.year }}</span>
-                <span class="mos" style="color: steelblue;">{{ item.month }}</span>
-              </div>
-            </div>
-            <h3 class="heading"><a href="#" data-toggle="modal" data-target="#myModal">{{ item.title }}</a></h3>
-            <p>{{ item.description }}</p>
-            <div class="d-flex align-items-center mt-4 meta">
-              <p class="mb-0">
-                <a href="#" class="btn btn-secondary" onclick="confirmDelete('{{ item._id }}')">
-                  <span class="ion-ios-trash"></span> Hapus
-                </a>
-              </p>
-              <p class="ml-auto mb-0">
-                <a href="#" class="mr-2"
-                  onclick="openEditModal('{{ item._id }}', '{{ item.title }}', '{{ item.description }}', '{{ item.category }}', '{{ item.image }}')">
-                  <span class="ion-ios-create"></span> Edit
-                </a>
-                <a href="#" class="mr-2" onclick="toggleArchive('{{ item._id }}', '{{ item.category }}')">
-                  <span class="{{ 'ion-ios-archive' if not item.archived else 'icon ion-ios-share' }}"></span>
-                  {{ 'Arsipkan' if not item.archived else 'Un-Arsipkan' }}
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-
-  </div>
-</section>
-<!-- Modal for FJKT -->
-<div id="fjkt-modal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <div class="modal-inner">
-      <div class="form-container">
-        <h2>Form Input FJKT</h2>
-        <form id="fjkt-form" action="{{ url_for('submitgallery') }}" method="post" enctype="multipart/form-data">
-          <input type="hidden" id="fjkt-category-input" name="category" value="FJKT">
-          <div class="form-group">
-            <label for="fjkt-name">Judul:</label>
-            <input type="text" id="fjkt-name" name="fjkt-name" required>
-          </div>
-          <div class="form-group">
-            <label for="fjkt-description">Deskripsi:</label>
-            <input type="text" id="fjkt-description" name="fjkt-description" required>
-          </div>
-          <div class="form-group">
-            <label for="fjkt-image">Gambar:</label>
-            <input type="file" id="fjkt-image" name="fjkt-image" accept="image/*" required>
-          </div>
-          <button type="button" id="fjkt-clear">Clear</button>
-        </form>
-      </div>
-      <div class="detail-container">
-        <h2>Detail FJKT</h2>
-        <div id="fjkt-detail">
-          <p>Judul: <span id="fjkt-detail-name"></span></p>
-          <p>Deskripsi: <span id="fjkt-detail-description"></span></p>
-          <img id="fjkt-detail-image-preview" src="#" alt="Preview Gambar">
-        </div>
-        <button type="submit" form="fjkt-form" id="fjkt-save">Simpan</button>
       </div>
     </div>
   </div>
-</div>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("user-account").addEventListener("click", function () {
+        document.getElementById("logout-popup").style.display = "block";
+      });
 
-<!-- Modal for Fan Art -->
-<div id="fan-art-modal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <div class="modal-inner">
-      <div class="form-container">
-        <h2>Form Input Fan Art</h2>
-        <form id="fan-art-form" action="{{ url_for('submitgallery') }}" method="post" enctype="multipart/form-data">
-          <input type="hidden" id="fan-art-category-input" name="category" value="FAN ART">
-          <div class="form-group">
-            <label for="fan-art-title">Judul:</label>
-            <input type="text" id="fan-art-title" name="fan-art-title" required>
-          </div>
-          <div class="form-group">
-            <label for="fan-art-description">Deskripsi:</label>
-            <input type="text" id="fan-art-description" name="fan-art-description" required>
-          </div>
-          <div class="form-group">
-            <label for="fan-art-image">Gambar:</label>
-            <input type="file" id="fan-art-image" name="fan-art-image" accept="image/*" required>
-          </div>
-          <button type="button" id="fan-art-clear">Clear</button>
-        </form>
-      </div>
-      <div class="detail-container">
-        <h2>Detail Fan Art</h2>
-        <div id="fan-art-detail">
-          <p>Judul: <span id="fan-art-detail-title"></span></p>
-          <p>Deskripsi: <span id="fan-art-detail-description"></span></p>
-          <img id="fan-art-detail-image-preview" src="#" alt="Preview Gambar">
-        </div>
-        <button type="submit" form="fan-art-form" id="fan-art-save">Simpan</button>
-      </div>
-    </div>
-  </div>
-</div>
+      document.getElementById("cancel-btn").addEventListener("click", function () {
+        document.getElementById("logout-popup").style.display = "none";
+      });
 
-<!-- Modal for Edit (FJKT and Fan Art) -->
-<div id="edit-modal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeEditModal()">&times;</span>
-    <div class="modal-inner">
-      <div class="form-container">
-        <h2>Edit Item</h2>
-        <form id="edit-form" action="editgallery" method="post" enctype="multipart/form-data">
-          <input type="hidden" id="edit-item-id" name="item_id" value="">
-          <input type="hidden" id="current-image-path" name="current_image_path" value="">
-          <div class="form-group">
-            <label for="edit-name">Judul:</label>
-            <input type="text" id="edit-name" name="edit-name" required>
-          </div>
-          <div class="form-group">
-            <label for="edit-description">Deskripsi:</label>
-            <input type="text" id="edit-description" name="edit-description" required>
-          </div>
-          <div class="form-group">
-            <label for="edit-image">Gambar:</label>
-            <input type="file" id="edit-image" name="edit-image" accept="image/*" onchange="previewImage(event)">
-          </div>
-          <div class="form-group">
-            <label for="edit-category">Kategori:</label>
-            <select id="edit-category" name="edit-category">
-              <option value="FJKT">FJKT</option>
-              <option value="Fan Art">Fan Art</option>
-            </select>
-          </div>
-          <button type="button" id="edit-clear" onclick="clearEditForm()">Clear</button>
-        </form>
-      </div>
-      <div class="detail-container">
-        <h2>Detail Item</h2>
-        <div id="edit-detail">
-          <p>Judul: <span id="edit-detail-name"></span></p>
-          <p>Deskripsi: <span id="edit-detail-description"></span></p>
-          <p>Kategori: <span id="edit-detail-category"></span></p>
-          <img id="edit-detail-image-preview" src="#" alt="Preview Gambar" style="max-width: 100%;">
-        </div>
-        <button type="submit" form="edit-form" id="edit-save">Simpan</button>
-      </div>
-    </div>
-  </div>
-</div>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // Tampilkan modal pilihan galeri saat tombol GALLERY diklik
-    const galleryButton = document.getElementById('gallery-button');
-    const galleryOptions = document.getElementById('gallery-options');
-
-    galleryButton.addEventListener('click', function () {
-      galleryOptions.style.display = 'flex';
+      document.getElementById("logout-btn").addEventListener("click", function () {
+        Swal.fire({
+          title: 'Anda yakin ingin logout?',
+          text: "Anda akan diarahkan ke halaman utama.",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Ya, logout!',
+          cancelButtonText: 'Batal'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = "/";
+          }
+        });
+      });
     });
 
-    // Tampilkan modal FJKT saat tombol FJKT diklik
-    const fjktButton = document.getElementById('fjkt-button');
-    fjktButton.addEventListener('click', function () {
-      selectCategory('FJKT'); // Panggil fungsi untuk menampilkan modal FJKT
+    var editPasswordBtn = document.getElementById('edit-password-btn');
+    var passwordFields = document.getElementById('password-fields');
+
+    editPasswordBtn.addEventListener('click', function() {
+        if (passwordFields.style.display === 'none') {
+            passwordFields.style.display = 'block';
+        } else {
+            passwordFields.style.display = 'none';
+        }
     });
 
-    // Tampilkan modal Fan Art saat tombol Fan Art diklik
-    const fanArtButton = document.getElementById('fan-art-button');
-    fanArtButton.addEventListener('click', function () {
-      selectCategory('FAN ART'); // Panggil fungsi untuk menampilkan modal Fan Art
-    });
-
-    function selectCategory(category) {
-      // Ubah nilai input hidden dengan nama 'category' sesuai dengan kategori yang dipilih
-      if (category === 'FJKT') {
-        document.getElementById('fjkt-category-input').value = category;
-        document.getElementById('fjkt-modal').style.display = 'block';
-      } else if (category === 'FAN ART') {
-        document.getElementById('fan-art-category-input').value = category;
-        document.getElementById('fan-art-modal').style.display = 'block';
-      }
-    }
-
-    document.addEventListener('click', function (event) {
-      const isClickInside = galleryOptions.contains(event.target) || galleryButton.contains(event.target);
-      if (!isClickInside) {
-        galleryOptions.style.display = 'none';
-      }
-    });
-
-    galleryOptions.addEventListener('mouseenter', function () {
-      galleryOptions.style.display = 'flex';
-    });
-
-    galleryOptions.addEventListener('mouseleave', function () {
-      galleryOptions.style.display = 'none';
-    });
-
-    // Get the modals
-    var fjktModal = document.getElementById("fjkt-modal");
-    var fanArtModal = document.getElementById("fan-art-modal");
-
-    // Get the <span> elements that close the modals
-    var closeButtons = document.getElementsByClassName("close");
-
-    // When the user clicks on <span> (x), close the modals
-    for (var i = 0; i < closeButtons.length; i++) {
-      closeButtons[i].onclick = function () {
-        this.parentElement.parentElement.style.display = "none";
-      }
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-      if (event.target == fjktModal) {
-        fjktModal.style.display = "none";
-      }
-      if (event.target == fanArtModal) {
-        fanArtModal.style.display = "none";
-      }
-    }
-
-    // Ambil elemen-elemen input dan gambar yang perlu di-reset
-    var fjktNameInput = document.getElementById("fjkt-name");
-    var fjktDescriptionInput = document.getElementById("fjkt-description");
-    var fjktImageInput = document.getElementById("fjkt-image");
-    var fjktDetailName = document.getElementById("fjkt-detail-name");
-    var fjktDetailDescription = document.getElementById("fjkt-detail-description");
-    var fjktDetailImagePreview = document.getElementById("fjkt-detail-image-preview");
-
-    // Ambil tombol "Clear"
-    var fjktClearButton = document.getElementById("fjkt-clear");
-
-    // Tambahkan event listener untuk tombol "Clear"
-    fjktClearButton.addEventListener('click', function () {
-      // Hapus nilai dari input teks
-      fjktNameInput.value = "";
-      fjktDescriptionInput.value = "";
-
-      // Reset preview gambar
-      fjktDetailImagePreview.src = "#";
-      fjktDetailImagePreview.alt = "Preview Gambar";
-    });
-
-    // Get form input elements for Fan Art
-    var fanArtTitleInput = document.getElementById("fan-art-title");
-    var fanArtDescriptionInput = document.getElementById("fan-art-description");
-    var fanArtImageInput = document.getElementById("fan-art-image");
-    var fanArtDetailTitle = document.getElementById("fan-art-detail-title");
-    var fanArtDetailDescription = document.getElementById("fan-art-detail-description");
-    var fanArtDetailImagePreview = document.getElementById("fan-art-detail-image-preview");
-
-    // Add event listeners for FJKT form inputs
-    fjktNameInput.addEventListener('input', updateFjktDetail);
-    fjktDescriptionInput.addEventListener('input', updateFjktDetail);
-    fjktImageInput.addEventListener('change', previewFjktImage);
-
-    // Add event listeners for Fan Art form inputs
-    fanArtTitleInput.addEventListener('input', updateFanArtDetail);
-    fanArtDescriptionInput.addEventListener('input', updateFanArtDetail);
-    fanArtImageInput.addEventListener('change', previewFanArtImage);
-
-    // Function to update FJKT detail section
-    function updateFjktDetail() {
-      fjktDetailName.textContent = fjktNameInput.value;
-      fjktDetailDescription.textContent = fjktDescriptionInput.value;
-    }
-
-    // Function to preview selected FJKT image
-    function previewFjktImage(event) {
-      var file = event.target.files[0];
-      var reader = new FileReader();
-      reader.onload = function () {
-        fjktDetailImagePreview.src = reader.result;
-      }
-      reader.readAsDataURL(file);
-    }
-
-    // Function to update Fan Art detail section
-    function updateFanArtDetail() {
-      fanArtDetailTitle.textContent = fanArtTitleInput.value;
-      fanArtDetailDescription.textContent = fanArtDescriptionInput.value;
-    }
-
-    // Function to preview selected Fan Art image
-    function previewFanArtImage(event) {
-      var file = event.target.files[0];
-      var reader = new FileReader();
-      reader.onload = function () {
-        fanArtDetailImagePreview.src = reader.result;
-      }
-      reader.readAsDataURL(file);
-    }
-  });
-  function confirmDelete(itemId) {
-    Swal.fire({
-      title: "Apakah Anda yakin?",
-      text: "Anda tidak akan bisa mengembalikan ini!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Ya, hapus!"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // Mengirimkan permintaan POST untuk menghapus item
-        fetch(`/deletegallery/${itemId}`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-          })
-          .then(response => {
-            if (response.ok) {
-              Swal.fire({
-                title: "Terhapus!",
-                text: "Item Anda telah dihapus.",
-                icon: "success"
-              }).then(() => {
-                // Refresh halaman atau lakukan tindakan lain setelah penghapusan berhasil
-                window.location.reload();
+    function confirmEditP() {
+      Swal.fire({
+        title: 'Apakah Anda yakin?',
+        text: 'Menyimpan perubahan ini!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ya',
+        cancelButtonText: 'Tidak'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const formData = new FormData(document.getElementById('editProfileForm'));
+          $.ajax({
+            url: '/profile/' + $('#id').val(),
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+              Swal.fire(
+                'Berhasil!',
+                'Profil Anda telah diperbarui.',
+                'success'
+              ).then(() => {
+                $('#edit-profile-modal').modal('hide'); 
+                window.location.reload(); 
               });
-            } else {
-              Swal.fire({
-                title: "Gagal!",
-                text: "Item Anda tidak dapat dihapus.",
-                icon: "error"
+            },
+            error: function (xhr, status, error) {
+              Swal.fire(
+                'Gagal!',
+                'Profil Anda tidak dapat diperbarui.',
+                'error'
+              ).then(() => {
+                $('#edit-profile-modal').modal('hide'); 
+                window.location.reload(); 
               });
             }
           });
-      }
-    });
-  }
-
-  function openEditModal(id, title, description, category, image) {
-    document.getElementById('edit-item-id').value = id;
-    document.getElementById('edit-name').value = title;
-    document.getElementById('edit-description').value = description;
-    document.getElementById('edit-category').value = category;
-    document.getElementById('current-image-path').value = image;
-
-    document.getElementById('edit-detail-name').innerText = title;
-    document.getElementById('edit-detail-description').innerText = description;
-    document.getElementById('edit-detail-category').innerText = category;
-    document.getElementById('edit-detail-image-preview').src = image ?
-      `static/assets/img/gallery/${category.toLowerCase()}/${image}` : '#';
-
-    document.getElementById('edit-modal').style.display = 'block';
-  }
-
-  function closeEditModal() {
-    document.getElementById('edit-modal').style.display = 'none';
-  }
-
-  function clearEditForm() {
-    document.getElementById('edit-form').reset();
-  }
-
-  function previewImage(event) {
-    const output = document.getElementById('edit-detail-image-preview');
-    output.src = URL.createObjectURL(event.target.files[0]);
-  }
-
-  document.getElementById('edit-form').onsubmit = function (event) {
-    event.preventDefault();
-    const formData = new FormData(this);
-    fetch(`/editgallery`, {
-      method: 'POST',
-      body: formData
-    }).then(response => {
-      if (response.ok) {
-        Swal.fire({
-          title: "Berhasil!",
-          text: "Item Anda telah diperbarui.",
-          icon: "success"
-        }).then(() => {
-          window.location.reload();
-        });
-      } else {
-        Swal.fire({
-          title: "Gagal!",
-          text: "Item Anda tidak dapat diperbarui.",
-          icon: "error"
-        });
-      }
-    });
-  }
-
-  function toggleArchive(itemId, category) {
-    fetch(`/archive_item/${itemId}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          category: category
-        })
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          Swal.fire({
-            title: data.archived ? "Diarsipkan!" : "Di-unarsipkan!",
-            text: data.archived ? "Item telah diarsipkan." : "Item telah di-unarsipkan.",
-            icon: "success"
-          }).then(() => {
-            window.location.reload();
-          });
-        } else {
-          Swal.fire({
-            title: "Gagal!",
-            text: "Tidak dapat mengubah status item.",
-            icon: "error"
-          });
         }
       });
-  }
-</script>
-{% include 'footer.html' %}
+    }
+  </script>
+
+  <section class="ftco-section bg-light" data-section="gallery">
+    <div class="container">
+      <div class="row justify-content-center pb-5">
+        <div class="col-md-7 heading-section text-center ftco-animate">
+          <span class="subheading">Gallery</span>
+          <h2 class="mb-4">Our Gallery</h2>
+          <p>Jelajahi galeri kami untuk melihat foto dan media menawan dari acara komunitas kami. 
+            Ruang ini juga memamerkan karya seni yang dibuat oleh penggemar dan peminat JKT48.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 testimonial">
+          <div class="carousel-project owl-carousel">
+            {% for item in gallery_items %}
+            <div class="item">
+                <div class="project">
+                    <div class="img">
+                      {% if item['type'] == 'FJKT' %}
+                      <img src="../static/assets/img/gallery/fjkt/{{ item['gambar'] }}" class="img-fluid fjktku" alt="Image">
+                      <a href="../static/assets/img/gallery/fjkt/{{ item['gambar'] }}" class="icon image-popup d-flex justify-content-center align-items-center">
+                          <span class="icon-expand"></span>
+                      </a>
+                      {% elif item['type'] == 'Fan Art' %}
+                      <img src="../static/assets/img/gallery/fanart/{{ item['gambar'] }}" class="img-fluid fanartku" alt="Image">
+                      <a href="../static/assets/img/gallery/fanart/{{ item['gambar'] }}" class="icon image-popup d-flex justify-content-center align-items-center">
+                          <span class="icon-expand"></span>
+                      </a>
+                      {% endif %}
+                    </div>
+                    <div class="text px-4">
+                        <h3><a href="#">{{ item['nama'] }}</a></h3>
+                        <span>{{ item['type'] }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center mb-5">
+        <div class="col-md-7 heading-section text-center ftco-animate">
+          <div class="button-container">
+            <button id="gallery-button">
+              <span style="margin-right: 5px;">GALLERY</span>
+              <i class="fas fa-plus-circle"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row justify-content-center align-items-center vh-100 mb-5" id="gallery-options" style="display: none;">
+        <div class="col-md-7 heading-section text-center ftco-animate">
+          <div class="buttons-container">
+            <button id="fjkt-button" onclick="selectCategory('fjkt')">
+              <span style="margin-right: 5px; color: white;">FJKT</span>
+              <i class="fas fa-plus-circle" style="color: white;"></i>
+            </button>
+            <button id="fan-art-button" onclick="selectCategory('fanart')">
+              <span style="margin-right: 5px; color: white">FAN ART</span>
+              <i class="fas fa-plus-circle" style="color: white;"></i>
+            </button>
+          </div>
+        </div>
+      </div>      
+      
+      <div>
+        <h3 class="centered-bold" id="target-section" style="margin-bottom: 4rem;">FJKT</h3>
+      </div>
+      <div class="row px-2 mt-4 gap-3" id="filterable-cards" style="margin-bottom: 3rem;">
+        <div class="row d-flex">
+          {% for item in fjkt %}
+            <div class="col-md-4 ftco-animate" style="margin-bottom: 3rem;">
+                <div class="blog-entry justify-content-end">
+                    <a href="#" onclick="postDetail('{{ item._id }}', 'fjkt')" data-toggle="modal" data-target="#myModal" data-id="{{item._id}}" data-type="fjkt" class="block-211">
+                        <img src="../static/assets/img/gallery/fjkt/{{ item.gambar }}" alt="Image">
+                    </a>                  
+                    <div class="text mt-3 float-right d-block">
+                        <div class="d-flex align-items-center pt-2 mb-4 topp">
+                          <div class="one mr-3">
+                            <span class="day">{{ item.tanggal|datetimeformat('%d') }}</span>
+                          </div>
+                          <div class="two">
+                              <span class="yr">{{ item.tanggal|datetimeformat('%Y') }}</span>
+                              <span class="mos">{{ item.tanggal|datetimeformat('%B') }}</span>
+                          </div>
+                        </div>
+                        <h3 class="heading"><a href="#" onclick="postDetail('{{ item._id }}', 'fjkt')" data-toggle="modal" data-target="#myModal" data-id="{{item._id}}" data-type="fjkt">{{ item.nama }}</a></h3>
+                        <p>{{ item.deskripsi }}</p>
+                        <div class="d-flex align-items-center mt-4 meta">
+                            <a href="#" class="btn btn-secondary" onclick="postDetail('{{ item._id }}', 'fjkt')" data-toggle="modal" data-target="#myModal" data-id="{{item._id}}" data-type="fjkt">Comment <span class="ion-ios-arrow-round-forward"></span></a>
+                            <p class="ml-auto mb-0">
+                                <a href="#" class="mr-2" onclick="loadComments('{{ item._id }}')" data-toggle="modal" data-target="#commentsModal">{{ item.last_comment_username }}</a>
+                                <a href="#" class="meta-chat" onclick="loadComments('{{ item._id }}')" data-toggle="modal" data-target="#commentsModal"><span class="icon-chat"></span> {{ item.jumlah_komentar }}</a>
+                            </p>
+                        </div>
+                        <div class="d-flex flex-column align-items-center mt-2">
+                          <div class="w-100">
+                              <a href="#" class="btn btn-warning btn-small w-100" onclick="editGallery('{{ item._id }}', 'fjkt')" data-id="{{ item._id }}" data-type="fjkt">Edit <span class="ion-ios-create"></span></a>
+                          </div>
+                          <div class="w-100" style="margin-top: 0.2rem;">
+                              <a href="#" onclick="confirmDelete('{{ item._id }}', 'fjkt')" class="btn btn-secondary btn-small w-100">Delete <span class="ion-ios-trash"></span></a>
+                          </div>
+                          <div class="w-100" style="margin-top: 0.2rem;">
+                            <a href="#" class="btn btn-primary btn-small w-100" onclick="toggleArchive('{{ item._id }}', 'fjkt')">
+                              {{ 'Arsipkan' if not item.archived else 'Un-Arsipkan' }}
+                              <span class="{{ 'ion-ios-archive' if not item.archived else 'icon ion-ios-share' }}"></span>
+                            </a>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+          {% endfor %}
+          
+        </div> 
+      </div>
+    
+      <h3 class="centered-bold" id="fan-section" style="margin-bottom: 4rem;">FAN ART</h3>
+      <div class="row px-2 mt-4 gap-3" id="filterable-cards">
+        <div class="row d-flex">
+          {% for item in fanart %}
+            <div class="col-md-4 ftco-animate" style="margin-bottom: 3rem;">
+              <div class="blog-entry justify-content-end">
+                <a href="#" onclick="postDetail('{{ item._id }}', 'fanart')" data-toggle="modal" data-target="#myModal" data-id="{{item._id}}" data-type="fanart" class="block-20">
+                  <img src="../static/assets/img/gallery/fanart/{{ item.gambar }}" alt="Image">
+                </a>                  
+                <div class="text mt-3 float-right d-block">
+                  <div class="d-flex align-items-center pt-2 mb-4 topp">
+                    <div class="one mr-3">
+                      <span class="day">{{ item.tanggal|datetimeformat('%d') }}</span>
+                    </div>
+                    <div class="two">
+                        <span class="yr">{{ item.tanggal|datetimeformat('%Y') }}</span>
+                        <span class="mos">{{ item.tanggal|datetimeformat('%B') }}</span>
+                    </div>
+                  </div>
+                  <h3 class="heading"><a href="#" onclick="postDetail('{{ item._id }}', 'fanart')" data-toggle="modal" data-target="#myModal" data-id="{{item._id}}" data-type="fanart">{{ item.nama }}</a></h3>
+                  <p>{{ item.deskripsi }}</p>
+                  <div class="d-flex align-items-center mt-4 meta">
+                    <p class="mb-0"><a href="#" class="btn btn-secondary" onclick="postDetail('{{ item._id }}', 'fanart')" data-toggle="modal" data-target="#myModal" data-id="{{item._id}}" data-type="fanart">Comment <span class="ion-ios-arrow-round-forward"></span></a></p>
+                    <p class="ml-auto mb-0">
+                      <a href="#" class="mr-2" onclick="loadComments('{{ item._id }}')" data-toggle="modal" data-target="#commentsModal">{{ item.last_comment_username }}</a>
+                      <a href="#" class="meta-chat" onclick="loadComments('{{ item._id }}')" data-toggle="modal" data-target="#commentsModal"><span class="icon-chat"></span> {{ item.jumlah_komentar }}</a>
+                    </p>
+                  </div>
+                  <div class="d-flex flex-column align-items-center mt-2">
+                    <div class="w-100">
+                        <a href="#" class="btn btn-warning btn-small w-100" onclick="editGallery('{{ item._id }}', 'fanart')" data-id="{{ item._id }}" data-type="fanart">Edit <span class="ion-ios-create"></span></a>
+                    </div>
+                    <div class="w-100" style="margin-top: 0.2rem;">
+                        <a href="#" onclick="confirmDelete('{{ item._id }}', 'fanart')" class="btn btn-secondary btn-small w-100">Delete <span class="ion-ios-trash"></span></a>
+                    </div>
+                    <div class="w-100" style="margin-top: 0.2rem;">
+                      <a href="#" class="btn btn-primary btn-small w-100" onclick="toggleArchive('{{ item._id }}', 'fanart')">
+                        {{ 'Arsipkan' if not item.archived else 'Un-Arsipkan' }}
+                        <span class="{{ 'ion-ios-archive' if not item.archived else 'icon ion-ios-share' }}"></span>
+                      </a>
+                    </div>
+                </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+          
+        </div> 
+      </div>
+        
+    </div>
+  </section>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">Detail Post</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <form id="postDetailForm" method="post" enctype="multipart/form-data">
+                        <input type="hidden" id="type" name="type">
+                        <input type="hidden" id="_id" name="_id">
+                        <img src="" id="gambar" name="gambar" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title" id="nama" name="nama"></h5>
+                            <p class="card-text" id="deskripsi" nama="deskripsi"></p>
+                            <!-- Bagian komentar -->
+                            <div class="form-group">
+                                <label for="comment">Comment:</label>
+                                <textarea class="form-control" rows="5" id="comment" name="comment"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="submitComment()">Submit Comment</button>
+            </div>
+        </div>
+    </div>
+  </div>
+  
+  <!-- Modal Structure -->
+  <div class="modal fade" id="commentsModal" tabindex="-1" role="dialog" aria-labelledby="commentsModalLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="commentsModalLabel">Comments</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="comment-section" id="commentSection">
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- Modal for FJKT -->
+  <div id="fjkt-modal" class="modal1">
+    <div class="modal-content modal-content1">
+      <span class="close1">&times;</span>
+      <div class="modal-inner">
+        <div class="form-container">
+          <h2>Form Input FJKT</h2>
+          <form id="fjkt-form" action="/upgallery" method="post" enctype="multipart/form-data">
+            <input type="hidden" id="type-fjkt" name="type" value="fjkt">
+            <div class="form-group">
+              <label for="fjkt-nama">Judul:</label>
+              <input type="text" class="form-control" id="fjkt-nama" name="nama" required>
+            </div>
+            <div class="form-group">
+              <label for="fjkt-deskripsi">Deskripsi:</label>
+              <input type="text" class="form-control" id="fjkt-deskripsi" name="deskripsi" required>
+            </div>
+            <div class="form-group">
+              <label for="fjkt-gambar">Gambar:</label>
+              <input type="file" class="form-control" id="fjkt-gambar" name="gambar" accept="image/*" required>
+            </div>
+            <button type="button" id="fjkt-clear">Clear</button>
+          </form>
+        </div>
+        <hr class="separator">
+        <div class="detail-container">
+          <h2>Detail FJKT</h2>
+          <div id="fjkt-detail">
+            <p>Judul: <span id="fjkt-detail-name"></span></p>
+            <p>Deskripsi: <span id="fjkt-detail-description"></span></p>
+            <img id="fjkt-detail-image-preview" src="https://img.icons8.com/?size=100&id=RxzRPd8sH7Ru&format=png&color=000000" alt="Preview Gambar">
+          </div>
+          <button type="submit" onclick="confirmSimpan('fjkt-form')" id="fjkt-save">Simpan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Fan Art -->
+  <div id="fan-art-modal" class="modal1">
+    <div class="modal-content modal-content1">
+      <span class="close1">&times;</span>
+      <div class="modal-inner">
+        <div class="form-container">
+          <h2>Form Input Fan Art</h2>
+          <form id="fan-art-form" action="/upgallery" method="post" enctype="multipart/form-data">
+            <input type="hidden" id="type-fan-art" name="type" value="fanart">
+            <div class="form-group">
+              <label for="fan-art-nama">Judul:</label>
+              <input type="text" class="form-control" id="fan-art-nama" name="nama" required>
+            </div>
+            <div class="form-group">
+              <label for="fan-art-deskripsi">Deskripsi:</label>
+              <input type="text" class="form-control" id="fan-art-deskripsi" name="deskripsi" required>
+            </div>
+            <div class="form-group">
+              <label for="fan-art-gambar">Gambar:</label>
+              <input type="file" class="form-control" id="fan-art-gambar" name="gambar" accept="image/*" required>
+            </div>
+            <button type="button" id="fan-art-clear">Clear</button>
+          </form>
+        </div>
+        <hr class="separator">
+        <div class="detail-container">
+          <h2>Detail Fan Art</h2>
+          <div id="fan-art-detail">
+            <p>Judul: <span id="fan-art-detail-title"></span></p>
+            <p>Deskripsi: <span id="fan-art-detail-description"></span></p>
+            <img id="fan-art-detail-image-preview" src="https://img.icons8.com/?size=100&id=RxzRPd8sH7Ru&format=png&color=000000" alt="Preview Gambar">
+          </div>
+          <button type="submit" onclick="confirmSimpan('fan-art-form')" id="fan-art-save">Simpan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Edit (FJKT and Fan Art) -->
+  <div id="edit-modal" class="modal1">
+    <div class="modal-content modal-content1">
+        <span class="close1" onclick="closeEditModal()">&times;</span>
+        <div class="modal-inner">
+            <div class="form-container">
+                <h2>Edit Item</h2>
+                <form id="editGalleryForm" method="post" enctype="multipart/form-data">
+                    <input type="hidden" id="id" name="_id">
+                    <input type="hidden" id="edit_type" name="type">
+                    <div class="form-group">
+                        <label for="edit_nama">Judul:</label>
+                        <input type="text" id="edit_nama" name="nama" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_deskripsi">Deskripsi:</label>
+                        <input type="text" id="edit_deskripsi" name="deskripsi" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_gambar">Gambar:</label>
+                        <input type="file" class="form-control" name="gambar" id="gambar" accept="image/*" onchange="previewImage(event)">
+                    </div>
+                    <button type="button" id="edit-clear" onclick="clearEditForm()">Clear</button>
+                </form>
+            </div>
+            <hr class="separator">
+            <div class="detail-container">
+                <h2>Detail Item</h2>
+                <div id="edit-detail">
+                    <p>Judul: <span id="edit-detail-name"></span></p>
+                    <p>Deskripsi: <span id="edit-detail-description"></span></p>
+                    <p>Kategori: <span id="edit-detail-category"></span></p>
+                    <img id="edit-detail-image-preview" src="#" alt="Preview Gambar" style="max-width: 100%;">
+                </div>
+                <button type="submit" id="edit-save" onclick="confirmEdit()">Simpan</button>
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+  <script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const galleryButton = document.getElementById('gallery-button');
+      const galleryOptions = document.getElementById('gallery-options');
+
+      galleryButton.addEventListener('click', function () {
+        galleryOptions.style.display = 'flex';
+      });
+
+      const fjktButton = document.getElementById('fjkt-button');
+      fjktButton.addEventListener('click', function () {
+        selectCategory('fjkt'); 
+      });
+
+      const fanArtButton = document.getElementById('fan-art-button');
+      fanArtButton.addEventListener('click', function () {
+        selectCategory('fanart'); 
+      });
+
+      function selectCategory(category) {
+        if (category === 'fjkt') {
+          document.getElementById('type-fjkt').value = category;
+          document.getElementById('fjkt-modal').style.display = 'block';
+        } else if (category === 'fanart') {
+          document.getElementById('type-fan-art').value = category;
+          document.getElementById('fan-art-modal').style.display = 'block';
+        }
+      }
+
+      document.addEventListener('click', function (event) {
+        const isClickInside = galleryOptions.contains(event.target) || galleryButton.contains(event.target);
+        if (!isClickInside) {
+          galleryOptions.style.display = 'none';
+        }
+      });
+
+      galleryOptions.addEventListener('mouseenter', function () {
+        galleryOptions.style.display = 'flex';
+      });
+
+      galleryOptions.addEventListener('mouseleave', function () {
+        galleryOptions.style.display = 'none';
+      });
+  
+      var fjktModal = document.getElementById("fjkt-modal");
+      var fanArtModal = document.getElementById("fan-art-modal");
+  
+      var closeButtons = document.getElementsByClassName("close1");
+  
+      for (var i = 0; i < closeButtons.length; i++) {
+        closeButtons[i].onclick = function () {
+          this.parentElement.parentElement.style.display = "none";
+        }
+      }
+  
+      window.onclick = function (event) {
+        if (event.target == fjktModal) {
+          fjktModal.style.display = "none";
+        }
+        if (event.target == fanArtModal) {
+          fanArtModal.style.display = "none";
+        }
+      }
+  
+      var fjktNameInput = document.getElementById("fjkt-nama");
+      var fjktDescriptionInput = document.getElementById("fjkt-deskripsi");
+      var fjktImageInput = document.getElementById("fjkt-gambar");
+      var fjktDetailName = document.getElementById("fjkt-detail-name");
+      var fjktDetailDescription = document.getElementById("fjkt-detail-description");
+      var fjktDetailImagePreview = document.getElementById("fjkt-detail-image-preview");
+      var fjktClearButton = document.getElementById("fjkt-clear");
+
+      var fanArtNameInput = document.getElementById("fan-art-nama");
+      var fanArtDescriptionInput = document.getElementById("fan-art-deskripsi");
+      var fanArtImageInput = document.getElementById("fan-art-gambar");
+      var fanArtDetailTitle = document.getElementById("fan-art-detail-title");
+      var fanArtDetailDescription = document.getElementById("fan-art-detail-description");
+      var fanArtDetailImagePreview = document.getElementById("fan-art-detail-image-preview");
+      var fanArtClearButton = document.getElementById("fan-art-clear");
+
+      fjktClearButton.addEventListener('click', function () {
+        fjktNameInput.value = "";
+        fjktDescriptionInput.value = "";
+        fjktImageInput.value = null;
+        fjktDetailImagePreview.src = "https://img.icons8.com/?size=100&id=RxzRPd8sH7Ru&format=png&color=000000";
+        fjktDetailImagePreview.alt = "Preview Gambar";
+        updateFjktDetail();
+      });
+
+      fanArtClearButton.addEventListener('click', function () {
+        fanArtNameInput.value = "";
+        fanArtDescriptionInput.value = "";
+        fanArtImageInput.value = null;
+        fanArtDetailImagePreview.src = "https://img.icons8.com/?size=100&id=RxzRPd8sH7Ru&format=png&color=000000";
+        fanArtDetailImagePreview.alt = "Preview Gambar";
+        updateFanArtDetail();
+      });
+
+      fjktNameInput.addEventListener('input', updateFjktDetail);
+      fjktDescriptionInput.addEventListener('input', updateFjktDetail);
+      fjktImageInput.addEventListener('change', previewFjktImage);
+      fanArtNameInput.addEventListener('input', updateFanArtDetail);
+      fanArtDescriptionInput.addEventListener('input', updateFanArtDetail);
+      fanArtImageInput.addEventListener('change', previewFanArtImage);
+
+      function updateFjktDetail() {
+        fjktDetailName.textContent = fjktNameInput.value;
+        fjktDetailDescription.textContent = fjktDescriptionInput.value;
+      }
+
+      function previewFjktImage(event) {
+        var file = event.target.files[0];
+        var reader = new FileReader();
+        reader.onload = function () {
+          fjktDetailImagePreview.src = reader.result;
+        }
+        reader.readAsDataURL(file);
+      }
+
+      function updateFanArtDetail() {
+        fanArtDetailTitle.textContent = fanArtNameInput.value;
+        fanArtDetailDescription.textContent = fanArtDescriptionInput.value;
+      }
+
+      function previewFanArtImage(event) {
+        var file = event.target.files[0];
+        var reader = new FileReader();
+        reader.onload = function () {
+          fanArtDetailImagePreview.src = reader.result;
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+
+    function confirmSimpan(formId) {
+      Swal.fire({
+          title: 'Apakah Anda yakin?',
+          text: "Menyimpan item baru ini!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Ya',
+          cancelButtonText: 'Tidak'
+      }).then((result) => {
+          if (result.isConfirmed) {
+              const formData = new FormData(document.getElementById(formId));
+              $.ajax({
+                  url: '/upgallery',
+                  type: 'POST',
+                  data: formData,
+                  processData: false,
+                  contentType: false,
+                  success: function(response) {
+                      Swal.fire(
+                          'Berhasil!',
+                          'Item Anda telah ditambahkan.',
+                          'success'
+                      ).then(() => {
+                          $('#edit-modal').css('display', 'none');
+                          window.location.reload();
+                      });
+                  },
+                  error: function(xhr, status, error) {
+                      Swal.fire(
+                          'Gagal!',
+                          'Item Anda tidak dapat ditambahkan.',
+                          'error'
+                      );
+                  }
+              });
+          }
+      });
+    }
+
+    var editNamaInput = document.getElementById("edit_nama");
+    var editDeskripsiInput = document.getElementById("edit_deskripsi");
+    var editGambarInput = document.getElementById("edit_gambar");
+    var editDetailName = document.getElementById("edit-detail-name");
+    var editDetailDescription = document.getElementById("edit-detail-description");
+    var editDetailCategory = document.getElementById("edit-detail-category");
+    var editDetailImagePreview = document.getElementById("edit-detail-image-preview");
+    var editClearButton = document.getElementById("edit-clear");
+
+    editNamaInput.addEventListener('input', updateEditDetail);
+    editDeskripsiInput.addEventListener('input', updateEditDetail);
+    editGambarInput.addEventListener('change', previewEditImage);
+
+    function updateEditDetail() {
+        editDetailName.textContent = editNamaInput.value;
+        editDetailDescription.textContent = editDeskripsiInput.value;
+    }
+
+    function previewEditImage(event) {
+        var file = event.target.files[0];
+        var reader = new FileReader();
+        reader.onload = function () {
+            editDetailImagePreview.src = reader.result;
+        }
+        reader.readAsDataURL(file);
+    }
+
+    function confirmEdit() {
+      Swal.fire({
+          title: 'Apakah Anda yakin?',
+          text: "Menyimpan perubahan ini!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Ya',
+          cancelButtonText: 'Tidak'
+      }).then((result) => {
+          if (result.isConfirmed) {
+              const formData = new FormData(document.getElementById('editGalleryForm'));
+              $.ajax({
+                  url: '/editGallery/' + $('#edit_type').val() + '/' + $('#id').val(),
+                  type: 'POST',
+                  data: formData,
+                  processData: false,
+                  contentType: false,
+                  success: function(response) {
+                      Swal.fire(
+                          'Berhasil!',
+                          'Item Anda telah diperbarui.',
+                          'success'
+                      ).then(() => {
+                          $('#edit-modal').css('display', 'none');
+                          window.location.reload();
+                      });
+                  },
+                  error: function(xhr, status, error) {
+                      Swal.fire(
+                          'Gagal!',
+                          'Item Anda tidak dapat diperbarui.',
+                          'error'
+                      );
+                  }
+              });
+          }
+      });
+    }
+
+    function confirmDelete(itemId, type) {
+      Swal.fire({
+        title: "Apakah Anda yakin?",
+        text: "Anda tidak akan bisa mengembalikan ini!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya, hapus!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          fetch(`/deleteGallery/${type}/${itemId}`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+            })
+            .then(response => {
+              if (response.ok) {
+                Swal.fire({
+                  title: "Terhapus!",
+                  text: "Item Anda telah dihapus.",
+                  icon: "success"
+                }).then(() => {
+                  window.location.reload();
+                });
+              } else {
+                Swal.fire({
+                  title: "Gagal!",
+                  text: "Item Anda tidak dapat dihapus.",
+                  icon: "error"
+                });
+              }
+            });
+        }
+      });
+    }
+
+    function editGallery(itemId, type) {
+      $.ajax({
+          url: '/editGallery/' + type + '/' + itemId,
+          type: 'GET',
+          success: function(response) {
+              $('#edit-modal').css('display', 'block');
+              $('#id').val(itemId);
+              $('#edit_nama').val(response.nama);
+              $('#edit_type').val(type);
+              $('#gambar').val(response.gambar);
+              $('#edit_deskripsi').val(response.deskripsi);
+              $('#edit-detail-name').text(response.nama);
+              $('#edit-detail-description').text(response.deskripsi);
+              if (type === 'fjkt') {
+                $('#edit-detail-category').text('FJKT');
+              } else if (type === 'fanart') {
+                $('#edit-detail-category').text('FAN ART');
+              }
+              $('#edit-detail-image-preview').attr('src', '/static/assets/img/gallery/' + type + '/' + response.gambar);
+          },
+          error: function(xhr, status, error) {
+              console.error('Error fetching gallery item:', error);
+          }
+      });
+    }
+    
+    function closeEditModal() {
+        $('#edit-modal').css('display', 'none');
+    }
+    
+    function clearEditForm() {
+        $('#editGalleryForm').trigger('reset');
+        $('#edit-detail-image-preview').attr('src', '#');
+    }  
+
+    function previewImage(event) {
+      var reader = new FileReader();
+      reader.onload = function () {
+          var img = document.getElementById('edit-detail-image-preview');
+          img.src = reader.result;
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    }
+
+    function toggleArchive(itemId, category) {
+      fetch(`/archive_item/${itemId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            type: category
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            Swal.fire({
+              title: data.archived ? "Diarsipkan!" : "Di-unarsipkan!",
+              text: data.archived ? "Item telah diarsipkan." : "Item telah di-unarsipkan.",
+              icon: "success"
+            }).then(() => {
+              window.location.reload();
+            });
+          } else {
+            Swal.fire({
+              title: "Gagal!",
+              text: "Tidak dapat mengubah status item.",
+              icon: "error"
+            });
+          }
+        });
+    }
+  </script>
+
+  <footer class="ftco-footer ftco-section">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">FJKT48 Lombok</h2>
+            <p>Menyatukan para penggemar JKT48 di Pulau Lombok, berbagi pengalaman, dan menyalurkan dukungan kepada idol ibu kota yaitu JKT48.</p>
+            <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+              <li class="ftco-animate"><a href="https://x.com/fjkt48_lombokuy"><span class="icon-twitter"></span></a></li>
+              <li class="ftco-animate" style="text-align: center;"><a href="https://www.tiktok.com/@fjkt48.lombok" style="font-size: 24px; padding: 3px; align-items: center;"><i class="fab fa-tiktok"></i></a></li>
+              <li class="ftco-animate"><a href="https://www.instagram.com/fjkt48.lombok"><span class="icon-instagram"></span></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="ftco-footer-widget mb-4 ml-md-4">
+            <h2 class="ftco-heading-2">Links</h2>
+            <ul class="list-unstyled">
+              <li><a href="/user"><span class="icon-long-arrow-right mr-2"></span>Users</a></li>
+              <li><a href="/upgallery"><span class="icon-long-arrow-right mr-2"></span>Up Gallery</a></li>
+              <li><a href="/upmerchandise"><span class="icon-long-arrow-right mr-2"></span>Up Merchandise</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Have a Questions?</h2>
+              <div class="block-23 mb-3">
+                <ul>
+                  <li><span class="icon icon-map-marker"></span><span class="text"> (Goebux's Cafe) Jl. Pesona Wisata, Pagutan - Kota Mataram, Nusa Tenggara Barat, Lombok</span></li>
+                  <li><a href="tel://081236233328"><span class="icon icon-phone"></span><span class="text">+62 812-3623-3328</span></a></li>
+                  <li><a href="mailto:dpurwantama18@gmail.com"><span class="icon icon-envelope"></span><span class="text">dpurwantama18@gmail.com</span></a></li>
+                </ul>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <p>
+              &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Fanbase JKT48 Lombok
+          </p>			
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+  <script src="../static/assets/js/jquery.min.js"></script>
+  <script src="../static/assets/js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="../static/assets/js/popper.min.js"></script>
+  <script src="../static/assets/js/bootstrap.min.js"></script>
+  <script src="../static/assets/js/jquery.easing.1.3.js"></script>
+  <script src="../static/assets/js/jquery.waypoints.min.js"></script>
+  <script src="../static/assets/js/jquery.stellar.min.js"></script>
+  <script src="../static/assets/js/owl.carousel.min.js"></script>
+  <script src="../static/assets/js/jquery.magnific-popup.min.js"></script>
+  <script src="../static/assets/js/aos.js"></script>
+  <script src="../static/assets/js/jquery.animateNumber.min.js"></script>
+  <script src="../static/assets/js/scrollax.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="../static/assets/js/google-map.js"></script>
+  <script src="../static/assets/js/jsgallery.js"></script>
+  <script src="../static/assets/js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  </body>
+</html>
