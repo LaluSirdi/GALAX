@@ -93,7 +93,7 @@ def login():
             session['_id'] = str(login_user['_id'])
             session['status'] = 'login'
             if request.form['username'] == 'admin1':
-                return redirect(url_for('upmerchandise'))
+                return redirect(url_for('user'))
             else:
                 return redirect(url_for('beranda'))
 
