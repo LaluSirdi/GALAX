@@ -101,14 +101,14 @@ def login():
             session['_id'] = str(login_user['_id'])
             session['status'] = 'login'
             if request.form['username'] == 'admin1':
-                return redirect(url_for('upmerchandise'))
+                return jsonify({"status": "success", "redirect_url": url_for('upmerchandise')}), 200
             else:
-                return redirect(url_for('beranda'))
+                return jsonify({"status": "success", "redirect_url": url_for('beranda')}), 200
 
-        flash('Kombinasi username/password tidak valid', 'error')
-        return redirect(url_for('index'))
+        return jsonify({"status": "error", "message": "Kombinasi username/password tidak valid"}), 404
 
-    return render_template('index.html')
+    return jsonify({"status": "error", "message": "Metode request tidak valid"}), 400
+
 
 @app.route('/profile/<user_id>', methods=['GET', 'POST'])
 def profile(user_id):

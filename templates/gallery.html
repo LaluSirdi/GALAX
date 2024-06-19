@@ -37,49 +37,7 @@
                     </div>
                 </div>
             </div>
-          </div>
-          <div class="item">
-            <div class="project">
-              <div class="img">
-                <img src="../static/assets/img/gallery/banner-4.png" class="img-fluid fanartku" alt="Image">
-                <a href="../static/assets/img/gallery/banner-4.png" class="icon image-popup d-flex justify-content-center align-items-center">
-                  <span class="icon-expand"></span>
-                </a>
-              </div>
-              <div class="text px-4">
-                <h3><a href="#">Adel</a></h3>
-                <span>Fan Art</span>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div class="project">
-              <div class="img">
-                <img src="../static/assets/img/gallery/banner-5.jpg" class="img-fluid" alt="Image">
-                <a href="../static/assets/img/gallery/banner-5.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
-                  <span class="icon-expand"></span>
-                </a>
-              </div>
-              <div class="text px-4">
-                <h3><a href="#">Gathering</a></h3>
-                <span>FJKT</span>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div class="project">
-              <div class="img">
-                <img src="../static/assets/img/gallery/banner-6.png" class="img-fluid fanartku" alt="Image">
-                <a href="../static/assets/img/gallery/banner-6.png" class="icon image-popup d-flex justify-content-center align-items-center">
-                  <span class="icon-expand"></span>
-                </a>
-              </div>
-              <div class="text px-4">
-                <h3><a href="#">Zee</a></h3>
-                <span>Fan Art</span>
-              </div>
-            </div>
-          </div>
+            {% endfor %}
         </div>
       </div>
     </div>
@@ -104,7 +62,7 @@
         {% for item in fjkt %}
           <div class="col-md-4 ftco-animate" style="margin-bottom: 3rem;">
               <div class="blog-entry justify-content-end">
-                  <a href="#" data-toggle="modal" data-target="#myModal" data-id="{{item._id}}" data-type="fjkt" class="block-211">
+                  <a href="#" data-toggle="modal" data-target="#myModal" data-id="{{item._id}}" data-type="fjkt" class="block-20">
                       <img src="../static/assets/img/gallery/fjkt/{{ item.gambar }}" alt="Image">
                   </a>                  
                   <div class="text mt-3 float-right d-block">
@@ -137,7 +95,6 @@
     <h3 class="centered-bold" id="fan-section" style="margin-bottom: 4rem;">FAN ART</h3>
     <div class="row px-2 mt-4 gap-3" id="filterable-cards">
       <div class="row d-flex">
-
         {% for item in fanart %}
             <div class="col-md-4 ftco-animate" style="margin-bottom: 3rem;">
               <div class="blog-entry justify-content-end">
@@ -192,7 +149,7 @@
                       <img src="" id="gambar" name="gambar" class="card-img-top" alt="...">
                       <div class="card-body">
                           <h5 class="card-title" id="nama" name="nama"></h5>
-                          <p class="card-text" id="deskripsi" nama="deskripsi"></p>
+                          <p class="card-text" id="deskripsi" name="deskripsi"></p>
                           <!-- Bagian komentar -->
                           <div class="form-group">
                               <label for="comment">Comment:</label>

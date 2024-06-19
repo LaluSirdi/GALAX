@@ -155,6 +155,40 @@
 			  });
 			});
 		  });
+		  
+// sign in
+		  document.addEventListener("DOMContentLoaded", function () {
+			document.getElementById('signInForm').addEventListener('submit', function(event) {
+				event.preventDefault();
+				
+				const formData = new FormData(document.getElementById('signInForm'));
+				
+				$.ajax({
+					url: '/login',
+					type: 'POST',
+					data: formData,
+					processData: false,
+					contentType: false,
+					success: function(response) {
+						Swal.fire(
+							'Berhasil!',
+							'Anda berhasil login.',
+							'success'
+						).then(() => {
+							window.location.href = response.redirect_url; 
+						});
+					},
+					error: function(xhr, status, error) {
+						Swal.fire(
+							'Gagal!',
+							xhr.responseJSON.message,
+							'error'
+						);
+					}
+				});
+			});
+		});
+		
     </script>
 
 	<section class="hero-wrap js-fullheight" style="background-image: url('../static/assets/img/bg_4.png');"
