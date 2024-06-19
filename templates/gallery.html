@@ -15,46 +15,27 @@
     <div class="row">
       <div class="col-md-12 testimonial">
         <div class="carousel-project owl-carousel">
-          <div class="item">
-            <div class="project">
-              <div class="img">
-                <img src="../static/assets/img/gallery/banner-1.jpg" class="img-fluid" alt="Image">
-                <a href="../static/assets/img/gallery/banner-1.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
-                  <span class="icon-expand"></span>
-                </a>
-              </div>
-              <div class="text px-4">
-                <h3><a href="#">Gathering</a></h3>
-                <span>FJKT</span>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div class="project">
-              <div class="img">
-                <img src="../static/assets/img/gallery/banner-2.png" class="img-fluid fanartku" alt="Image">
-                <a href="../static/assets/img/gallery/banner-2.png" class="icon image-popup d-flex justify-content-center align-items-center">
-                  <span class="icon-expand"></span>
-                </a>
-              </div>
-              <div class="text px-4">
-                <h3><a href="#">Freya</a></h3>
-                <span>Fan Art</span>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div class="project">
-              <div class="img">
-                <img src="../static/assets/img/gallery/banner-3.jpg" class="img-fluid" alt="Image">
-                <a href="../static/assets/img/gallery/banner-3.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
-                  <span class="icon-expand"></span>
-                </a>
-              </div>
-              <div class="text px-4">
-                <h3><a href="#">Gathering</a></h3>
-                <span>FJKT</span>
-              </div>
+            {% for item in gallery_items %}
+            <div class="item">
+                <div class="project">
+                    <div class="img">
+                      {% if item['type'] == 'FJKT' %}
+                      <img src="../static/assets/img/gallery/fjkt/{{ item['gambar'] }}" class="img-fluid fjktku" alt="Image">
+                      <a href="../static/assets/img/gallery/fjkt/{{ item['gambar'] }}" class="icon image-popup d-flex justify-content-center align-items-center">
+                          <span class="icon-expand"></span>
+                      </a>
+                      {% elif item['type'] == 'Fan Art' %}
+                      <img src="../static/assets/img/gallery/fanart/{{ item['gambar'] }}" class="img-fluid fanartku" alt="Image">
+                      <a href="../static/assets/img/gallery/fanart/{{ item['gambar'] }}" class="icon image-popup d-flex justify-content-center align-items-center">
+                          <span class="icon-expand"></span>
+                      </a>
+                      {% endif %}
+                    </div>
+                    <div class="text px-4">
+                        <h3><a href="#">{{ item['nama'] }}</a></h3>
+                        <span>{{ item['type'] }}</span>
+                    </div>
+                </div>
             </div>
           </div>
           <div class="item">
@@ -80,7 +61,7 @@
                 </a>
               </div>
               <div class="text px-4">
-                <h3><a href="#">Nonton Konser</a></h3>
+                <h3><a href="#">Gathering</a></h3>
                 <span>FJKT</span>
               </div>
             </div>
@@ -120,33 +101,35 @@
     </div>
     <div class="row px-2 mt-4 gap-3" id="filterable-cards" style="margin-bottom: 3rem;">
       <div class="row d-flex">
-        <div class="col-md-4 ftco-animate" style="margin-bottom: 3rem;">
-          <div class="blog-entry justify-content-end">
-            <a href="#" data-toggle="modal" data-target="#myModal" class="block-211 ">
-              <img src="../static/assets/img/fjkt.jpg" alt="Image" >
-            </a>                  
-            <div class="text mt-3 float-right d-block">
-              <div class="d-flex align-items-center pt-2 mb-4 topp">
-                <div class="one mr-3">
-                  <span class="day">12</span>
-                </div>
-                <div class="two">
-                  <span class="yr">2019</span>
-                  <span class="mos">March</span>
-                </div>
+        {% for item in fjkt %}
+          <div class="col-md-4 ftco-animate" style="margin-bottom: 3rem;">
+              <div class="blog-entry justify-content-end">
+                  <a href="#" data-toggle="modal" data-target="#myModal" data-id="{{item._id}}" data-type="fjkt" class="block-211">
+                      <img src="../static/assets/img/gallery/fjkt/{{ item.gambar }}" alt="Image">
+                  </a>                  
+                  <div class="text mt-3 float-right d-block">
+                      <div class="d-flex align-items-center pt-2 mb-4 topp">
+                        <div class="one mr-3">
+                          <span class="day">{{ item.tanggal|datetimeformat('%d') }}</span>
+                        </div>
+                        <div class="two">
+                            <span class="yr">{{ item.tanggal|datetimeformat('%Y') }}</span>
+                            <span class="mos">{{ item.tanggal|datetimeformat('%B') }}</span>
+                        </div>
+                      </div>
+                      <h3 class="heading"><a href="#" onclick="postDetail('{{ item._id }}', 'fjkt')" data-toggle="modal" data-target="#myModal" data-id="{{item._id}}" data-type="fjkt">{{ item.nama }}</a></h3>
+                      <p>{{ item.deskripsi }}</p>
+                      <div class="d-flex align-items-center mt-4 meta">
+                          <a href="#" class="btn btn-secondary" onclick="postDetail('{{ item._id }}', 'fjkt')" data-toggle="modal" data-target="#myModal" data-id="{{item._id}}" data-type="fjkt">Comment <span class="ion-ios-arrow-round-forward"></span></a>
+                          <p class="ml-auto mb-0">
+                              <a href="#" class="mr-2" onclick="loadComments('{{ item._id }}')" data-toggle="modal" data-target="#commentsModal">{{ item.last_comment_username }}</a>
+                              <a href="#" class="meta-chat" onclick="loadComments('{{ item._id }}')" data-toggle="modal" data-target="#commentsModal"><span class="icon-chat"></span> {{ item.jumlah_komentar }}</a>
+                          </p>
+                      </div>
+                  </div>
               </div>
-              <h3 class="heading"><a href="#" data-toggle="modal" data-target="#myModal">Growth</a></h3>
-              <p>Lorem Ipsum</p>
-              <div class="d-flex align-items-center mt-4 meta">
-                <p class="mb-0"><a href="#" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">Comment <span class="ion-ios-arrow-round-forward"></span></a></p>
-                <p class="ml-auto mb-0">
-                  <a href="#" class="mr-2">Admin</a>
-                  <a href="#" class="meta-chat" data-toggle="modal" data-target="#commentsModal"><span class="icon-chat"></span> 3</a>
-                </p>
-              </div>
-            </div>
           </div>
-        </div>
+        {% endfor %}
         
       </div> 
     </div>
@@ -155,33 +138,35 @@
     <div class="row px-2 mt-4 gap-3" id="filterable-cards">
       <div class="row d-flex">
 
-        <div class="col-md-4 ftco-animate" style="margin-bottom: 3rem;">
-          <div class="blog-entry justify-content-end">
-            <a href="#" data-toggle="modal" data-target="#myModal" class="block-20">
-              <img src="../static/assets/img/gallery/banner-2.png" alt="Image">
-            </a>                  
-            <div class="text mt-3 float-right d-block">
-              <div class="d-flex align-items-center pt-2 mb-4 topp">
-                <div class="one mr-3">
-                  <span class="day">12</span>
+        {% for item in fanart %}
+            <div class="col-md-4 ftco-animate" style="margin-bottom: 3rem;">
+              <div class="blog-entry justify-content-end">
+                <a href="#" onclick="postDetail('{{ item._id }}', 'fanart')" data-toggle="modal" data-target="#myModal" data-id="{{item._id}}" data-type="fanart" class="block-20">
+                  <img src="../static/assets/img/gallery/fanart/{{ item.gambar }}" alt="Image">
+                </a>                  
+                <div class="text mt-3 float-right d-block">
+                  <div class="d-flex align-items-center pt-2 mb-4 topp">
+                    <div class="one mr-3">
+                      <span class="day">{{ item.tanggal|datetimeformat('%d') }}</span>
+                    </div>
+                    <div class="two">
+                        <span class="yr">{{ item.tanggal|datetimeformat('%Y') }}</span>
+                        <span class="mos">{{ item.tanggal|datetimeformat('%B') }}</span>
+                    </div>
+                  </div>
+                  <h3 class="heading"><a href="#" onclick="postDetail('{{ item._id }}', 'fanart')" data-toggle="modal" data-target="#myModal" data-id="{{item._id}}" data-type="fanart">{{ item.nama }}</a></h3>
+                  <p>{{ item.deskripsi }}</p>
+                  <div class="d-flex align-items-center mt-4 meta">
+                    <p class="mb-0"><a href="#" class="btn btn-secondary" onclick="postDetail('{{ item._id }}', 'fanart')" data-toggle="modal" data-target="#myModal" data-id="{{item._id}}" data-type="fanart">Comment <span class="ion-ios-arrow-round-forward"></span></a></p>
+                    <p class="ml-auto mb-0">
+                      <a href="#" class="mr-2" onclick="loadComments('{{ item._id }}')" data-toggle="modal" data-target="#commentsModal">{{ item.last_comment_username }}</a>
+                      <a href="#" class="meta-chat" onclick="loadComments('{{ item._id }}')" data-toggle="modal" data-target="#commentsModal"><span class="icon-chat"></span> {{ item.jumlah_komentar }}</a>
+                    </p>
+                  </div>
                 </div>
-                <div class="two">
-                  <span class="yr">2019</span>
-                  <span class="mos">March</span>
-                </div>
-              </div>
-              <h3 class="heading"><a href="#" data-toggle="modal" data-target="#myModal">Growth</a></h3>
-              <p>Lorem Ipsum</p>
-              <div class="d-flex align-items-center mt-4 meta">
-                <p class="mb-0"><a href="#" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">Comment <span class="ion-ios-arrow-round-forward"></span></a></p>
-                <p class="ml-auto mb-0">
-                  <a href="#" class="mr-2">Admin</a>
-                  <a href="#" class="meta-chat" data-toggle="modal" data-target="#commentsModal"><span class="icon-chat"></span> 3</a>
-                </p>
               </div>
             </div>
-          </div>
-        </div>
+          {% endfor %}
         
       </div> 
     </div>
@@ -192,32 +177,36 @@
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-  <div class="modal-content">
-      <div class="modal-header">
-      <h5 class="modal-title" id="myModalLabel">Detail Post</h5>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-      </button>
-      </div>
-      <div class="modal-body">
-      <div class="card">
-          <img src="../static/assets/img/fjkt.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-          <h5 class="card-title">Why Lead Generation is Key for Business Growth</h5>
-          <p class="card-text">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-          <!-- Bagian komentar -->
-          <div class="form-group">
-              <label for="comment">Comment:</label>
-              <textarea class="form-control" rows="5" id="comment"></textarea>
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="myModalLabel">Detail Post</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
           </div>
+          <div class="modal-body">
+              <div class="card">
+                  <form id="postDetailForm" method="post" enctype="multipart/form-data">
+                      <input type="hidden" id="type" name="type">
+                      <input type="hidden" id="_id" name="_id">
+                      <img src="" id="gambar" name="gambar" class="card-img-top" alt="...">
+                      <div class="card-body">
+                          <h5 class="card-title" id="nama" name="nama"></h5>
+                          <p class="card-text" id="deskripsi" nama="deskripsi"></p>
+                          <!-- Bagian komentar -->
+                          <div class="form-group">
+                              <label for="comment">Comment:</label>
+                              <textarea class="form-control" rows="5" id="comment" name="comment"></textarea>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" onclick="submitComment()">Submit Comment</button>
           </div>
       </div>
-      </div>
-      <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      <button type="button" class="btn btn-primary">Submit Comment</button>
-      </div>
-  </div>
   </div>
 </div>
 
@@ -233,63 +222,14 @@
           </div>
           <div class="modal-body">
               <!-- Comment Section -->
-              <div class="comment-section">
-                  <div class="comment">
-                      <div class="comment-avatar">
-                          <img src="../static/assets/img/fanart1.png" alt="Avatar" />
-                      </div>
-                      <div class="comment-content">
-                          <h6>@Sit Amet</h6>
-                          <span class="comment-date">12 January 2024</span>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla fermentum varius metus quis molestie.</p>
-                          <div class="comment-actions">
-                              <span class="likes mb-0"><i class="ion-ios-thumbs-up"></i> 72</span>
-                              <p class="ml-auto mb-0">
-                              <span class="edit"><i class="icon-pencil"></i></span>
-                              <span class="delete"><i class="ion-ios-trash"></i></span></p>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="comment">
-                    <div class="comment-avatar">
-                        <img src="../static/assets/img/fanart1.png" alt="Avatar" />
-                    </div>
-                    <div class="comment-content">
-                        <h6>@Sit Amet</h6>
-                        <span class="comment-date">12 January 2024</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla fermentum varius metus quis molestie.</p>
-                        <div class="comment-actions">
-                            <span class="likes mb-0"><i class="ion-ios-thumbs-up"></i> 72</span>
-                        </div>
-                    </div>
-                  </div>
-                  <!-- Additional comments can be added here -->
+              <div class="comment-section" id="commentSection">
+                  <!-- Comments will be loaded here via JavaScript -->
               </div>
           </div>
       </div>
   </div>
 </div>
 
-<script>
-  const fjktButton = document.getElementById('fjkt-button');
-  const fanArtButton = document.getElementById('fan-art-button');
-  const targetSection = document.getElementById('target-section');
-  const fanSection = document.getElementById('fan-section');
-
-  fjktButton.addEventListener('click', () => {
-    targetSection.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
-    });
-  });
-
-  fanArtButton.addEventListener('click', () => {
-    fanSection.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
-    });
-  });
-</script>
-
+<script src="../static/assets/js/jsgallery.js"></script>
 
 {% include 'footer.html' %}

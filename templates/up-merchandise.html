@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="../static/assets/css/flaticon.css">
     <link rel="stylesheet" href="../static/assets/css/icomoon.css">
     <link rel="stylesheet" href="../static/assets/css/style.css">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="../static/assets/css/style-upgallery.css">
     <style>
       .user-icon {
           position: fixed;
@@ -38,7 +41,6 @@
       #user-account .login-text {
           display: none;
       }
-
       @media (max-width: 650px) {
           #user-account .fas.fa-user {
               display: none;
@@ -74,11 +76,63 @@
 	      </div>
 	    </div>
       <div id="logout-popup">
-        <p>Anda yakin ingin logout?</p>
-        <button id="logout-btn">Logout</button>
-        <button id="cancel-btn">Cancel</button>
+        <button id="edit-profile-btn" class="btn btn-primary btn-small w-100" data-toggle="modal" data-target="#edit-profile-modal">Setting Profil</button>
+        <div class="row justify-content-center">
+          <p>Anda yakin ingin logout?</p>
+          <button id="logout-btn">Logout</button>
+          <button id="cancel-btn">Cancel</button>
+        </div>
       </div>
 	</nav>
+
+  <!-- Modal for Edit Profile -->
+  <div class="modal fade" id="edit-profile-modal" tabindex="-1" role="dialog" aria-labelledby="eedit-profile-modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="edit-profile-modalLabel">Edit Profile</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="editProfileForm" method="post" enctype="multipart/form-data">
+            <input type="hidden" id="id" name="_id" value="{{ session['_id'] }}">
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" class="form-control" id="username" name="username" value="{{ session['username'] }}" required readonly>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" name="email" value="{{ session['email'] }}" required>
+            </div>
+            <div class="form-group">
+              <label for="profile_pic">Foto Profil (Hanya image .png, .jpeg dan .jpg)</label>
+              <img id="gambar-preview" src="../static/assets/img/profile_pics/{{ session['profile_pic_real'] }}" alt="" width="200">
+              <input type="file" class="form-control" accept=".png,.jpg,.jpeg" name="profile_pic" id="profile_pic"
+                    style="border-radius: 13px;" placeholder="Enter the Image" onchange="previewImage(event)" />
+            </div>
+            <hr>
+            <button type="button" class="btn btn-secondary" id="edit-password-btn">Edit Password</button>
+            <div id="password-fields" style="display: none;">
+              <div class="form-group">
+                <input type="password" class="form-control" id="current_password" name="current_password" value="{{ session['password'] }}" hidden>
+              </div>
+              <div class="form-group">
+                <label for="new_password">Password Baru</label>
+                <input type="password" class="form-control" id="new_password" name="new_password">
+              </div>
+              <div class="form-group">
+                <label for="confirm_password">Konfirmasi Password Baru</label>
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password">
+              </div>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="confirmEditP()">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
   
   <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -91,9 +145,75 @@
       });
 
       document.getElementById("logout-btn").addEventListener("click", function () {
-        window.location.href = "/";
+        Swal.fire({
+          title: 'Anda yakin ingin logout?',
+          text: "Anda akan diarahkan ke halaman utama.",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Ya, logout!',
+          cancelButtonText: 'Batal'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = "/";
+          }
+        });
       });
     });
+
+    var editPasswordBtn = document.getElementById('edit-password-btn');
+    var passwordFields = document.getElementById('password-fields');
+
+    editPasswordBtn.addEventListener('click', function() {
+        if (passwordFields.style.display === 'none') {
+            passwordFields.style.display = 'block';
+        } else {
+            passwordFields.style.display = 'none';
+        }
+    });
+
+    function confirmEditP() {
+      Swal.fire({
+        title: 'Apakah Anda yakin?',
+        text: 'Menyimpan perubahan ini!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ya',
+        cancelButtonText: 'Tidak'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const formData = new FormData(document.getElementById('editProfileForm'));
+          $.ajax({
+            url: '/profile/' + $('#id').val(),
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+              Swal.fire(
+                'Berhasil!',
+                'Profil Anda telah diperbarui.',
+                'success'
+              ).then(() => {
+                $('#edit-profile-modal').modal('hide'); 
+                window.location.reload(); 
+              });
+            },
+            error: function (xhr, status, error) {
+              Swal.fire(
+                'Gagal!',
+                'Profil Anda tidak dapat diperbarui.',
+                'error'
+              ).then(() => {
+                $('#edit-profile-modal').modal('hide'); 
+                window.location.reload(); 
+              });
+            }
+          });
+        }
+      });
+    }
   </script>
 
 <link rel="stylesheet" href="../static/assets/css/style-landing.css">
@@ -118,11 +238,11 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center pb-5" style="margin-top: -9rem; margin-bottom: -12rem;">
+        <div class="row justify-content-center pb-5" style="margin-bottom: -12rem;">
             <section class="room__container" id="room">
                 <div class="room__grid">
                   {% for item in merchandise %}
-                  <div class="room__card">
+                  <div class="room__card" style="margin-top: -9rem; margin-bottom: -1rem;">
                       <div class="img">
                           <a href="../static/assets/img/product/{{item.gambar}}" class="icon image-popup d-flex justify-content-center align-items-center">
                               <img src="../static/assets/img/product/{{item.gambar}}" class="block-20" alt="Check Your Image" style="height: 450px;">
@@ -138,10 +258,16 @@
                               </div>
                               <div class="d-flex flex-column align-items-center mt-2">
                                   <div class="w-100">
-                                      <a href="#" class="btn btn-warning btn-small w-100" onclick="editMerchandise('{{ item._id }}')" data-toggle="modal" data-target="#editMerchandiseModal" data-id="{{ item._id }}">Edit <span class="ion-ios-create"></span></a>
+                                      <a href="#" class="btn btn-warning btn-small w-100" onclick="editMerchandise('{{ item._id }}')" >Edit <span class="ion-ios-create"></span></a>
                                   </div>
                                   <div class="w-100" style="margin-top: -0.7rem;">
-                                      <a href="/deleteMerchandise/{{item._id}}" class="btn btn-secondary btn-small w-100">Delete <span class="ion-ios-trash"></span></a>
+                                      <a href="#" onclick="confirmDelete('{{ item._id }}')" class="btn btn-secondary btn-small w-100">Delete <span class="ion-ios-trash"></span></a>
+                                  </div>
+                                  <div class="w-100" style="margin-top: -0.7rem;">
+                                    <a href="#" class="btn btn-primary btn-small w-100" onclick="toggleArchive('{{ item._id }}', 'fjkt')">
+                                      {{ 'Arsipkan' if not item.archived else 'Un-Arsipkan' }}
+                                      <span class="{{ 'ion-ios-archive' if not item.archived else 'icon ion-ios-share' }}"></span>
+                                    </a>
                                   </div>
                               </div>
                           </div>
@@ -153,66 +279,69 @@
         </div>
         <div id="input-merchandise" style="margin-top: 2rem; display: flex; justify-content: center;">
           <!-- Button to trigger modal -->
-          <p class="mb-0"><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#merchandiseModal">Add Merchandise <span class="ion-md-add"></span></a></p>
+          <p class="mb-0"><a href="#" class="btn btn-primary" id="add-merchandise">Add Merchandise <span class="ion-md-add"></span></a></p>
         </div>
     </div>
 </section>
 
-<!-- Modal -->
-<div class="modal fade" id="merchandiseModal" tabindex="-1" role="dialog" aria-labelledby="merchandiseModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="merchandiseModalLabel">Add Merchandise</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="{{ url_for('upmerchandise') }}" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="nama">Nama Merchandise</label>
-                        <input type="text" class="form-control" id="nama" name="nama" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="harga">Harga</label>
-                        <input type="number" class="form-control" id="harga" name="harga" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="deskripsi">Deskripsi</label>
-                        <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="gambar">Gambar</label>
-                        <input type="file" class="form-control-file" id="gambar" name="gambar" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-        </div>
-    </div>
+<!-- Modal for Merchandise -->
+<div id="merchandise-modal" class="modal1">
+  <div class="modal-content modal-content1">
+      <span class="close1">&times;</span>
+      <div class="modal-inner">
+          <div class="form-container">
+              <h2>Form Input Merchandise</h2>
+              <form id="merchandise-form" action="/upmerchandise" method="post" enctype="multipart/form-data">
+                  <div class="form-group">
+                      <label for="nama">Nama</label>
+                      <input type="text" class="form-control" id="nama" name="nama" required>
+                  </div>
+                  <div class="form-group">
+                      <label for="harga">Harga</label>
+                      <input type="number" class="form-control" id="harga" name="harga" required>
+                  </div>
+                  <div class="form-group">
+                      <label for="deskripsi">Deskripsi</label>
+                      <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" required></textarea>
+                  </div>
+                  <div class="form-group">
+                      <label for="gambar">Gambar</label>
+                      <input type="file" class="form-control" id="gambar" name="gambar" accept="image/*" onchange="previewMerchandiseImage(event)" required >
+                  </div>
+                  <button type="button" id="merchandise-clear">Clear</button>
+              </form>
+          </div>
+          <hr class="separator">
+          <div class="detail-container">
+              <h2>Detail Merchandise</h2>
+              <div id="merchandise-detail">
+                  <p>Nama: <span id="merchandise-detail-name"></span></p>
+                  <p>Harga: <span id="merchandise-detail-price"></span></p>
+                  <p>Deskripsi: <span id="merchandise-detail-description"></span></p>
+                  <img id="merchandise-detail-image-preview" src="https://img.icons8.com/?size=100&id=RxzRPd8sH7Ru&format=png&color=000000" alt="Preview Gambar">
+              </div>
+              <button type="button" id="merchandise-save">Simpan</button>
+          </div>
+      </div>
+  </div>
 </div>
 
 <!-- Modal for Edit Merchandise -->
-<div class="modal fade" id="editMerchandiseModal" tabindex="-1" role="dialog" aria-labelledby="editMerchandiseModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="editMerchandiseModalLabel">Edit Merchandise</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-              </button>
-          </div>
-          <div class="modal-body">
-              <form id="editMerchandiseForm" action="" method="post" enctype="multipart/form-data">
+<div id="edit-modal" class="modal1">
+  <div class="modal-content modal-content1">
+      <span class="close1">&times;</span>
+      <div class="modal-inner">
+          <div class="form-container">
+              <h2>Edit Item</h2>
+              <form id="editMerchandiseForm" method="post" enctype="multipart/form-data">
                   <input type="hidden" id="edit_id" name="_id">
                   <div class="form-group">
-                      <label for="edit_nama">Nama Merchandise</label>
-                      <input type="text" class="form-control" id="edit_nama" name="nama" required>
+                      <label for="edit_nama">Nama</label>
+                      <input type="text" id="edit_nama" name="nama" required>
                   </div>
                   <div class="form-group">
-                      <label for="edit_harga">Harga</label>
-                      <input type="number" class="form-control" id="edit_harga" name="harga" required>
+                    <label for="edit_harga">Harga</label>
+                    <input type="number" class="form-control" id="edit_harga" name="harga" required>
                   </div>
                   <div class="form-group">
                       <label for="edit_deskripsi">Deskripsi</label>
@@ -220,31 +349,263 @@
                   </div>
                   <div class="form-group">
                       <label for="edit_gambar">Gambar</label>
-                      <img id="gambar-preview" src="" alt="" width="200">
-                      <input type="file" class="form-control" accept=".png,.jpg,.jpeg" name="gambar"
-                            style="border-radius: 13px;" placeholder="Enter the Image" onchange="previewImage(event)" />
+                      <input type="file" class="form-control" name="gambar" id="gambar" accept="image/*" onchange="previewEditImage(event)">
                   </div>
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="button" id="edit-clear" onclick="clearEditForm()">Clear</button>
               </form>
+          </div>
+          <hr class="separator">
+          <div class="detail-container">
+              <h2>Detail Item</h2>
+              <div id="edit-detail">
+                  <p>Judul: <span id="edit-detail-name"></span></p>
+                  <p>Harga: <span id="edit-detail-price"></span></p>
+                  <p>Deskripsi: <span id="edit-detail-description"></span></p>
+                  <img id="edit-detail-image-preview" src="#" alt="Preview Gambar" style="max-width: 100%;">
+              </div>
+              <button type="submit" id="edit-save" onclick="confirmEdit()">Simpan</button>
           </div>
       </div>
   </div>
 </div>
 
 <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const addMerchandiseButton = document.getElementById('add-merchandise');
+    const merchandiseModal = document.getElementById('merchandise-modal');
+    const closeButtons = document.getElementsByClassName('close1');
+    const merchandiseForm = document.getElementById('merchandise-form');
+    const merchandiseClearButton = document.getElementById('merchandise-clear');
+    const merchandiseSaveButton = document.getElementById('merchandise-save');
+    const merchandiseDetailName = document.getElementById('merchandise-detail-name');
+    const merchandiseDetailPrice = document.getElementById('merchandise-detail-price');
+    const merchandiseDetailDescription = document.getElementById('merchandise-detail-description');
+    const merchandiseImageInput = document.getElementById('gambar');
+    const merchandiseDetailImagePreview = document.getElementById('merchandise-detail-image-preview');
+    const editModal = document.getElementById('edit-modal');
+
+    addMerchandiseButton.addEventListener('click', function () {
+        merchandiseModal.style.display = 'block';
+    });
+
+    for (let i = 0; i < closeButtons.length; i++) {
+        closeButtons[i].onclick = function () {
+            merchandiseModal.style.display = 'none';
+            editModal.style.display = 'none';
+        };
+    }
+
+    window.onclick = function (event) {
+        if (event.target == merchandiseModal) {
+            merchandiseModal.style.display = 'none';
+            editModal.style.display = 'none';
+        }
+    };
+
+    merchandiseClearButton.addEventListener('click', function () {
+        clearForm();
+    });
+
+    merchandiseForm.addEventListener('input', function () {
+        updateMerchandiseDetail();
+    });
+
+    merchandiseSaveButton.addEventListener('click', function () {
+        confirmSimpan('merchandise-form');
+    });
+
+    function clearForm() {
+        merchandiseForm.reset();
+        merchandiseDetailImagePreview.src = 'https://img.icons8.com/?size=100&id=RxzRPd8sH7Ru&format=png&color=000000';
+        updateMerchandiseDetail();
+    }
+
+    function updateMerchandiseDetail() {
+        merchandiseDetailName.textContent = merchandiseForm.nama.value;
+        merchandiseDetailPrice.textContent = merchandiseForm.harga.value;
+        merchandiseDetailDescription.textContent = merchandiseForm.deskripsi.value;
+    }
+
+    function confirmSimpan(formId) {
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: 'Menyimpan item baru ini!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Tidak'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const formData = new FormData(document.getElementById(formId));
+                $.ajax({
+                    url: '/upmerchandise',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        Swal.fire(
+                            'Berhasil!',
+                            'Item Anda telah ditambahkan.',
+                            'success'
+                        ).then(() => {
+                            merchandiseModal.style.display = 'none';
+                            window.location.reload();
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        Swal.fire(
+                            'Gagal!',
+                            'Item Anda tidak dapat ditambahkan.',
+                            'error',
+                        );
+                    }
+                });
+            }
+        });
+    }
+  });
+
+  function previewMerchandiseImage(event) {
+    var reader = new FileReader();
+    reader.onload = function () {
+        var img = document.getElementById('merchandise-detail-image-preview');
+        img.src = reader.result;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+  }
+
+    const editNamaInput = document.getElementById('edit_nama');
+    const editHargaInput = document.getElementById('edit_harga');
+    const editDeskripsiInput = document.getElementById('edit_deskripsi');
+    const editGambarInput = document.getElementById('gambar');
+    const editDetailName = document.getElementById('edit-detail-name');
+    const editDetailPrice = document.getElementById('edit-detail-price');
+    const editDetailDescription = document.getElementById('edit-detail-description');
+    const editDetailImagePreview = document.getElementById('edit-detail-image-preview');
+    const editClearButton = document.getElementById('edit-clear');
+    const editModal = document.getElementById('edit-modal');
+
+    editNamaInput.addEventListener('input', updateEditDetail);
+    editHargaInput.addEventListener('input', updateEditDetail);
+    editDeskripsiInput.addEventListener('input', updateEditDetail);
+    editGambarInput.addEventListener('change', previewEditImage);
+
+    function updateEditDetail() {
+        editDetailName.textContent = editNamaInput.value;
+        editDetailPrice.textContent = editHargaInput.value;
+        editDetailDescription.textContent = editDeskripsiInput.value;
+    }
+
+    function previewEditImage(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = function () {
+            editDetailImagePreview.src = reader.result;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function confirmEdit() {
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: 'Menyimpan perubahan ini!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Tidak'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const formData = new FormData(document.getElementById('editMerchandiseForm'));
+                $.ajax({
+                    url: '/editMerchandise/' + $('#edit_id').val(),
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        Swal.fire(
+                            'Berhasil!',
+                            'Item Anda telah diperbarui.',
+                            'success'
+                        ).then(() => {
+                            closeEditModal();
+                            window.location.reload();
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        Swal.fire(
+                            'Gagal!',
+                            'Item Anda tidak dapat diperbarui.',
+                            'error'
+                        );
+                    }
+                });
+            }
+        });
+    }
+
+    function closeEditModal() {
+      $('#edit-modal').css('display', 'none');
+    }
+
+    function clearEditForm() {
+      document.getElementById('editMerchandiseForm').reset();
+      document.getElementById('edit-detail-image-preview').src = 'https://img.icons8.com/?size=100&id=RxzRPd8sH7Ru&format=png&color=000000';
+    }  
+
+  function confirmDelete(itemId) {
+    Swal.fire({
+      title: "Apakah Anda yakin?",
+      text: "Anda tidak akan bisa mengembalikan ini!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ya, hapus!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`/deleteMerchandise/${itemId}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+          })
+          .then(response => {
+            if (response.ok) {
+              Swal.fire({
+                title: "Terhapus!",
+                text: "Item Anda telah dihapus.",
+                icon: "success"
+              }).then(() => {
+                window.location.reload();
+              });
+            } else {
+              Swal.fire({
+                title: "Gagal!",
+                text: "Item Anda tidak dapat dihapus.",
+                icon: "error"
+              });
+            }
+          });
+      }
+    });
+  }
+
   function editMerchandise(itemId) {
       $.ajax({
           url: '/editMerchandise/' + itemId,
           type: 'GET',
           success: function(response) {
+              $('#edit-modal').css('display', 'block');
               $('#edit_id').val(itemId);
               $('#edit_nama').val(response.nama);
               $('#edit_harga').val(response.harga);
               $('#edit_deskripsi').val(response.deskripsi);
-              $('#editMerchandiseForm').attr('action', '/editMerchandise/' + itemId);
-              if (response.gambar) {
-                $('#gambar-preview').attr('src', '/static/assets/img/product/' + response.gambar);
-            }
+              $('#edit-detail-name').text(response.nama);
+              $('#edit-detail-price').text(response.harga);
+              $('#edit-detail-description').text(response.deskripsi);
+              $('#edit-detail-image-preview').attr('src', '/static/assets/img/product/' + response.gambar);
           },
           error: function(error) {
               console.log(error);
@@ -252,14 +613,36 @@
       });
   }
 
-  function previewImage(event) {
-    var reader = new FileReader();
-    reader.onload = function () {
-        var img = document.getElementById('gambar-preview');
-        img.src = reader.result;
-    }
-    reader.readAsDataURL(event.target.files[0]);
+  function toggleArchive(itemId) {
+    fetch(`/archive_item_m/${itemId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+         
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          Swal.fire({
+            title: data.archived ? "Diarsipkan!" : "Di-unarsipkan!",
+            text: data.archived ? "Item telah diarsipkan." : "Item telah di-unarsipkan.",
+            icon: "success"
+          }).then(() => {
+            window.location.reload();
+          });
+        } else {
+          Swal.fire({
+            title: "Gagal!",
+            text: "Tidak dapat mengubah status item.",
+            icon: "error"
+          });
+        }
+      });
   }
+
 </script>
 
 <footer class="ftco-footer ftco-section">
@@ -281,7 +664,7 @@
             <h2 class="ftco-heading-2">Links</h2>
             <ul class="list-unstyled">
               <li><a href="/user"><span class="icon-long-arrow-right mr-2"></span>Users</a></li>
-              <li><a href="/upcontact"><span class="icon-long-arrow-right mr-2"></span>Up Gallery</a></li>
+              <li><a href="/upgallery"><span class="icon-long-arrow-right mr-2"></span>Up Gallery</a></li>
               <li><a href="/upmerchandise"><span class="icon-long-arrow-right mr-2"></span>Up Merchandise</a></li>
             </ul>
           </div>
@@ -309,6 +692,8 @@
     </div>
   </footer>
   
+  
+  
     <!-- loader -->
     <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
   
@@ -328,6 +713,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="../static/assets/js/google-map.js"></script>
     <script src="../static/assets/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   
     </body>
   </html>
