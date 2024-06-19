@@ -60,9 +60,9 @@
     <div class="row px-2 mt-4 gap-3" id="filterable-cards" style="margin-bottom: 3rem;">
       <div class="row d-flex">
         {% for item in fjkt %}
-          <div class="col-md-4 ftco-animate" style="margin-bottom: 3rem;">
+          <div class="col-md-4 ftco-animate" style="margin-bottom: 4rem;">
               <div class="blog-entry justify-content-end">
-                  <a href="#" data-toggle="modal" data-target="#myModal" data-id="{{item._id}}" data-type="fjkt" class="block-20">
+                  <a href="#" onclick="postDetail('{{ item._id }}', 'fjkt')" data-toggle="modal" data-target="#myModal" data-id="{{item._id}}" data-type="fjkt" class="block-211">
                       <img src="../static/assets/img/gallery/fjkt/{{ item.gambar }}" alt="Image">
                   </a>                  
                   <div class="text mt-3 float-right d-block">
@@ -84,6 +84,7 @@
                               <a href="#" class="meta-chat" onclick="loadComments('{{ item._id }}')" data-toggle="modal" data-target="#commentsModal"><span class="icon-chat"></span> {{ item.jumlah_komentar }}</a>
                           </p>
                       </div>
+                      
                   </div>
               </div>
           </div>
@@ -96,34 +97,35 @@
     <div class="row px-2 mt-4 gap-3" id="filterable-cards">
       <div class="row d-flex">
         {% for item in fanart %}
-            <div class="col-md-4 ftco-animate" style="margin-bottom: 3rem;">
-              <div class="blog-entry justify-content-end">
-                <a href="#" onclick="postDetail('{{ item._id }}', 'fanart')" data-toggle="modal" data-target="#myModal" data-id="{{item._id}}" data-type="fanart" class="block-20">
-                  <img src="../static/assets/img/gallery/fanart/{{ item.gambar }}" alt="Image">
-                </a>                  
-                <div class="text mt-3 float-right d-block">
-                  <div class="d-flex align-items-center pt-2 mb-4 topp">
-                    <div class="one mr-3">
-                      <span class="day">{{ item.tanggal|datetimeformat('%d') }}</span>
-                    </div>
-                    <div class="two">
-                        <span class="yr">{{ item.tanggal|datetimeformat('%Y') }}</span>
-                        <span class="mos">{{ item.tanggal|datetimeformat('%B') }}</span>
-                    </div>
+          <div class="col-md-4 ftco-animate" style="margin-bottom: 4rem;">
+            <div class="blog-entry justify-content-end">
+              <a href="#" onclick="postDetail('{{ item._id }}', 'fanart')" data-toggle="modal" data-target="#myModal" data-id="{{item._id}}" data-type="fanart" class="block-20">
+                <img src="../static/assets/img/gallery/fanart/{{ item.gambar }}" alt="Image">
+              </a>                  
+              <div class="text mt-3 float-right d-block">
+                <div class="d-flex align-items-center pt-2 mb-4 topp">
+                  <div class="one mr-3">
+                    <span class="day">{{ item.tanggal|datetimeformat('%d') }}</span>
                   </div>
-                  <h3 class="heading"><a href="#" onclick="postDetail('{{ item._id }}', 'fanart')" data-toggle="modal" data-target="#myModal" data-id="{{item._id}}" data-type="fanart">{{ item.nama }}</a></h3>
-                  <p>{{ item.deskripsi }}</p>
-                  <div class="d-flex align-items-center mt-4 meta">
-                    <p class="mb-0"><a href="#" class="btn btn-secondary" onclick="postDetail('{{ item._id }}', 'fanart')" data-toggle="modal" data-target="#myModal" data-id="{{item._id}}" data-type="fanart">Comment <span class="ion-ios-arrow-round-forward"></span></a></p>
-                    <p class="ml-auto mb-0">
-                      <a href="#" class="mr-2" onclick="loadComments('{{ item._id }}')" data-toggle="modal" data-target="#commentsModal">{{ item.last_comment_username }}</a>
-                      <a href="#" class="meta-chat" onclick="loadComments('{{ item._id }}')" data-toggle="modal" data-target="#commentsModal"><span class="icon-chat"></span> {{ item.jumlah_komentar }}</a>
-                    </p>
+                  <div class="two">
+                      <span class="yr">{{ item.tanggal|datetimeformat('%Y') }}</span>
+                      <span class="mos">{{ item.tanggal|datetimeformat('%B') }}</span>
                   </div>
                 </div>
+                <h3 class="heading"><a href="#" onclick="postDetail('{{ item._id }}', 'fanart')" data-toggle="modal" data-target="#myModal" data-id="{{item._id}}" data-type="fanart">{{ item.nama }}</a></h3>
+                <p>{{ item.deskripsi }}</p>
+                <div class="d-flex align-items-center mt-4 meta">
+                  <p class="mb-0"><a href="#" class="btn btn-secondary" onclick="postDetail('{{ item._id }}', 'fanart')" data-toggle="modal" data-target="#myModal" data-id="{{item._id}}" data-type="fanart">Comment <span class="ion-ios-arrow-round-forward"></span></a></p>
+                  <p class="ml-auto mb-0">
+                    <a href="#" class="mr-2" onclick="loadComments('{{ item._id }}')" data-toggle="modal" data-target="#commentsModal">{{ item.last_comment_username }}</a>
+                    <a href="#" class="meta-chat" onclick="loadComments('{{ item._id }}')" data-toggle="modal" data-target="#commentsModal"><span class="icon-chat"></span> {{ item.jumlah_komentar }}</a>
+                  </p>
+                </div>
+                
               </div>
             </div>
-          {% endfor %}
+          </div>
+        {% endfor %}
         
       </div> 
     </div>
@@ -149,7 +151,7 @@
                       <img src="" id="gambar" name="gambar" class="card-img-top" alt="...">
                       <div class="card-body">
                           <h5 class="card-title" id="nama" name="nama"></h5>
-                          <p class="card-text" id="deskripsi" name="deskripsi"></p>
+                          <p class="card-text" id="deskripsi" nama="deskripsi"></p>
                           <!-- Bagian komentar -->
                           <div class="form-group">
                               <label for="comment">Comment:</label>
@@ -186,6 +188,27 @@
       </div>
   </div>
 </div>
+
+<script>
+  const fjktButton = document.getElementById('fjkt-button');
+  const fanArtButton = document.getElementById('fan-art-button');
+  const targetSection = document.getElementById('target-section');
+  const fanSection = document.getElementById('fan-section');
+
+  fjktButton.addEventListener('click', () => {
+    targetSection.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  });
+
+  fanArtButton.addEventListener('click', () => {
+    fanSection.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  });
+</script>
 
 <script src="../static/assets/js/jsgallery.js"></script>
 

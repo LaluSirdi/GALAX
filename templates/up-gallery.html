@@ -70,9 +70,21 @@
 	          <li class="nav-item"><a href="/user" class="nav-link" data-nav-section="users"><span>Users</span></a></li>
 	          <li class="nav-item"><a href="/upgallery" class="nav-link" data-nav-section="gallery"><span>Up Gallery</span></a></li>
 	          <li class="nav-item"><a href="/upmerchandise" class="nav-link" data-nav-section="merchandise"><span>Up Merchandise</span></a></li>
-            <li class="nav-item">
-              <a href="#" class="nav-link" id="user-account"><span><i class="fas fa-user"></i> <span class="login-text">Logout</span></span></a>
-            </li>
+            {% if '_id' in session %}
+                <li class="nav-item">
+                    <a class="nav-link" id="user-account" href="#">
+                        {% if session['profile_pic_real'] != 'profile_placeholder.png' %}
+                        <img src="{{ url_for('static', filename='assets/img/profile_pics/' ~ session['profile_pic_real']) }}" alt="Profile Picture" style="margin-left: -5px; width: 30px; height: 30px; border-radius: 50%;">
+                        {% else %}
+                        <i class="fas fa-user"></i><span class="login-text">Logout</span>
+                        {% endif %}
+                    </a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" id="user-account" href="{{ url_for('index') }}" class="login-text">Login</a>
+                </li>
+            {% endif %}
           </ul>
 	      </div>
 	    </div>
@@ -111,7 +123,7 @@
               <label for="profile_pic">Foto Profil (Hanya image .png, .jpeg dan .jpg)</label>
               <img id="gambar-preview" src="../static/assets/img/profile_pics/{{ session['profile_pic_real'] }}" alt="" width="200">
               <input type="file" class="form-control" accept=".png,.jpg,.jpeg" name="profile_pic" id="profile_pic"
-                    style="border-radius: 13px;" placeholder="Enter the Image" onchange="previewImage(event)" />
+                    style="border-radius: 13px;" placeholder="Enter the Image" onchange="previewImageUser(event)" />
             </div>
             <hr>
             <button type="button" class="btn btn-secondary" id="edit-password-btn">Edit Password</button>
@@ -204,7 +216,7 @@
             error: function (xhr, status, error) {
               Swal.fire(
                 'Gagal!',
-                'Profil Anda tidak dapat diperbarui.',
+                xhr.responseJSON.message,
                 'error'
               ).then(() => {
                 $('#edit-profile-modal').modal('hide'); 
@@ -909,6 +921,15 @@
             });
           }
         });
+    }
+
+    function previewImageUser(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = function () {
+          document.getElementById('gambar-preview').src = reader.result;
+      };
+      reader.readAsDataURL(file);
     }
   </script>
 

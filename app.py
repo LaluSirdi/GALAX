@@ -77,10 +77,10 @@ def register():
         email_exists = users_collection.find_one({'email': email})
 
         if user_exists:
-            return jsonify({"status": "error", "message": "Item tidak ditemukan"}), 404
+            return jsonify({"status": "error", "message": "Username sudah ada, gunakan yang lain"}), 404
 
         if email_exists:
-            return jsonify({"status": "error", "message": "Item tidak ditemukan"}), 404
+            return jsonify({"status": "error", "message": "Email sudah ada, gunakan yang lain"}), 404
 
         users_collection.insert_one({'username': username, 'email': email, 'password': hashed_password, "profile_pic_real": "profile_placeholder.png",})
         flash('Registrasi berhasil! Silakan login.', 'success')
@@ -101,14 +101,13 @@ def login():
             session['_id'] = str(login_user['_id'])
             session['status'] = 'login'
             if request.form['username'] == 'admin':
-                return jsonify({"status": "success", "redirect_url": url_for('user')}), 200
+                return jsonify({"status": "success", "redirect_url": url_for('upmerchandise')}), 200
             else:
                 return jsonify({"status": "success", "redirect_url": url_for('beranda')}), 200
 
         return jsonify({"status": "error", "message": "Kombinasi username/password tidak valid"}), 404
 
-    return jsonify({"status": "error", "message": "Metode request tidak valid"}), 400
-
+    return render_template('index.html')
 
 @app.route('/profile/<user_id>', methods=['GET', 'POST'])
 def profile(user_id):
@@ -139,10 +138,10 @@ def profile(user_id):
         email_exists = users_collection.find_one({'email': email, '_id': {'$ne': ObjectId(user_id)}})
 
         if user_exists:
-            return jsonify({"status": "error", "message": "Item tidak ditemukan"}), 404
+            return jsonify({"status": "error", "message": "Username sudah ada, gunakan yang lain"}), 404
 
         if email_exists:
-            return jsonify({"status": "error", "message": "Item tidak ditemukan"}), 404
+            return jsonify({"status": "error", "message": "Email sudah ada, gunakan yang lain"}), 404
 
         update_data = {
             'username': username,
@@ -158,11 +157,11 @@ def profile(user_id):
             if new_password and confirm_password:
                 if check_password_hash(pw_user, current_password):
                     print('Password saat ini tidak sesuai.', 'error')
-                    return jsonify({"status": "error", "message": "Item tidak ditemukan"}), 404
+                    return jsonify({"status": "error", "message": "Password saat ini tidak sesuai."}), 404
 
                 if new_password != confirm_password:
                     print('Password baru dan konfirmasi password tidak cocok.', 'error')
-                    return jsonify({"status": "error", "message": "Item tidak ditemukan"}), 404
+                    return jsonify({"status": "error", "message": "Password baru dan konfirmasi password tidak cocok."}), 404
 
                 hashed_password = generate_password_hash(new_password).decode('utf-8')
                 update_data['password'] = hashed_password
