@@ -83,7 +83,7 @@ def register():
             return jsonify({"status": "error", "message": "Email sudah ada, gunakan yang lain"}), 404
 
         users_collection.insert_one({'username': username, 'email': email, 'password': hashed_password, "profile_pic_real": "profile_placeholder.png",})
-        flash('Registrasi berhasil! Silakan login.', 'success')
+
         return redirect(url_for('index'))
 
     return render_template('index.html')
