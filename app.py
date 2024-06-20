@@ -123,7 +123,7 @@ def login():
             session['_id'] = str(login_user['_id'])
             session['status'] = 'login'
             if request.form['username'] == 'admin':
-                return jsonify({"status": "success", "redirect_url": url_for('upmerchandise')}), 200
+                return jsonify({"status": "success", "redirect_url": url_for('user')}), 200
             else:
                 return jsonify({"status": "success", "redirect_url": url_for('beranda')}), 200
 
