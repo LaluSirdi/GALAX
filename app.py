@@ -1,3 +1,6 @@
+import os
+from os.path import join, dirname
+from dotenv import load_dotenv
 from flask import Flask, redirect, url_for, render_template, request, jsonify, flash, session
 from pymongo import MongoClient
 from bson import ObjectId
@@ -6,35 +9,18 @@ from flask_session import Session
 from flask_bcrypt import generate_password_hash, check_password_hash
 from datetime import datetime, timedelta
 from werkzeug.utils import secure_filename
-from dotenv import load_dotenv
-import os
 from functools import wraps
-load_dotenv()
+
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
+
+MONGODB_URI = os.environ.get("MONGODB_URI")
+DB_NAME =  os.environ.get("DB_NAME")
+
+client = MongoClient(MONGODB_URI)
+db = client[DB_NAME]
+
 app = Flask(__name__)
-
-# Use environment variables
-mongo_uri = os.getenv('MONGO_URI')
-db_name = os.getenv('DB_NAME')
-app.secret_key = os.getenv('SECRET_KEY')
-bcrypt_secret_key = os.getenv('BCRYPT_SECRET_KEY')
-
-# Debugging prints to check if environment variables are loaded correctly
-print(f"mongo_uri: {mongo_uri}")
-print(f"db_name: {db_name}")
-print(f"app.secret_key: {app.secret_key}")
-print(f"bcrypt_secret_key: {bcrypt_secret_key}")
-
-# Ensure db_name is a string
-if not isinstance(db_name, str):
-    raise TypeError("DB_NAME environment variable must be a string")
-
-client = MongoClient(mongo_uri)
-db = client[db_name]
-users_collection = db['users']
-
-bcrypt = Bcrypt(app)
-client = MongoClient('mongodb://sparta:123@ac-noo9u4e-shard-00-00.uurp56w.mongodb.net:27017,ac-noo9u4e-shard-00-01.uurp56w.mongodb.net:27017,ac-noo9u4e-shard-00-02.uurp56w.mongodb.net:27017/?ssl=true&replicaSet=atlas-g38sd1-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0&connectTimeoutMS=30000')
-db = client.dbfjkt
 users_collection = db['users']
 
 app.secret_key = 'galax'
